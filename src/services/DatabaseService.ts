@@ -325,7 +325,10 @@ class DatabaseService {
 
     const result = await pool.query(query, values);
     const dish = result.rows[0];
-    dish.ingredients = JSON.parse(dish.ingredients);
+    // PostgreSQL JSONB ya devuelve el objeto parseado
+    if (typeof dish.ingredients === 'string') {
+      dish.ingredients = JSON.parse(dish.ingredients);
+    }
     return dish;
   }
 
@@ -339,7 +342,7 @@ class DatabaseService {
     const result = await pool.query(query, [mealId]);
     return result.rows.map((dish) => ({
       ...dish,
-      ingredients: JSON.parse(dish.ingredients),
+      ingredients: typeof dish.ingredients === 'string' ? JSON.parse(dish.ingredients) : dish.ingredients,
     }));
   }
 
@@ -361,7 +364,10 @@ class DatabaseService {
 
     const result = await pool.query(query, values);
     const list = result.rows[0];
-    list.items = JSON.parse(list.items);
+    // PostgreSQL JSONB ya devuelve el objeto parseado
+    if (typeof list.items === 'string') {
+      list.items = JSON.parse(list.items);
+    }
     return list;
   }
 
@@ -378,7 +384,9 @@ class DatabaseService {
     }
 
     const list = result.rows[0];
-    list.items = JSON.parse(list.items);
+    if (typeof list.items === 'string') {
+      list.items = JSON.parse(list.items);
+    }
     return list;
   }
 
@@ -397,7 +405,9 @@ class DatabaseService {
     }
 
     const list = result.rows[0];
-    list.items = JSON.parse(list.items);
+    if (typeof list.items === 'string') {
+      list.items = JSON.parse(list.items);
+    }
     return list;
   }
 
