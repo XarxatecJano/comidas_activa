@@ -17,7 +17,7 @@
   - Implementar pool de conexiones con manejo de errores
   - _Requirements: Todos_
 
-- [ ] 3. Implementar modelos de datos TypeScript
+- [-] 3. Implementar modelos de datos TypeScript
   - Crear interfaces TypeScript: User, MenuPlan, Meal, Diner, Dish, ShoppingList, ShoppingItem
   - Crear tipos auxiliares: MealType, DishCourse, MenuPlanStatus
   - Implementar validadores de datos para cada modelo
