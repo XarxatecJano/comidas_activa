@@ -23,7 +23,7 @@
   - Implementar validadores de datos para cada modelo
   - _Requirements: Todos_
 
-- [-] 4. Implementar DatabaseService
+- [x] 4. Implementar DatabaseService
   - Crear clase DatabaseService con métodos genéricos de acceso a datos
   - Implementar métodos CRUD para User
   - Implementar métodos CRUD para MenuPlan
