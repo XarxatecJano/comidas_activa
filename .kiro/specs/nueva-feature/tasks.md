@@ -10,7 +10,7 @@
   - Configurar scripts en package.json (dev, build, start)
   - _Requirements: Todos_
 
-- [-] 2. Configurar base de datos PostgreSQL
+- [x] 2. Configurar base de datos PostgreSQL
   - Crear script de inicialización de base de datos (schema.sql)
   - Implementar tablas: User, MenuPlan, Meal, Diner, Dish, ShoppingList según el esquema definido
   - Crear módulo de conexión a PostgreSQL usando pg
