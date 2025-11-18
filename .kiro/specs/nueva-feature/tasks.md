@@ -117,7 +117,7 @@
   - Implementar diseño responsive
   - _Requirements: Todos_
 
-- [-] 16. Implementar AuthComponent en frontend
+- [x] 16. Implementar AuthComponent en frontend
   - Crear auth.js con funciones de registro y login
   - Implementar formulario de registro con campo de preferencias (textarea)
   - Implementar formulario de login
