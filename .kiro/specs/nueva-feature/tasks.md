@@ -101,14 +101,14 @@
   - Añadir logging de errores
   - _Requirements: Todos_
 
-- [-] 14. Crear estructura HTML base del frontend
+- [x] 14. Crear estructura HTML base del frontend
   - Crear index.html con estructura básica
   - Crear páginas: register.html, login.html, profile.html, menu-planner.html, shopping-list.html
   - Añadir enlaces de navegación entre páginas
   - Incluir meta tags y configuración responsive
   - _Requirements: Todos_
 
-- [ ] 15. Implementar estilos CSS
+- [x] 15. Implementar estilos CSS
   - Crear styles.css con estilos globales
   - Diseñar formularios de registro y login
   - Diseñar interfaz de planificador de menús
@@ -117,7 +117,7 @@
   - Implementar diseño responsive
   - _Requirements: Todos_
 
-- [ ] 16. Implementar AuthComponent en frontend
+- [-] 16. Implementar AuthComponent en frontend
   - Crear auth.js con funciones de registro y login
   - Implementar formulario de registro con campo de preferencias (textarea)
   - Implementar formulario de login

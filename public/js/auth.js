@@ -1,5 +1,7 @@
-// API Base URL
-const API_URL = 'http://localhost:3000/api';
+// API Base URL - Use environment variable or default to localhost
+const API_URL = window.location.hostname === 'localhost' 
+    ? 'http://localhost:3000/api' 
+    : '/api';
 
 // Utility functions
 function showError(message) {
@@ -53,9 +55,54 @@ function removeToken() {
     localStorage.removeItem('authToken');
 }
 
+// Save user data to localStorage
+function saveUserData(user) {
+    localStorage.setItem('userData', JSON.stringify(user));
+}
+
+// Get user data from localStorage
+function getUserData() {
+    const data = localStorage.getItem('userData');
+    return data ? JSON.parse(data) : null;
+}
+
+// Remove user data from localStorage
+function removeUserData() {
+    localStorage.removeItem('userData');
+}
+
 // Check if user is logged in
 function isLoggedIn() {
     return !!getToken();
+}
+
+// Validate email format
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+// Validate password strength
+function validatePassword(password) {
+    const errors = [];
+    
+    if (password.length < 8) {
+        errors.push('La contraseña debe tener al menos 8 caracteres');
+    }
+    
+    if (!/[a-z]/.test(password)) {
+        errors.push('Debe contener al menos una letra minúscula');
+    }
+    
+    if (!/[A-Z]/.test(password)) {
+        errors.push('Debe contener al menos una letra mayúscula');
+    }
+    
+    if (!/[0-9]/.test(password)) {
+        errors.push('Debe contener al menos un número');
+    }
+    
+    return errors;
 }
 
 // Register Form Handler
@@ -74,8 +121,24 @@ if (registerForm) {
         };
 
         // Client-side validation
-        if (formData.password.length < 8) {
-            showError('La contraseña debe tener al menos 8 caracteres');
+        if (!formData.name || formData.name.length < 2) {
+            showError('El nombre debe tener al menos 2 caracteres');
+            return;
+        }
+
+        if (!isValidEmail(formData.email)) {
+            showError('Por favor, ingresa un email válido');
+            return;
+        }
+
+        const passwordErrors = validatePassword(formData.password);
+        if (passwordErrors.length > 0) {
+            showError(passwordErrors.join('. '));
+            return;
+        }
+
+        if (formData.defaultDiners < 1 || formData.defaultDiners > 20) {
+            showError('El número de comensales debe estar entre 1 y 20');
             return;
         }
 
@@ -130,6 +193,7 @@ if (loginForm) {
 
             if (response.ok) {
                 saveToken(data.token);
+                saveUserData(data.user);
                 showSuccess('¡Login exitoso! Redirigiendo...');
                 setTimeout(() => {
                     window.location.href = '/dashboard.html';
@@ -147,7 +211,38 @@ if (loginForm) {
 // Logout function
 function logout() {
     removeToken();
+    removeUserData();
     window.location.href = '/index.html';
+}
+
+// Make API call with authentication
+async function authenticatedFetch(url, options = {}) {
+    const token = getToken();
+    
+    if (!token) {
+        throw new Error('No authentication token found');
+    }
+    
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        ...options.headers
+    };
+    
+    const response = await fetch(url, {
+        ...options,
+        headers
+    });
+    
+    // If unauthorized, redirect to login
+    if (response.status === 401) {
+        removeToken();
+        removeUserData();
+        window.location.href = '/login.html';
+        throw new Error('Session expired');
+    }
+    
+    return response;
 }
 
 // Check authentication on protected pages
