@@ -57,7 +57,7 @@
   - Añadir manejo de errores: timeout, rate limiting, respuestas malformadas
   - _Requirements: Generar planificación, cambiar comida individual, generar lista de compra_
 
-- [ ] 8. Implementar MenuPlanService
+- [x] 8. Implementar MenuPlanService
   - Crear método createMenuPlan() que coordina con AIService
   - Implementar lógica para considerar preferencias de múltiples comensales
   - Crear método updateMeal() para actualizar comida específica
