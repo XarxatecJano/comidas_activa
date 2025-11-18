@@ -1,14 +1,30 @@
 import { Hono } from 'hono';
 import { serve } from '@hono/node-server';
+import { serveStatic } from '@hono/node-server/serve-static';
+import { cors } from 'hono/cors';
 import dotenv from 'dotenv';
+import authRoutes from './routes/auth.routes';
 
 // Cargar variables de entorno
 dotenv.config();
 
 const app = new Hono();
 
+// CORS middleware
+app.use('/*', cors({
+  origin: '*',
+  allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowHeaders: ['Content-Type', 'Authorization'],
+}));
+
+// Servir archivos estáticos
+app.use('/*', serveStatic({ root: './public' }));
+
+// API Routes
+app.route('/api/auth', authRoutes);
+
 // Ruta de prueba
-app.get('/', (c) => {
+app.get('/api', (c) => {
   return c.json({ message: 'Menu Planner API - Server is running' });
 });
 

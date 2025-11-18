@@ -32,7 +32,7 @@
   - Añadir manejo de transacciones y rollback
   - _Requirements: Todos_
 
-- [ ] 5. Implementar UserService
+- [x] 5. Implementar UserService
   - Crear método createUser() con hash de contraseña
   - Crear método updateUser() para actualizar datos del usuario
   - Crear método updatePreferences() para actualizar preferencias alimentarias
