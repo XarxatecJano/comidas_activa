@@ -172,7 +172,12 @@ function displayMenuPlan(menuPlan) {
 // Confirm plan
 async function confirmPlan() {
     if (!currentMenuPlan) {
-        alert('No hay planificación para confirmar');
+        showPlanMessage('No hay planificación para confirmar', 'error');
+        return;
+    }
+    
+    // Ask for confirmation
+    if (!confirm('¿Deseas confirmar esta planificación? Una vez confirmada, no podrás editarla.')) {
         return;
     }
     
@@ -184,15 +189,77 @@ async function confirmPlan() {
         const data = await response.json();
         
         if (response.ok) {
-            alert('¡Planificación confirmada! Ahora puedes generar tu lista de compra.');
-            // Redirect to shopping list generation
-            window.location.href = `/shopping-list.html?planId=${currentMenuPlan.id}`;
+            // Update current menu plan status
+            currentMenuPlan.status = 'confirmed';
+            
+            // Show success message
+            showPlanMessage('¡Planificación confirmada exitosamente!', 'success');
+            
+            // Disable editing
+            disableEditing();
+            
+            // Show shopping list button
+            showShoppingListButton();
         } else {
-            alert(data.error?.message || 'Error al confirmar planificación');
+            showPlanMessage(data.error?.message || 'Error al confirmar planificación', 'error');
         }
     } catch (error) {
         console.error('Error:', error);
-        alert('Error de conexión');
+        showPlanMessage('Error de conexión', 'error');
+    }
+}
+
+// Disable editing after confirmation
+function disableEditing() {
+    // Disable all edit and regenerate buttons in meal cards
+    const editButtons = document.querySelectorAll('.meal-card-actions button');
+    editButtons.forEach(button => {
+        button.disabled = true;
+        button.style.opacity = '0.5';
+        button.style.cursor = 'not-allowed';
+    });
+    
+    // Hide confirm button and show message
+    const confirmButton = document.querySelector('.plan-actions button.btn-primary');
+    if (confirmButton) {
+        confirmButton.style.display = 'none';
+    }
+    
+    // Add confirmed badge
+    const resultDiv = document.getElementById('menuPlanResult');
+    if (resultDiv) {
+        const badge = document.createElement('div');
+        badge.className = 'confirmed-badge';
+        badge.innerHTML = '✓ Planificación Confirmada';
+        resultDiv.insertBefore(badge, resultDiv.firstChild);
+    }
+}
+
+// Show shopping list button
+function showShoppingListButton() {
+    const planActions = document.querySelector('.plan-actions');
+    if (planActions) {
+        // Clear existing buttons
+        planActions.innerHTML = '';
+        
+        // Add shopping list button
+        const shoppingListBtn = document.createElement('button');
+        shoppingListBtn.className = 'btn btn-primary';
+        shoppingListBtn.innerHTML = '🛒 Generar Lista de Compra';
+        shoppingListBtn.onclick = () => {
+            window.location.href = `/shopping-list.html?planId=${currentMenuPlan.id}`;
+        };
+        
+        // Add new plan button
+        const newPlanBtn = document.createElement('button');
+        newPlanBtn.className = 'btn btn-secondary';
+        newPlanBtn.innerHTML = 'Nueva Planificación';
+        newPlanBtn.onclick = () => {
+            window.location.href = '/menu-planner.html';
+        };
+        
+        planActions.appendChild(shoppingListBtn);
+        planActions.appendChild(newPlanBtn);
     }
 }
 

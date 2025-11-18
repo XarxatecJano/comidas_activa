@@ -154,7 +154,7 @@
   - Mostrar ingredientes de cada plato
   - _Requirements: Cambiar comensales por comida, definir número de platos, cambiar comida individual_
 
-- [ ] 20. Implementar confirmación de planificación en frontend
+- [x] 20. Implementar confirmación de planificación en frontend
   - Añadir botón "Confirmar Planificación" en menu-planner.js
   - Implementar llamada a API POST /api/menu-plans/:id/confirm
   - Mostrar mensaje de éxito al confirmar
