@@ -32,7 +32,7 @@
   - Añadir manejo de transacciones y rollback
   - _Requirements: Todos_
 
-- [x] 5. Implementar UserService
+- [ ] 5. Implementar UserService
   - Crear método createUser() con hash de contraseña
   - Crear método updateUser() para actualizar datos del usuario
   - Crear método updatePreferences() para actualizar preferencias alimentarias
@@ -40,7 +40,7 @@
   - Implementar validación de email único
   - _Requirements: Registro, actualizar datos, eliminar cuenta, actualizar preferencias_
 
-- [ ] 6. Implementar sistema de autenticación
+- [x] 6. Implementar sistema de autenticación
   - Crear AuthService con métodos login() y logout()
   - Implementar hash de contraseñas con bcrypt
   - Crear middleware de autenticación JWT o sesiones
