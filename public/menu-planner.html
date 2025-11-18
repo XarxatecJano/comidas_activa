@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificar Menú - Menu Planner</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Menu Planner</h1>
+            <nav class="nav">
+                <a href="/dashboard.html">Dashboard</a>
+                <a href="/menu-planner.html" class="active">Planificar Menú</a>
+                <a href="/profile.html">Mi Perfil</a>
+                <button onclick="logout()" class="btn btn-small">Cerrar Sesión</button>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <div class="planner-container">
+                <h2>Crear Nueva Planificación</h2>
+                
+                <form id="menuPlanForm" class="planner-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="startDate">Fecha de Inicio</label>
+                            <input type="date" id="startDate" name="startDate" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="endDate">Fecha de Fin</label>
+                            <input type="date" id="endDate" name="endDate" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Días de la Semana</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="days" value="monday"> Lunes</label>
+                            <label><input type="checkbox" name="days" value="tuesday"> Martes</label>
+                            <label><input type="checkbox" name="days" value="wednesday"> Miércoles</label>
+                            <label><input type="checkbox" name="days" value="thursday"> Jueves</label>
+                            <label><input type="checkbox" name="days" value="friday"> Viernes</label>
+                            <label><input type="checkbox" name="days" value="saturday"> Sábado</label>
+                            <label><input type="checkbox" name="days" value="sunday"> Domingo</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tipos de Comida</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="mealTypes" value="lunch" checked> Almuerzo</label>
+                            <label><input type="checkbox" name="mealTypes" value="dinner" checked> Cena</label>
+                        </div>
+                    </div>
+
+                    <div id="planMessage" class="message" style="display: none;"></div>
+
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <span id="btnText">Generar Planificación</span>
+                        <span id="btnLoading" style="display: none;">Generando...</span>
+                    </button>
+                </form>
+
+                <div id="menuPlanResult" class="menu-plan-result" style="display: none;">
+                    <h3>Tu Planificación</h3>
+                    <div id="mealsContainer" class="meals-container"></div>
+                    
+                    <div class="plan-actions">
+                        <button onclick="confirmPlan()" class="btn btn-primary">Confirmar Planificación</button>
+                        <button onclick="resetPlan()" class="btn btn-secondary">Nueva Planificación</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/js/auth.js"></script>
+    <script src="/js/menu-planner.js"></script>
+</body>
+</html>

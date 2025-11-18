@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - Menu Planner</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Menu Planner</h1>
+            <nav class="nav">
+                <a href="/dashboard.html">Dashboard</a>
+                <a href="/menu-planner.html">Planificar Menú</a>
+                <a href="/profile.html" class="active">Mi Perfil</a>
+                <button onclick="logout()" class="btn btn-small">Cerrar Sesión</button>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <div class="profile-container">
+                <h2>Mi Perfil</h2>
+                
+                <div class="profile-section">
+                    <h3>Información Personal</h3>
+                    <form id="profileForm" class="auth-form">
+                        <div class="form-group">
+                            <label for="name">Nombre</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="defaultDiners">Número de comensales por defecto</label>
+                            <input type="number" id="defaultDiners" name="defaultDiners" min="1" max="20" required>
+                        </div>
+
+                        <div id="profileMessage" class="message" style="display: none;"></div>
+
+                        <button type="submit" class="btn btn-primary">Actualizar Datos</button>
+                    </form>
+                </div>
+
+                <div class="profile-section">
+                    <h3>Preferencias Alimentarias</h3>
+                    <form id="preferencesForm" class="auth-form">
+                        <div class="form-group">
+                            <label for="preferences">Mis Preferencias</label>
+                            <textarea id="preferences" name="preferences" rows="6" placeholder="Ej: No me gusta el tomate natural, soy vegetariano, alérgico a los frutos secos..."></textarea>
+                            <small>Describe tus gustos y restricciones alimentarias</small>
+                        </div>
+
+                        <div id="preferencesMessage" class="message" style="display: none;"></div>
+
+                        <button type="submit" class="btn btn-primary">Actualizar Preferencias</button>
+                    </form>
+                </div>
+
+                <div class="profile-section danger-zone">
+                    <h3>Zona de Peligro</h3>
+                    <p>Una vez eliminada tu cuenta, no hay vuelta atrás. Por favor, está seguro.</p>
+                    <button onclick="deleteAccount()" class="btn btn-danger">Eliminar Cuenta</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/js/auth.js"></script>
+    <script src="/js/profile.js"></script>
+</body>
+</html>

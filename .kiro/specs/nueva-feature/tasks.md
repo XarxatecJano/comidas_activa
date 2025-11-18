@@ -94,14 +94,14 @@
   - Validar que la planificación esté confirmada antes de generar lista
   - _Requirements: Generar lista de compra_
 
-- [-] 13. Implementar middleware de manejo de errores global
+- [x] 13. Implementar middleware de manejo de errores global
   - Crear middleware onError en Hono
   - Mapear excepciones a códigos HTTP apropiados
   - Implementar formato de respuesta de error consistente
   - Añadir logging de errores
   - _Requirements: Todos_
 
-- [ ] 14. Crear estructura HTML base del frontend
+- [-] 14. Crear estructura HTML base del frontend
   - Crear index.html con estructura básica
   - Crear páginas: register.html, login.html, profile.html, menu-planner.html, shopping-list.html
   - Añadir enlaces de navegación entre páginas

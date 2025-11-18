@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Menu Planner</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Menu Planner</h1>
+            <nav class="nav">
+                <a href="/dashboard.html" class="active">Dashboard</a>
+                <a href="/menu-planner.html">Planificar Menú</a>
+                <a href="/profile.html">Mi Perfil</a>
+                <button onclick="logout()" class="btn btn-small">Cerrar Sesión</button>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <div class="dashboard-container">
+                <div class="welcome-message">
+                    <h2>Bienvenido, <span id="userName">Usuario</span></h2>
+                    <p>Gestiona tus planificaciones de menús semanales</p>
+                </div>
+
+                <div class="dashboard-actions">
+                    <a href="/menu-planner.html" class="dashboard-card">
+                        <h3>📅 Nueva Planificación</h3>
+                        <p>Crea un nuevo menú semanal personalizado</p>
+                    </a>
+
+                    <a href="/profile.html" class="dashboard-card">
+                        <h3>👤 Mi Perfil</h3>
+                        <p>Actualiza tus datos y preferencias</p>
+                    </a>
+                </div>
+
+                <div class="recent-plans">
+                    <h3>Planificaciones Recientes</h3>
+                    <div id="recentPlansContainer">
+                        <p class="empty-state">No tienes planificaciones aún. ¡Crea tu primera planificación!</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/js/auth.js"></script>
+    <script>
+        // Require authentication
+        requireAuth();
+
+        // Load user name (placeholder - implement with actual API call)
+        document.addEventListener('DOMContentLoaded', () => {
+            // TODO: Fetch user data from API
+            const userName = localStorage.getItem('userName') || 'Usuario';
+            document.getElementById('userName').textContent = userName;
+        });
+    </script>
+</body>
+</html>
