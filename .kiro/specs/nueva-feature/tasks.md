@@ -65,14 +65,14 @@
   - Implementar validación de número de comensales y platos
   - _Requirements: Generar planificación, especificar comensales, definir número de platos, confirmar dieta_
 
-- [ ] 9. Implementar controladores y rutas de autenticación
+- [x] 9. Implementar controladores y rutas de autenticación
   - Crear POST /api/auth/register con validación de datos y campo de preferencias
   - Crear POST /api/auth/login con validación de credenciales
   - Crear POST /api/auth/logout
   - Implementar manejo de errores HTTP (400, 401, 500)
   - _Requirements: Registro con preferencias_
 
-- [ ] 10. Implementar controladores y rutas de usuario
+- [-] 10. Implementar controladores y rutas de usuario
   - Crear GET /api/users/:id para obtener datos del usuario
   - Crear PUT /api/users/:id para actualizar datos
   - Crear PUT /api/users/:id/preferences para actualizar preferencias
