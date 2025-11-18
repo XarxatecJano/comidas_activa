@@ -733,6 +733,82 @@ body {
     border-left: 4px solid var(--primary-color);
 }
 
+.meal-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.meal-card-header h4 {
+    color: var(--primary-dark);
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.meal-card-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.meal-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.meal-edit-form {
+    background: var(--bg-light);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.meal-edit-form .form-group {
+    margin-bottom: 15px;
+}
+
+.meal-edit-form .form-group:last-child {
+    margin-bottom: 0;
+}
+
+.meal-diners-count,
+.meal-dishes-count {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.diners-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.diner-input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.diner-name-input {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.diner-name-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
 .meal-card h4 {
     color: var(--primary-dark);
     margin-bottom: 15px;

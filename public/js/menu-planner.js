@@ -138,60 +138,32 @@ function showPlanMessage(message, type = 'success') {
     }
 }
 
-// Display menu plan
+// Display menu plan using MealCard components
 function displayMenuPlan(menuPlan) {
     const resultDiv = document.getElementById('menuPlanResult');
     const mealsContainer = document.getElementById('mealsContainer');
     
     if (!resultDiv || !mealsContainer) return;
     
-    // Clear previous content
+    // Clear previous content and meal cards
     mealsContainer.innerHTML = '';
+    mealCards.clear();
     
-    // Group meals by day and type
-    const dayNames = {
-        monday: 'Lunes',
-        tuesday: 'Martes',
-        wednesday: 'Miércoles',
-        thursday: 'Jueves',
-        friday: 'Viernes',
-        saturday: 'Sábado',
-        sunday: 'Domingo'
-    };
-    
-    const mealTypeNames = {
-        lunch: 'Almuerzo',
-        dinner: 'Cena'
-    };
-    
+    // Create MealCard for each meal
     menuPlan.meals.forEach(meal => {
-        const mealCard = document.createElement('div');
-        mealCard.className = 'meal-card';
-        
-        const dayName = dayNames[meal.dayOfWeek] || meal.dayOfWeek;
-        const mealTypeName = mealTypeNames[meal.mealType] || meal.mealType;
-        
-        let dishesHTML = '';
-        meal.dishes.forEach(dish => {
-            const ingredientsHTML = dish.ingredients
-                .map(ing => `<span class="ingredient-tag">${ing}</span>`)
-                .join('');
-            
-            dishesHTML += `
-                <div class="dish-item">
-                    <h5>${dish.name}</h5>
-                    <p>${dish.description}</p>
-                    <div class="ingredients-list">${ingredientsHTML}</div>
-                </div>
-            `;
+        const mealCard = new MealCard(meal, menuPlan.id, (updatedMeal) => {
+            // Update the meal in currentMenuPlan
+            const mealIndex = currentMenuPlan.meals.findIndex(m => m.id === updatedMeal.id);
+            if (mealIndex !== -1) {
+                currentMenuPlan.meals[mealIndex] = updatedMeal;
+            }
         });
         
-        mealCard.innerHTML = `
-            <h4>${dayName} - ${mealTypeName}</h4>
-            ${dishesHTML}
-        `;
+        // Store reference to meal card
+        mealCards.set(meal.id, mealCard);
         
-        mealsContainer.appendChild(mealCard);
+        // Render and append to container
+        mealsContainer.appendChild(mealCard.render());
     });
     
     resultDiv.style.display = 'block';

@@ -144,7 +144,7 @@
   - Renderizar menú generado usando MealCard
   - _Requirements: Generar planificación, especificar comensales por defecto_
 
-- [ ] 19. Implementar MealCardComponent en frontend
+- [x] 19. Implementar MealCardComponent en frontend
   - Crear meal-card.js para visualización de comidas individuales
   - Mostrar día, tipo de comida (lunch/dinner) y platos
   - Implementar editor de número de comensales por comida
