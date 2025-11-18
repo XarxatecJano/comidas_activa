@@ -126,7 +126,7 @@
   - Añadir redirección después de login exitoso
   - _Requirements: Registro con preferencias_
 
-- [ ] 17. Implementar UserProfileComponent en frontend
+- [x] 17. Implementar UserProfileComponent en frontend
   - Crear profile.js para gestión de perfil
   - Mostrar datos del usuario actual
   - Implementar formulario de edición de datos
