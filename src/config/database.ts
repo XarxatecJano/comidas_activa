@@ -6,8 +6,8 @@ dotenv.config();
 const poolConfig: PoolConfig = {
   connectionString: process.env.DATABASE_URL,
   max: 20, // Máximo de conexiones en el pool
-  idleTimeoutMillis: 30000, // Tiempo antes de cerrar conexión inactiva
-  connectionTimeoutMillis: 2000, // Tiempo máximo de espera para obtener conexión
+  idleTimeoutMillis: 0, // 0 = nunca cerrar conexiones inactivas
+  connectionTimeoutMillis: 10000, // 10 segundos para obtener conexión
 };
 
 const pool = new Pool(poolConfig);

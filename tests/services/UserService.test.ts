@@ -11,7 +11,7 @@ describe('UserService', () => {
     if (testUserId) {
       await pool.query('DELETE FROM "User" WHERE id = $1', [testUserId]);
     }
-    await pool.end();
+    // No cerrar el pool aquí, se cierra en setup.ts
   });
 
   describe('createUser', () => {
