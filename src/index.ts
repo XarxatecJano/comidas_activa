@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import authRoutes from './routes/auth.routes';
 import userRoutes from './routes/user.routes';
 import menuPlanRoutes from './routes/menuPlan.routes';
+import shoppingListRoutes from './routes/shoppingList.routes';
 
 // Cargar variables de entorno
 dotenv.config();
@@ -26,6 +27,7 @@ app.use('/*', serveStatic({ root: './public' }));
 app.route('/api/auth', authRoutes);
 app.route('/api/users', userRoutes);
 app.route('/api/menu-plans', menuPlanRoutes);
+app.route('/api/shopping-lists', shoppingListRoutes);
 
 // Ruta de prueba
 app.get('/api', (c) => {

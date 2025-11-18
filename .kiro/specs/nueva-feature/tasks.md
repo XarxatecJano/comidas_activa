@@ -80,7 +80,7 @@
   - Añadir middleware de autenticación a todas las rutas
   - _Requirements: Actualizar datos, actualizar preferencias, eliminar cuenta_
 
-- [-] 11. Implementar controladores y rutas de planificación de menús
+- [x] 11. Implementar controladores y rutas de planificación de menús
   - Crear POST /api/menu-plans para crear nueva planificación con comensales por defecto
   - Crear GET /api/menu-plans/:id para obtener planificación
   - Crear PUT /api/menu-plans/:id/meals/:mealId para actualizar comida específica
@@ -88,7 +88,7 @@
   - Implementar validación de permisos (usuario propietario)
   - _Requirements: Generar planificación, cambiar comida individual, confirmar dieta_
 
-- [ ] 12. Implementar controladores y rutas de lista de compra
+- [-] 12. Implementar controladores y rutas de lista de compra
   - Crear POST /api/shopping-lists para generar lista desde planificación confirmada
   - Crear GET /api/shopping-lists/:id para obtener lista
   - Validar que la planificación esté confirmada antes de generar lista
