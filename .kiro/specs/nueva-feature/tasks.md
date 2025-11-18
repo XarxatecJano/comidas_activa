@@ -88,13 +88,13 @@
   - Implementar validación de permisos (usuario propietario)
   - _Requirements: Generar planificación, cambiar comida individual, confirmar dieta_
 
-- [-] 12. Implementar controladores y rutas de lista de compra
+- [x] 12. Implementar controladores y rutas de lista de compra
   - Crear POST /api/shopping-lists para generar lista desde planificación confirmada
   - Crear GET /api/shopping-lists/:id para obtener lista
   - Validar que la planificación esté confirmada antes de generar lista
   - _Requirements: Generar lista de compra_
 
-- [ ] 13. Implementar middleware de manejo de errores global
+- [-] 13. Implementar middleware de manejo de errores global
   - Crear middleware onError en Hono
   - Mapear excepciones a códigos HTTP apropiados
   - Implementar formato de respuesta de error consistente

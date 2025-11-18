@@ -7,11 +7,15 @@ import authRoutes from './routes/auth.routes';
 import userRoutes from './routes/user.routes';
 import menuPlanRoutes from './routes/menuPlan.routes';
 import shoppingListRoutes from './routes/shoppingList.routes';
+import { errorHandler, notFoundHandler } from './middleware/errorHandler';
 
 // Cargar variables de entorno
 dotenv.config();
 
 const app = new Hono();
+
+// Middleware global de manejo de errores
+app.onError(errorHandler);
 
 // CORS middleware
 app.use('/*', cors({
@@ -33,6 +37,9 @@ app.route('/api/shopping-lists', shoppingListRoutes);
 app.get('/api', (c) => {
   return c.json({ message: 'Menu Planner API - Server is running' });
 });
+
+// Manejador de rutas no encontradas (404)
+app.notFound(notFoundHandler);
 
 const port = parseInt(process.env.PORT || '3000');
 
