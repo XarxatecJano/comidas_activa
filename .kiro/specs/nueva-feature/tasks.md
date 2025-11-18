@@ -72,7 +72,7 @@
   - Implementar manejo de errores HTTP (400, 401, 500)
   - _Requirements: Registro con preferencias_
 
-- [-] 10. Implementar controladores y rutas de usuario
+- [x] 10. Implementar controladores y rutas de usuario
   - Crear GET /api/users/:id para obtener datos del usuario
   - Crear PUT /api/users/:id para actualizar datos
   - Crear PUT /api/users/:id/preferences para actualizar preferencias
@@ -80,7 +80,7 @@
   - Añadir middleware de autenticación a todas las rutas
   - _Requirements: Actualizar datos, actualizar preferencias, eliminar cuenta_
 
-- [ ] 11. Implementar controladores y rutas de planificación de menús
+- [-] 11. Implementar controladores y rutas de planificación de menús
   - Crear POST /api/menu-plans para crear nueva planificación con comensales por defecto
   - Crear GET /api/menu-plans/:id para obtener planificación
   - Crear PUT /api/menu-plans/:id/meals/:mealId para actualizar comida específica

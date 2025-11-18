@@ -5,6 +5,7 @@ import { cors } from 'hono/cors';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth.routes';
 import userRoutes from './routes/user.routes';
+import menuPlanRoutes from './routes/menuPlan.routes';
 
 // Cargar variables de entorno
 dotenv.config();
@@ -24,6 +25,7 @@ app.use('/*', serveStatic({ root: './public' }));
 // API Routes
 app.route('/api/auth', authRoutes);
 app.route('/api/users', userRoutes);
+app.route('/api/menu-plans', menuPlanRoutes);
 
 // Ruta de prueba
 app.get('/api', (c) => {
