@@ -47,7 +47,7 @@
   - Implementar validación de credenciales
   - _Requirements: Registro, login_
 
-- [ ] 7. Implementar AIService para integración con ChatGPT
+- [x] 7. Implementar AIService para integración con ChatGPT
   - Configurar cliente de OpenAI API
   - Crear método generateWeeklyMenu() que recibe preferencias, comensales y restricciones
   - Implementar prompt engineering para generar menús personalizados
