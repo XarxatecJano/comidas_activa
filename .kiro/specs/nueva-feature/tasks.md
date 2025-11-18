@@ -135,7 +135,7 @@
   - Implementar llamadas a API de usuario
   - _Requirements: Actualizar datos, actualizar preferencias, eliminar cuenta_
 
-- [ ] 18. Implementar MenuPlannerComponent en frontend
+- [x] 18. Implementar MenuPlannerComponent en frontend
   - Crear menu-planner.js para planificación de menús
   - Implementar selector de días de la semana (checkboxes)
   - Añadir campo para número de comensales por defecto

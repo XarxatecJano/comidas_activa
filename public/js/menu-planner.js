@@ -3,7 +3,7 @@ requireAuth();
 
 let currentMenuPlan = null;
 
-// Set minimum date to today
+// Set minimum date to today and load user defaults
 document.addEventListener('DOMContentLoaded', () => {
     const today = new Date().toISOString().split('T')[0];
     document.getElementById('startDate').setAttribute('min', today);
@@ -13,7 +13,28 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('startDate').addEventListener('change', (e) => {
         document.getElementById('endDate').setAttribute('min', e.target.value);
     });
+    
+    // Load user's default diners
+    loadUserDefaults();
 });
+
+// Load user's default settings
+async function loadUserDefaults() {
+    try {
+        const userData = getUserData();
+        if (userData && userData.id) {
+            const response = await authenticatedFetch(`${API_URL}/users/${userData.id}`);
+            const data = await response.json();
+            
+            if (response.ok && data.user.defaultDiners) {
+                document.getElementById('defaultDiners').value = data.user.defaultDiners;
+            }
+        }
+    } catch (error) {
+        console.error('Error loading user defaults:', error);
+        // Continue with default value if error
+    }
+}
 
 // Menu plan form handler
 const menuPlanForm = document.getElementById('menuPlanForm');
@@ -24,6 +45,7 @@ if (menuPlanForm) {
         // Get form data
         const startDate = document.getElementById('startDate').value;
         const endDate = document.getElementById('endDate').value;
+        const defaultDiners = parseInt(document.getElementById('defaultDiners').value);
         
         const daysCheckboxes = document.querySelectorAll('input[name="days"]:checked');
         const days = Array.from(daysCheckboxes).map(cb => cb.value);
@@ -47,6 +69,11 @@ if (menuPlanForm) {
             return;
         }
         
+        if (!defaultDiners || defaultDiners < 1 || defaultDiners > 20) {
+            showPlanMessage('El número de comensales debe estar entre 1 y 20', 'error');
+            return;
+        }
+        
         // Show loading
         toggleLoading(true);
         
@@ -57,7 +84,8 @@ if (menuPlanForm) {
                     startDate,
                     endDate,
                     days,
-                    mealTypes
+                    mealTypes,
+                    customDiners: defaultDiners
                 })
             });
             
