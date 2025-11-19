@@ -2,6 +2,7 @@
 requireAuth();
 
 let currentMenuPlan = null;
+let familyMembers = [];
 
 // Set minimum date to today and load user defaults
 document.addEventListener('DOMContentLoaded', () => {
@@ -19,6 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Load user's default diners
     loadUserDefaults();
+    
+    // Load family members
+    loadFamilyMembers();
 });
 
 // Setup select all days checkbox
@@ -63,6 +67,21 @@ async function loadUserDefaults() {
     } catch (error) {
         console.error('Error loading user defaults:', error);
         // Continue with default value if error
+    }
+}
+
+// Load family members
+async function loadFamilyMembers() {
+    try {
+        const response = await authenticatedFetch(`${API_URL}/family-members`);
+        const data = await response.json();
+        
+        if (response.ok) {
+            familyMembers = data.members || [];
+        }
+    } catch (error) {
+        console.error('Error loading family members:', error);
+        familyMembers = [];
     }
 }
 
@@ -187,7 +206,7 @@ function displayMenuPlan(menuPlan) {
             if (mealIndex !== -1) {
                 currentMenuPlan.meals[mealIndex] = updatedMeal;
             }
-        });
+        }, familyMembers);
         
         // Store reference to meal card
         mealCards.set(meal.id, mealCard);

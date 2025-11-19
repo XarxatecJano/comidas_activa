@@ -1245,3 +1245,87 @@ body {
         width: 100%;
     }
 }
+
+/* Family Members Selector in Meal Cards */
+.family-members-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+    background: var(--bg-light);
+    border-radius: 8px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.family-member-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.family-member-checkbox:hover {
+    background: var(--bg-gray);
+}
+
+.family-member-checkbox input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.member-name {
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+.member-restrictions {
+    color: var(--text-light);
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+.diners-info {
+    padding: 12px;
+    background: var(--bg-gray);
+    border-radius: 8px;
+    margin-bottom: 15px;
+    color: var(--text-dark);
+}
+
+.diners-info strong {
+    color: var(--primary-color);
+}
+
+.info-message {
+    padding: 12px;
+    background: #e3f2fd;
+    border-left: 4px solid var(--primary-color);
+    border-radius: 4px;
+    color: var(--text-dark);
+}
+
+.info-message a {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.info-message a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments for family member selector */
+@media (max-width: 768px) {
+    .family-members-selector {
+        max-height: 200px;
+    }
+
+    .family-member-checkbox {
+        padding: 8px;
+    }
+}

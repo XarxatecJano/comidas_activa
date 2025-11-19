@@ -2,11 +2,13 @@
 // Handles individual meal display and editing
 
 class MealCard {
-    constructor(meal, menuPlanId, onUpdate) {
+    constructor(meal, menuPlanId, onUpdate, familyMembers = []) {
         this.meal = meal;
         this.menuPlanId = menuPlanId;
         this.onUpdate = onUpdate;
+        this.familyMembers = familyMembers;
         this.isEditing = false;
+        this.selectedMemberIds = new Set(meal.dinerIds || []);
     }
 
     // Render the meal card
@@ -59,26 +61,21 @@ class MealCard {
     renderEditForm() {
         if (!this.isEditing) return '';
 
-        const diners = this.meal.diners || [];
         const numberOfDishes = this.meal.dishes?.length || 2;
 
         return `
             <div class="meal-edit-form">
                 <div class="form-group">
-                    <label>Número de Comensales</label>
-                    <input type="number" 
-                           class="meal-diners-count" 
-                           value="${diners.length || 1}" 
-                           min="1" 
-                           max="20"
-                           onchange="mealCards.get('${this.meal.id}').updateDinersCount(this.value)">
-                </div>
-
-                <div class="form-group">
-                    <label>Nombres de Comensales</label>
-                    <div class="diners-list" id="diners-${this.meal.id}">
-                        ${this.renderDinersList(diners)}
-                    </div>
+                    <label>Comensales (${this.selectedMemberIds.size} seleccionados)</label>
+                    ${this.familyMembers.length > 0 ? `
+                        <div class="family-members-selector" id="members-${this.meal.id}">
+                            ${this.renderFamilyMembersSelector()}
+                        </div>
+                        <small>Selecciona quiénes comerán en esta comida</small>
+                    ` : `
+                        <p class="info-message">No tienes miembros de familia añadidos. 
+                        <a href="/family-members.html">Añadir miembros</a></p>
+                    `}
                 </div>
 
                 <div class="form-group">
@@ -97,34 +94,61 @@ class MealCard {
         `;
     }
 
-    // Render list of diners
-    renderDinersList(diners) {
-        const count = diners.length || 1;
-        let html = '';
-        
-        for (let i = 0; i < count; i++) {
-            const dinerName = diners[i]?.name || '';
-            html += `
-                <div class="diner-input-group">
-                    <input type="text" 
-                           class="diner-name-input" 
-                           placeholder="Nombre del comensal ${i + 1}"
-                           value="${dinerName}"
-                           data-index="${i}">
-                </div>
-            `;
+    // Render family members selector
+    renderFamilyMembersSelector() {
+        return this.familyMembers.map(member => `
+            <label class="family-member-checkbox">
+                <input type="checkbox" 
+                       value="${member.id}"
+                       ${this.selectedMemberIds.has(member.id) ? 'checked' : ''}
+                       onchange="mealCards.get('${this.meal.id}').toggleMember('${member.id}', this.checked)">
+                <span class="member-name">${member.name}</span>
+                ${member.dietary_restrictions ? `
+                    <span class="member-restrictions">(${member.dietary_restrictions})</span>
+                ` : ''}
+            </label>
+        `).join('');
+    }
+
+    // Toggle member selection
+    toggleMember(memberId, isSelected) {
+        if (isSelected) {
+            this.selectedMemberIds.add(memberId);
+        } else {
+            this.selectedMemberIds.delete(memberId);
         }
-        
-        return html;
+    }
+
+    // Render diners info (read-only display)
+    renderDinersInfo() {
+        if (this.selectedMemberIds.size === 0) {
+            return '<p class="diners-info">No hay comensales asignados</p>';
+        }
+
+        const selectedMembers = this.familyMembers.filter(m => this.selectedMemberIds.has(m.id));
+        return `
+            <div class="diners-info">
+                <strong>Comensales (${selectedMembers.length}):</strong>
+                ${selectedMembers.map(m => m.name).join(', ')}
+            </div>
+        `;
     }
 
     // Render dishes
     renderDishes() {
+        let html = '';
+        
+        // Show diners info when not editing
+        if (!this.isEditing && this.familyMembers.length > 0) {
+            html += this.renderDinersInfo();
+        }
+        
         if (!this.meal.dishes || this.meal.dishes.length === 0) {
-            return '<p class="empty-state">No hay platos disponibles</p>';
+            html += '<p class="empty-state">No hay platos disponibles</p>';
+            return html;
         }
 
-        return this.meal.dishes.map(dish => `
+        html += this.meal.dishes.map(dish => `
             <div class="dish-item">
                 <h5>${dish.name}</h5>
                 <p>${dish.description || ''}</p>
@@ -137,6 +161,8 @@ class MealCard {
                 ` : ''}
             </div>
         `).join('');
+        
+        return html;
     }
 
     // Toggle edit mode
@@ -145,20 +171,7 @@ class MealCard {
         this.refresh();
     }
 
-    // Update diners count
-    updateDinersCount(count) {
-        const dinersContainer = document.getElementById(`diners-${this.meal.id}`);
-        if (dinersContainer) {
-            const currentDiners = this.meal.diners || [];
-            const newDiners = [];
-            
-            for (let i = 0; i < parseInt(count); i++) {
-                newDiners.push(currentDiners[i] || { name: '' });
-            }
-            
-            dinersContainer.innerHTML = this.renderDinersList(newDiners);
-        }
-    }
+
 
     // Update dishes count
     updateDishesCount(count) {
@@ -168,14 +181,8 @@ class MealCard {
     // Save meal settings
     async saveMealSettings() {
         try {
-            // Get diners from inputs
-            const dinerInputs = document.querySelectorAll(`#diners-${this.meal.id} .diner-name-input`);
-            const diners = Array.from(dinerInputs).map((input, index) => ({
-                name: input.value.trim() || `Comensal ${index + 1}`,
-                preferences: ''
-            }));
-
             const numberOfDishes = this.pendingDishesCount || this.meal.dishes?.length || 2;
+            const familyMemberIds = Array.from(this.selectedMemberIds);
 
             // Update meal via API
             const response = await authenticatedFetch(
@@ -183,7 +190,7 @@ class MealCard {
                 {
                     method: 'PUT',
                     body: JSON.stringify({
-                        diners,
+                        familyMemberIds,
                         numberOfDishes
                     })
                 }
@@ -193,6 +200,7 @@ class MealCard {
 
             if (response.ok) {
                 this.meal = data.meal;
+                this.meal.dinerIds = familyMemberIds;
                 this.isEditing = false;
                 this.refresh();
                 
@@ -217,15 +225,15 @@ class MealCard {
         }
 
         try {
-            const diners = this.meal.diners || [];
             const numberOfDishes = this.meal.dishes?.length || 2;
+            const familyMemberIds = Array.from(this.selectedMemberIds);
 
             const response = await authenticatedFetch(
                 `${API_URL}/menu-plans/${this.menuPlanId}/meals/${this.meal.id}`,
                 {
                     method: 'PUT',
                     body: JSON.stringify({
-                        diners,
+                        familyMemberIds,
                         numberOfDishes,
                         regenerate: true
                     })
@@ -236,6 +244,7 @@ class MealCard {
 
             if (response.ok) {
                 this.meal = data.meal;
+                this.meal.dinerIds = familyMemberIds;
                 this.refresh();
                 
                 if (this.onUpdate) {
