@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miembros de Familia - Menu Planner</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Menu Planner</h1>
+            <nav class="nav">
+                <a href="/dashboard.html">Dashboard</a>
+                <a href="/menu-planner.html">Planificar Menú</a>
+                <a href="/family-members.html" class="active">Miembros de Familia</a>
+                <a href="/profile.html">Mi Perfil</a>
+                <button onclick="logout()" class="btn btn-small">Cerrar Sesión</button>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <div class="family-members-container">
+                <h2>Gestionar Miembros de Familia</h2>
+                <p class="subtitle-text">Añade personas que comerán contigo y sus preferencias alimentarias</p>
+
+                <!-- Add New Member Form -->
+                <div class="add-member-section">
+                    <h3>Añadir Nuevo Miembro</h3>
+                    <form id="addMemberForm" class="member-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="memberName">Nombre *</label>
+                                <input type="text" id="memberName" name="name" required maxlength="255">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="memberPreferences">Preferencias Alimentarias</label>
+                            <textarea id="memberPreferences" name="preferences" rows="3" placeholder="Ej: Le gusta la pasta, prefiere pescado a carne..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="memberRestrictions">Restricciones Dietéticas</label>
+                            <textarea id="memberRestrictions" name="dietary_restrictions" rows="3" placeholder="Ej: Alérgico a los frutos secos, intolerante a la lactosa..."></textarea>
+                        </div>
+
+                        <div id="addMessage" class="message" style="display: none;"></div>
+
+                        <button type="submit" class="btn btn-primary">
+                            <span id="addBtnText">Añadir Miembro</span>
+                            <span id="addBtnLoading" style="display: none;">Añadiendo...</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Members List -->
+                <div class="members-list-section">
+                    <h3>Miembros Actuales</h3>
+                    <div id="loadingMembers" class="loading">Cargando miembros...</div>
+                    <div id="membersContainer" class="members-grid" style="display: none;"></div>
+                    <div id="emptyState" class="empty-state" style="display: none;">
+                        <p>No tienes miembros de familia añadidos todavía.</p>
+                        <p>Añade tu primer miembro usando el formulario de arriba.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Edit Member Modal -->
+    <div id="editModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeEditModal()">&times;</span>
+            <h3>Editar Miembro</h3>
+            <form id="editMemberForm" class="member-form">
+                <input type="hidden" id="editMemberId">
+                
+                <div class="form-group">
+                    <label for="editMemberName">Nombre *</label>
+                    <input type="text" id="editMemberName" name="name" required maxlength="255">
+                </div>
+
+                <div class="form-group">
+                    <label for="editMemberPreferences">Preferencias Alimentarias</label>
+                    <textarea id="editMemberPreferences" name="preferences" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="editMemberRestrictions">Restricciones Dietéticas</label>
+                    <textarea id="editMemberRestrictions" name="dietary_restrictions" rows="3"></textarea>
+                </div>
+
+                <div id="editMessage" class="message" style="display: none;"></div>
+
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/auth.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/family-members.js"></script>
+</body>
+</html>

@@ -7,6 +7,7 @@ import authRoutes from './routes/auth.routes';
 import userRoutes from './routes/user.routes';
 import menuPlanRoutes from './routes/menuPlan.routes';
 import shoppingListRoutes from './routes/shoppingList.routes';
+import familyMemberRoutes from './routes/familyMember.routes';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler';
 
 // Cargar variables de entorno
@@ -32,6 +33,7 @@ app.route('/api/auth', authRoutes);
 app.route('/api/users', userRoutes);
 app.route('/api/menu-plans', menuPlanRoutes);
 app.route('/api/shopping-lists', shoppingListRoutes);
+app.route('/api/family-members', familyMemberRoutes);
 
 // Ruta de prueba
 app.get('/api', (c) => {
