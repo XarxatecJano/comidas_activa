@@ -54,7 +54,7 @@ class AIService {
         messages: [
           {
             role: 'system',
-            content: 'Eres un chef experto en planificación de menús. Generas menús equilibrados, variados y adaptados a las preferencias del usuario. Siempre respondes en formato JSON válido.',
+            content: 'Eres un chef experto en cocina mediterránea española. Generas menús basados en la dieta mediterránea tradicional española, utilizando ingredientes frescos, de temporada y típicos de España (aceite de oliva, verduras, legumbres, pescado, carnes magras, frutas). Priorizas platos saludables, equilibrados y variados de la gastronomía española. Siempre respondes en formato JSON válido.',
           },
           {
             role: 'user',
@@ -103,7 +103,7 @@ class AIService {
         messages: [
           {
             role: 'system',
-            content: 'Eres un chef experto. Generas platos equilibrados y adaptados a las preferencias. Siempre respondes en formato JSON válido.',
+            content: 'Eres un chef experto en cocina mediterránea española. Generas platos basados en la dieta mediterránea tradicional española, utilizando ingredientes frescos y típicos de España. Priorizas recetas saludables de la gastronomía española. Siempre respondes en formato JSON válido.',
           },
           {
             role: 'user',
@@ -152,7 +152,7 @@ class AIService {
         messages: [
           {
             role: 'system',
-            content: 'Eres un asistente que genera listas de compra organizadas. Agrupas ingredientes similares y calculas cantidades totales. Siempre respondes en formato JSON válido.',
+            content: 'Eres un asistente experto en compras para cocina mediterránea española. Generas listas de compra organizadas con ingredientes típicos españoles. Agrupas ingredientes similares y calculas cantidades totales. Siempre respondes en formato JSON válido.',
           },
           {
             role: 'user',
@@ -201,7 +201,7 @@ class AIService {
     }
 
     return `
-Genera un menú semanal para ${defaultDiners} personas con las siguientes características:
+Genera un menú semanal de DIETA MEDITERRÁNEA ESPAÑOLA para ${defaultDiners} personas con las siguientes características:
 
 Preferencias del usuario: ${preferences || 'Sin preferencias específicas'}
 
@@ -209,6 +209,15 @@ IMPORTANTE: Debes generar EXACTAMENTE ${combinations.length} comidas, una para c
 ${combinations.map((c, i) => `${i + 1}. ${c}`).join('\n')}
 
 Para cada comida, genera 2 platos (un plato principal y un acompañamiento o postre).
+
+REQUISITOS DE DIETA MEDITERRÁNEA ESPAÑOLA:
+- Usa aceite de oliva virgen extra como grasa principal
+- Incluye verduras y hortalizas frescas de temporada
+- Prioriza pescado (al menos 2-3 veces por semana), legumbres y carnes magras
+- Incluye cereales integrales, arroz, pasta
+- Usa hierbas aromáticas y especias españolas (pimentón, azafrán, romero, tomillo)
+- Platos típicos españoles: paella, gazpacho, tortilla española, lentejas, cocido, pescado al horno, ensaladas mediterráneas
+- Frutas frescas de postre cuando sea apropiado
 
 Responde ÚNICAMENTE con un JSON válido en este formato:
 {
@@ -218,7 +227,7 @@ Responde ÚNICAMENTE con un JSON válido en este formato:
       "mealType": "lunch",
       "dishes": [
         {
-          "name": "Nombre del plato",
+          "name": "Nombre del plato español",
           "description": "Descripción breve",
           "ingredients": ["ingrediente1", "ingrediente2"],
           "course": "main"
@@ -236,8 +245,9 @@ Responde ÚNICAMENTE con un JSON válido en este formato:
 
 Asegúrate de que:
 - Generas TODAS las ${combinations.length} comidas solicitadas
-- Los menús sean variados y equilibrados
+- Los menús sean variados, equilibrados y típicos de la cocina española
 - Se respeten las preferencias alimentarias
+- Los platos sean auténticos de la dieta mediterránea española
 - Los ingredientes sean específicos
 - course puede ser: "starter", "main", o "dessert"
 - dayOfWeek debe ser uno de: ${days.join(', ')}
@@ -251,17 +261,25 @@ Asegúrate de que:
     ).join(', ');
 
     return `
-Genera una comida (${params.mealType}) para el ${params.dayOfWeek} con las siguientes características:
+Genera una comida de DIETA MEDITERRÁNEA ESPAÑOLA (${params.mealType}) para el ${params.dayOfWeek} con las siguientes características:
 
 Comensales: ${dinersInfo}
 Preferencias generales: ${params.preferences || 'Sin preferencias específicas'}
 Número de platos: ${params.numberOfDishes}
 
+REQUISITOS DE DIETA MEDITERRÁNEA ESPAÑOLA:
+- Usa aceite de oliva virgen extra como grasa principal
+- Incluye verduras y hortalizas frescas de temporada
+- Prioriza pescado, legumbres y carnes magras
+- Usa hierbas aromáticas y especias españolas (pimentón, azafrán, romero, tomillo)
+- Platos típicos españoles: paella, gazpacho, tortilla española, lentejas, cocido, pescado al horno, ensaladas mediterráneas
+- Frutas frescas de postre cuando sea apropiado
+
 Responde ÚNICAMENTE con un JSON válido en este formato:
 {
   "dishes": [
     {
-      "name": "Nombre del plato",
+      "name": "Nombre del plato español",
       "description": "Descripción breve",
       "ingredients": ["ingrediente1 (cantidad)", "ingrediente2 (cantidad)"],
       "course": "main"
