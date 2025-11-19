@@ -1,9 +1,21 @@
 import OpenAI from 'openai';
 import { Diner, Dish, Meal, ShoppingItem } from '../models';
+import MockAIService from './MockAIService';
+
+// Usar Mock AI Service solo si está explícitamente configurado
+const USE_MOCK = process.env.USE_MOCK_AI === 'true';
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
+
+if (USE_MOCK) {
+  console.log('⚠️  WARNING: Using Mock AI Service (no OpenAI API calls)');
+  console.log('   Set USE_MOCK_AI=false in .env to use real OpenAI');
+} else if (!process.env.OPENAI_API_KEY) {
+  console.log('⚠️  WARNING: OPENAI_API_KEY not set!');
+  console.log('   Set OPENAI_API_KEY in .env or USE_MOCK_AI=true for testing');
+}
 
 interface GenerateMenuParams {
   preferences: string;
@@ -29,11 +41,16 @@ class AIService {
     days: string[],
     mealTypes: ('lunch' | 'dinner')[]
   ): Promise<GeneratedMeal[]> {
+    // Usar Mock AI si está configurado
+    if (USE_MOCK) {
+      return MockAIService.generateWeeklyMenu(userPreferences, defaultDiners, days, mealTypes);
+    }
+
     const prompt = this.buildWeeklyMenuPrompt(userPreferences, defaultDiners, days, mealTypes);
 
     try {
       const completion = await openai.chat.completions.create({
-        model: 'gpt-4',
+        model: 'gpt-3.5-turbo',
         messages: [
           {
             role: 'system',
@@ -73,11 +90,16 @@ class AIService {
    * Regenerar una comida específica
    */
   async regenerateMeal(params: GenerateMenuParams): Promise<Dish[]> {
+    // Usar Mock AI si está configurado
+    if (USE_MOCK) {
+      return MockAIService.regenerateMeal(params);
+    }
+
     const prompt = this.buildSingleMealPrompt(params);
 
     try {
       const completion = await openai.chat.completions.create({
-        model: 'gpt-4',
+        model: 'gpt-3.5-turbo',
         messages: [
           {
             role: 'system',
@@ -117,11 +139,16 @@ class AIService {
    * Generar lista de la compra desde comidas confirmadas
    */
   async generateShoppingList(meals: Meal[]): Promise<ShoppingItem[]> {
+    // Usar Mock AI si está configurado
+    if (USE_MOCK) {
+      return MockAIService.generateShoppingList(meals);
+    }
+
     const prompt = this.buildShoppingListPrompt(meals);
 
     try {
       const completion = await openai.chat.completions.create({
-        model: 'gpt-4',
+        model: 'gpt-3.5-turbo',
         messages: [
           {
             role: 'system',
@@ -165,13 +192,21 @@ class AIService {
     days: string[],
     mealTypes: ('lunch' | 'dinner')[]
   ): string {
+    // Generar todas las combinaciones de días y tipos de comida
+    const combinations: string[] = [];
+    for (const day of days) {
+      for (const mealType of mealTypes) {
+        combinations.push(`${day} - ${mealType}`);
+      }
+    }
+
     return `
 Genera un menú semanal para ${defaultDiners} personas con las siguientes características:
 
 Preferencias del usuario: ${preferences || 'Sin preferencias específicas'}
 
-Días: ${days.join(', ')}
-Tipos de comida: ${mealTypes.join(', ')}
+IMPORTANTE: Debes generar EXACTAMENTE ${combinations.length} comidas, una para cada combinación:
+${combinations.map((c, i) => `${i + 1}. ${c}`).join('\n')}
 
 Para cada comida, genera 2 platos (un plato principal y un acompañamiento o postre).
 
@@ -187,6 +222,12 @@ Responde ÚNICAMENTE con un JSON válido en este formato:
           "description": "Descripción breve",
           "ingredients": ["ingrediente1", "ingrediente2"],
           "course": "main"
+        },
+        {
+          "name": "Nombre del segundo plato",
+          "description": "Descripción breve",
+          "ingredients": ["ingrediente1", "ingrediente2"],
+          "course": "dessert"
         }
       ]
     }
@@ -194,10 +235,13 @@ Responde ÚNICAMENTE con un JSON válido en este formato:
 }
 
 Asegúrate de que:
+- Generas TODAS las ${combinations.length} comidas solicitadas
 - Los menús sean variados y equilibrados
 - Se respeten las preferencias alimentarias
-- Los ingredientes sean específicos y con cantidades aproximadas
+- Los ingredientes sean específicos
 - course puede ser: "starter", "main", o "dessert"
+- dayOfWeek debe ser uno de: ${days.join(', ')}
+- mealType debe ser uno de: ${mealTypes.join(', ')}
 `;
   }
 

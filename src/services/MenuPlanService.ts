@@ -14,7 +14,7 @@ interface CreateMenuPlanRequest {
   endDate: Date;
   days: string[];
   mealTypes: ('lunch' | 'dinner')[];
-  customDiners?: Array<{ name: string; preferences?: string }>;
+  customDiners?: number | Array<{ name: string; preferences?: string }>;
 }
 
 interface UpdateMealRequest {
@@ -42,12 +42,26 @@ class MenuPlanService {
       throw new Error('User not found');
     }
 
-    // Validar comensales si se proporcionan
-    if (customDiners && customDiners.length > 0) {
+    // Normalizar customDiners: puede ser un número o un array
+    let dinersArray: Array<{ name: string; preferences?: string }>;
+    let dinersCount: number;
+
+    if (typeof customDiners === 'number') {
+      // Si es un número, crear comensales por defecto
+      dinersCount = customDiners;
+      dinersArray = this.createDefaultDiners(customDiners);
+    } else if (Array.isArray(customDiners) && customDiners.length > 0) {
+      // Si es un array, validar y usar
       const dinerErrors = this.validateDinersConfiguration(customDiners);
       if (dinerErrors.length > 0) {
         throw new Error(dinerErrors.join(', '));
       }
+      dinersCount = customDiners.length;
+      dinersArray = customDiners;
+    } else {
+      // Si no se proporciona, usar los comensales por defecto del usuario
+      dinersCount = user.defaultDiners;
+      dinersArray = this.createDefaultDiners(user.defaultDiners);
     }
 
     // Crear el plan de menú en la base de datos
@@ -63,7 +77,7 @@ class MenuPlanService {
       // Generar menú con IA
       const generatedMeals = await AIService.generateWeeklyMenu(
         user.preferences,
-        customDiners?.length || user.defaultDiners,
+        dinersCount,
         days,
         mealTypes
       );
@@ -74,7 +88,7 @@ class MenuPlanService {
         const meal = await this.createMealFromGenerated(
           menuPlan.id,
           generatedMeal,
-          customDiners || this.createDefaultDiners(user.defaultDiners)
+          dinersArray
         );
         meals.push(meal);
       }

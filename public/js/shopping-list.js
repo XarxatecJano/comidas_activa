@@ -39,6 +39,47 @@ async function loadShoppingList() {
     }
 }
 
+// Categorize ingredients
+function categorizeIngredients(items) {
+    const categories = {
+        'Frutas y Verduras': ['tomate', 'cebolla', 'ajo', 'pimiento', 'lechuga', 'zanahoria', 'patata', 'manzana', 'plátano', 'naranja', 'limón', 'perejil', 'cilantro'],
+        'Carnes y Pescados': ['pollo', 'ternera', 'cerdo', 'cordero', 'pescado', 'salmón', 'atún', 'merluza', 'gambas', 'mejillones', 'calamar'],
+        'Lácteos y Huevos': ['leche', 'queso', 'yogur', 'mantequilla', 'nata', 'huevo', 'huevos'],
+        'Cereales y Legumbres': ['arroz', 'pasta', 'pan', 'harina', 'lentejas', 'garbanzos', 'alubias'],
+        'Aceites y Condimentos': ['aceite', 'vinagre', 'sal', 'pimienta', 'azúcar', 'especias'],
+        'Otros': []
+    };
+    
+    const categorized = {};
+    
+    items.forEach(item => {
+        let assigned = false;
+        const ingredientLower = item.ingredient.toLowerCase();
+        
+        for (const [category, keywords] of Object.entries(categories)) {
+            if (category === 'Otros') continue;
+            
+            if (keywords.some(keyword => ingredientLower.includes(keyword))) {
+                if (!categorized[category]) {
+                    categorized[category] = [];
+                }
+                categorized[category].push(item);
+                assigned = true;
+                break;
+            }
+        }
+        
+        if (!assigned) {
+            if (!categorized['Otros']) {
+                categorized['Otros'] = [];
+            }
+            categorized['Otros'].push(item);
+        }
+    });
+    
+    return categorized;
+}
+
 // Display shopping list
 function displayShoppingList(shoppingList) {
     const container = document.getElementById('shoppingListContent');
@@ -50,13 +91,35 @@ function displayShoppingList(shoppingList) {
         return;
     }
     
+    // Categorize items
+    const categorized = categorizeIngredients(shoppingList.items);
+    
     let html = '<div class="shopping-items">';
     
-    shoppingList.items.forEach(item => {
+    // Render by categories
+    Object.entries(categorized).forEach(([category, items]) => {
+        if (items.length === 0) return;
+        
         html += `
-            <div class="shopping-item">
-                <span class="shopping-item-name">${item.ingredient}</span>
-                <span class="shopping-item-quantity">${item.quantity} ${item.unit}</span>
+            <div class="shopping-category">
+                <h3 class="category-title">${category}</h3>
+                <div class="category-items">
+        `;
+        
+        items.forEach(item => {
+            html += `
+                <div class="shopping-item">
+                    <label class="shopping-item-checkbox">
+                        <input type="checkbox" class="item-checkbox">
+                        <span class="shopping-item-name">${item.ingredient}</span>
+                    </label>
+                    <span class="shopping-item-quantity">${item.quantity} ${item.unit}</span>
+                </div>
+            `;
+        });
+        
+        html += `
+                </div>
             </div>
         `;
     });
@@ -84,6 +147,93 @@ function showError(message) {
 // Print list
 function printList() {
     window.print();
+}
+
+// Export list as text
+function exportList() {
+    if (!currentShoppingList || !currentShoppingList.items) {
+        alert('No hay lista para exportar');
+        return;
+    }
+    
+    const categorized = categorizeIngredients(currentShoppingList.items);
+    
+    let text = '=== LISTA DE COMPRA ===\n\n';
+    
+    Object.entries(categorized).forEach(([category, items]) => {
+        if (items.length === 0) return;
+        
+        text += `${category.toUpperCase()}\n`;
+        text += '─'.repeat(30) + '\n';
+        
+        items.forEach(item => {
+            text += `☐ ${item.ingredient} - ${item.quantity} ${item.unit}\n`;
+        });
+        
+        text += '\n';
+    });
+    
+    text += `\nGenerado el ${new Date().toLocaleDateString('es-ES')}\n`;
+    
+    // Create blob and download
+    const blob = new Blob([text], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `lista-compra-${new Date().toISOString().split('T')[0]}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+// Copy list to clipboard
+async function copyToClipboard() {
+    if (!currentShoppingList || !currentShoppingList.items) {
+        alert('No hay lista para copiar');
+        return;
+    }
+    
+    const categorized = categorizeIngredients(currentShoppingList.items);
+    
+    let text = '=== LISTA DE COMPRA ===\n\n';
+    
+    Object.entries(categorized).forEach(([category, items]) => {
+        if (items.length === 0) return;
+        
+        text += `${category.toUpperCase()}\n`;
+        
+        items.forEach(item => {
+            text += `☐ ${item.ingredient} - ${item.quantity} ${item.unit}\n`;
+        });
+        
+        text += '\n';
+    });
+    
+    try {
+        await navigator.clipboard.writeText(text);
+        showSuccessMessage('Lista copiada al portapapeles');
+    } catch (error) {
+        console.error('Error copying to clipboard:', error);
+        alert('No se pudo copiar al portapapeles');
+    }
+}
+
+// Show success message
+function showSuccessMessage(message) {
+    const container = document.getElementById('shoppingListContent');
+    if (container) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'message success';
+        messageDiv.textContent = message;
+        messageDiv.style.marginBottom = '20px';
+        
+        container.insertBefore(messageDiv, container.firstChild);
+        
+        setTimeout(() => {
+            messageDiv.remove();
+        }, 3000);
+    }
 }
 
 // Load shopping list on page load

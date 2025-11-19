@@ -4,7 +4,7 @@ dotenv.config();
 
 export const openaiConfig = {
   apiKey: process.env.OPENAI_API_KEY || '',
-  model: 'gpt-4',
+  model: 'gpt-3.5-turbo',
   maxTokens: 2000,
   temperature: 0.7,
 };

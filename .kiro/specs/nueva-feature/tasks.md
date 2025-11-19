@@ -162,7 +162,7 @@
   - Mostrar botón para generar lista de compra
   - _Requirements: Confirmar dieta_
 
-- [ ] 21. Implementar ShoppingListComponent en frontend
+- [x] 21. Implementar ShoppingListComponent en frontend
   - Crear shopping-list.js para lista de compra
   - Implementar botón "Generar Lista de Compra" que llama a API
   - Renderizar lista de ingredientes con cantidades
@@ -170,7 +170,7 @@
   - Añadir funcionalidad de impresión/exportación
   - _Requirements: Generar lista de compra_
 
-- [ ] 22. Implementar manejo de errores en frontend
+- [x] 22. Implementar manejo de errores en frontend
   - Crear función handleApiCall() para centralizar llamadas a API
   - Implementar función showErrorNotification() para mostrar errores al usuario
   - Añadir manejo de errores de red
@@ -178,7 +178,7 @@
   - Mostrar mensajes de error amigables
   - _Requirements: Todos_
 
-- [ ] 23. Conectar frontend con backend
+- [x] 23. Conectar frontend con backend
   - Crear módulo api.js con funciones para cada endpoint
   - Implementar fetch con headers de autenticación
   - Configurar CORS en backend si es necesario
