@@ -21,12 +21,14 @@
   "description": "Aplicación de planificación inteligente de menús semanales",
   "dependencies": {
     "@hono/node-server": "^1.19.6",
+    "@hono/zod-validator": "^0.7.4",
     "bcrypt": "^6.0.0",
     "dotenv": "^17.2.3",
     "hono": "^4.10.5",
     "jsonwebtoken": "^9.0.2",
     "openai": "^6.9.1",
-    "pg": "^8.16.3"
+    "pg": "^8.16.3",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
