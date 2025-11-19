@@ -73,11 +73,32 @@ async function loadUserDefaults() {
 // Load family members
 async function loadFamilyMembers() {
     try {
+        // Get current user data
+        const userData = getUserData();
+        
+        // Load family members from API
         const response = await authenticatedFetch(`${API_URL}/family-members`);
         const data = await response.json();
         
         if (response.ok) {
-            familyMembers = data.members || [];
+            // Create array with user first, then family members
+            familyMembers = [];
+            
+            // Add current user as first option
+            if (userData && userData.name) {
+                familyMembers.push({
+                    id: 'user-' + userData.id,
+                    name: userData.name + ' (Yo)',
+                    preferences: userData.preferences || '',
+                    dietary_restrictions: '',
+                    isCurrentUser: true
+                });
+            }
+            
+            // Add family members
+            if (data.members && data.members.length > 0) {
+                familyMembers.push(...data.members);
+            }
         }
     } catch (error) {
         console.error('Error loading family members:', error);
