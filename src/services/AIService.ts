@@ -219,6 +219,11 @@ REQUISITOS DE DIETA MEDITERRÁNEA ESPAÑOLA:
 - Platos típicos españoles: paella, gazpacho, tortilla española, lentejas, cocido, pescado al horno, ensaladas mediterráneas
 - Frutas frescas de postre cuando sea apropiado
 
+IMPORTANTE - REGLA PARA CENAS (dinner):
+- En las CENAS (dinner) EVITA hidratos de carbono: NO incluyas pan, pasta, arroz, patatas, legumbres
+- Las cenas deben ser ligeras: prioriza proteínas (pescado, pollo, huevos) con verduras
+- Ejemplos para cenas: pescado a la plancha con verduras, ensaladas con proteína, tortilla con ensalada, pollo al horno con verduras
+
 Responde ÚNICAMENTE con un JSON válido en este formato:
 {
   "meals": [
@@ -274,6 +279,13 @@ REQUISITOS DE DIETA MEDITERRÁNEA ESPAÑOLA:
 - Usa hierbas aromáticas y especias españolas (pimentón, azafrán, romero, tomillo)
 - Platos típicos españoles: paella, gazpacho, tortilla española, lentejas, cocido, pescado al horno, ensaladas mediterráneas
 - Frutas frescas de postre cuando sea apropiado
+
+${params.mealType === 'dinner' ? `
+IMPORTANTE - REGLA PARA ESTA CENA:
+- EVITA hidratos de carbono: NO incluyas pan, pasta, arroz, patatas, legumbres
+- La cena debe ser ligera: prioriza proteínas (pescado, pollo, huevos) con verduras
+- Ejemplos: pescado a la plancha con verduras, ensaladas con proteína, tortilla con ensalada, pollo al horno con verduras
+` : ''}
 
 Responde ÚNICAMENTE con un JSON válido en este formato:
 {
