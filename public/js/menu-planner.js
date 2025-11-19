@@ -14,9 +14,39 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('endDate').setAttribute('min', e.target.value);
     });
     
+    // Setup "Select All Days" functionality
+    setupSelectAllDays();
+    
     // Load user's default diners
     loadUserDefaults();
 });
+
+// Setup select all days checkbox
+function setupSelectAllDays() {
+    const selectAllCheckbox = document.getElementById('selectAllDays');
+    const dayCheckboxes = document.querySelectorAll('input[name="days"]');
+    
+    if (selectAllCheckbox && dayCheckboxes.length > 0) {
+        // Handle select all checkbox change
+        selectAllCheckbox.addEventListener('change', (e) => {
+            const isChecked = e.target.checked;
+            dayCheckboxes.forEach(checkbox => {
+                checkbox.checked = isChecked;
+            });
+        });
+        
+        // Handle individual day checkbox changes to update select all state
+        dayCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                const allChecked = Array.from(dayCheckboxes).every(cb => cb.checked);
+                const someChecked = Array.from(dayCheckboxes).some(cb => cb.checked);
+                
+                selectAllCheckbox.checked = allChecked;
+                selectAllCheckbox.indeterminate = someChecked && !allChecked;
+            });
+        });
+    }
+}
 
 // Load user's default settings
 async function loadUserDefaults() {

@@ -707,6 +707,26 @@ body {
     cursor: pointer;
 }
 
+.select-all-label {
+    width: 100%;
+    padding: 10px;
+    background: var(--bg-gray);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: 2px solid var(--border-color);
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.select-all-label:hover {
+    background: #e0e0e0;
+    border-color: var(--primary-color);
+}
+
+.select-all-label input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+}
+
 /* Menu Plan Result */
 .menu-plan-result {
     margin-top: 40px;
