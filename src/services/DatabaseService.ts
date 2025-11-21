@@ -14,6 +14,7 @@ import {
   CreateDishDTO,
   ShoppingList,
   CreateShoppingListDTO,
+  UserDinerPreferences,
 } from '../models';
 
 class DatabaseService {
@@ -138,7 +139,7 @@ class DatabaseService {
       WHERE id = $1
     `;
     const result = await pool.query(query, [planId]);
-    
+
     if (result.rows.length === 0) {
       return null;
     }
@@ -158,7 +159,7 @@ class DatabaseService {
                 updated_at as "updatedAt"
     `;
     const result = await pool.query(query, [planId]);
-    
+
     if (result.rows.length === 0) {
       return null;
     }
@@ -196,7 +197,7 @@ class DatabaseService {
       WHERE id = $1
     `;
     const result = await pool.query(query, [mealId]);
-    
+
     if (result.rows.length === 0) {
       return null;
     }
@@ -217,7 +218,7 @@ class DatabaseService {
       ORDER BY day_of_week, meal_type
     `;
     const result = await pool.query(query, [menuPlanId]);
-    
+
     const meals = await Promise.all(
       result.rows.map(async (meal) => {
         meal.diners = await this.getDinersByMealId(meal.id);
@@ -260,7 +261,7 @@ class DatabaseService {
     `;
 
     const result = await pool.query(query, values);
-    
+
     if (result.rows.length === 0) {
       return null;
     }
@@ -409,7 +410,7 @@ class DatabaseService {
       WHERE id = $1
     `;
     const result = await pool.query(query, [listId]);
-    
+
     if (result.rows.length === 0) {
       return null;
     }
@@ -430,7 +431,7 @@ class DatabaseService {
       LIMIT 1
     `;
     const result = await pool.query(query, [menuPlanId]);
-    
+
     if (result.rows.length === 0) {
       return null;
     }
@@ -462,7 +463,7 @@ class DatabaseService {
 
   // ==================== USER DINER PREFERENCES METHODS ====================
 
-  async getUserDinerPreferences(userId: string, mealType: string): Promise<Array<{ id: string; userId: string; mealType: string; familyMemberId: string; createdAt: Date }>> {
+  async getUserDinerPreferences(userId: string, mealType: string): Promise<UserDinerPreferences[]> {
     const query = `
       SELECT id, user_id as "userId", meal_type as "mealType", 
              family_member_id as "familyMemberId", created_at as "createdAt"
@@ -476,7 +477,7 @@ class DatabaseService {
 
   async setUserDinerPreferences(userId: string, mealType: string, familyMemberIds: string[]): Promise<void> {
     const client = await this.beginTransaction();
-    
+
     try {
       // First, delete existing preferences for this user and meal type
       await client.query(
@@ -511,7 +512,7 @@ class DatabaseService {
     await pool.query(query, [hasCustom, mealId]);
   }
 
-  async getMealWithResolvedDiners(mealId: string): Promise<any> {
+  async getMealWithResolvedDiners(mealId: string): Promise<(Meal & { diners: any[] }) | null> {
     // First get the meal with its basic info
     const mealQuery = `
       SELECT m.id, m.menu_plan_id as "menuPlanId", m.day_of_week as "dayOfWeek",
@@ -523,13 +524,13 @@ class DatabaseService {
       WHERE m.id = $1
     `;
     const mealResult = await pool.query(mealQuery, [mealId]);
-    
+
     if (mealResult.rows.length === 0) {
       return null;
     }
 
     const meal = mealResult.rows[0];
-    
+
     // Get diners based on whether meal has custom diners or uses bulk selection
     let diners = [];
     if (meal.hasCustomDiners) {

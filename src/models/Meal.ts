@@ -7,6 +7,7 @@ export interface Meal {
   menuPlanId: string;
   dayOfWeek: string;
   mealType: MealType;
+  hasCustomDiners: boolean;
   diners: Diner[];
   dishes: Dish[];
   createdAt: Date;

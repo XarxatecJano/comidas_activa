@@ -165,8 +165,8 @@ class MenuPlanService {
     }
 
     // Determinar comensales a usar
-    const dinersToUse = customDiners || 
-      (existingMeal.diners.length > 0 
+    const dinersToUse = customDiners ||
+      (existingMeal.diners.length > 0
         ? existingMeal.diners.map(d => ({ name: d.name, preferences: d.preferences }))
         : this.createDefaultDiners(user.defaultDiners));
 
@@ -316,7 +316,7 @@ class MenuPlanService {
       if (!mealWithFlag) continue;
 
       // Skip meals with custom diners flag
-      if ((mealWithFlag as any).hasCustomDiners) {
+      if (mealWithFlag.hasCustomDiners) {
         continue;
       }
 

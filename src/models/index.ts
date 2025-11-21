@@ -6,3 +6,4 @@ export * from './Meal';
 export * from './Diner';
 export * from './Dish';
 export * from './ShoppingList';
+export * from './UserDinerPreferences';

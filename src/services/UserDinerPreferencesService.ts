@@ -1,12 +1,5 @@
 import DatabaseService from './DatabaseService';
-
-export interface DinerPreference {
-  id: string;
-  userId: string;
-  mealType: 'lunch' | 'dinner';
-  familyMemberId: string;
-  createdAt: Date;
-}
+import { UserDinerPreferences } from '../models';
 
 class UserDinerPreferencesService {
   /**
