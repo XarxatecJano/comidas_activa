@@ -31,22 +31,22 @@ git push origin develop
   - Crear script de migración para establecer has_custom_diners=true para comidas existentes
   - _Requisitos: 4.1, 4.3, 2.2_
 
-- [ ] 2. Backend: Implementación de UserDinerPreferencesService
-  - [ ] 2.1 Crear clase UserDinerPreferencesService con operaciones CRUD
+- [x] 2. Backend: Implementación de UserDinerPreferencesService
+  - [x] 2.1 Crear clase UserDinerPreferencesService con operaciones CRUD
     - Implementar método getPreferences(userId, mealType)
     - Implementar método setPreferences(userId, mealType, familyMemberIds)
     - Implementar método clearPreferences(userId, mealType)
     - _Requisitos: 4.1, 4.2, 4.5_
 
-  - [ ] 2.2 Escribir test de propiedad para persistencia de selección masiva
+  - [x] 2.2 Escribir test de propiedad para persistencia de selección masiva
     - **Propiedad 6: Persistencia de selección masiva**
     - **Valida: Requisitos 4.1, 4.5**
 
-  - [ ] 2.3 Escribir test de propiedad para aislamiento de usuario
+  - [x] 2.3 Escribir test de propiedad para aislamiento de usuario
     - **Propiedad 7: Aislamiento de usuario**
     - **Valida: Requisitos 4.3**
 
-  - [ ] 2.4 Escribir tests unitarios para UserDinerPreferencesService
+  - [x] 2.4 Escribir tests unitarios para UserDinerPreferencesService
     - Testear selecciones vacías (caso extremo)
     - Testear selección de un solo comensal
     - Testear todos los miembros de familia seleccionados
@@ -75,22 +75,22 @@ git push origin develop
     - **Propiedad 10: Integridad referencial**
     - **Valida: Requisitos 5.5**
 
-- [ ] 4. Backend: Rutas de API para preferencias de comensales
-  - [ ] 4.1 Crear nuevas rutas en user.routes.ts
+- [x] 4. Backend: Rutas de API para preferencias de comensales
+  - [x] 4.1 Crear nuevas rutas en user.routes.ts
     - POST /api/users/:userId/diner-preferences/:mealType
     - GET /api/users/:userId/diner-preferences/:mealType
     - DELETE /api/users/:userId/diner-preferences/:mealType
     - Añadir middleware de autorización para verificar que el usuario posee las preferencias
     - _Requisitos: 4.1, 4.2, 4.3_
 
-  - [ ] 4.2 Añadir endpoint de revertir a masivo en menuPlan.routes.ts
+  - [x] 4.2 Añadir endpoint de revertir a masivo en menuPlan.routes.ts
     - POST /api/menu-plans/:planId/meals/:mealId/revert-diners
     - Verificar que el usuario posee el plan
     - Limpiar flag has_custom_diners
     - Aplicar selección masiva para el tipo de comida
     - _Requisitos: 2.4_
 
-  - [ ] 4.3 Escribir tests unitarios para nuevos endpoints de API
+  - [x] 4.3 Escribir tests unitarios para nuevos endpoints de API
     - Testear almacenamiento y recuperación exitosa de preferencias
     - Testear acceso no autorizado (error 403)
     - Testear tipo de comida inválido (error 400)
