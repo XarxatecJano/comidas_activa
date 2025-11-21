@@ -3,6 +3,8 @@ requireAuth();
 
 let currentMenuPlan = null;
 let familyMembers = [];
+let selectedLunchDiners = new Set();
+let selectedDinnerDiners = new Set();
 
 // Set minimum date to today and load user defaults
 document.addEventListener('DOMContentLoaded', () => {
@@ -54,20 +56,8 @@ function setupSelectAllDays() {
 
 // Load user's default settings
 async function loadUserDefaults() {
-    try {
-        const userData = getUserData();
-        if (userData && userData.id) {
-            const response = await authenticatedFetch(`${API_URL}/users/${userData.id}`);
-            const data = await response.json();
-            
-            if (response.ok && data.user.defaultDiners) {
-                document.getElementById('defaultDiners').value = data.user.defaultDiners;
-            }
-        }
-    } catch (error) {
-        console.error('Error loading user defaults:', error);
-        // Continue with default value if error
-    }
+    // Ya no necesitamos cargar defaultDiners porque ahora usamos selección de comensales individuales
+    // Esta función se mantiene por compatibilidad pero no hace nada
 }
 
 // Load family members
@@ -86,23 +76,79 @@ async function loadFamilyMembers() {
             
             // Add current user as first option
             if (userData && userData.name) {
-                familyMembers.push({
+                const currentUser = {
                     id: 'user-' + userData.id,
                     name: userData.name + ' (Yo)',
                     preferences: userData.preferences || '',
                     dietary_restrictions: '',
                     isCurrentUser: true
-                });
+                };
+                familyMembers.push(currentUser);
+                
+                // Select current user by default for both meal types
+                selectedLunchDiners.add(currentUser.id);
+                selectedDinnerDiners.add(currentUser.id);
             }
             
             // Add family members
             if (data.members && data.members.length > 0) {
                 familyMembers.push(...data.members);
             }
+            
+            // Render diners selectors
+            renderDinersSelectors();
         }
     } catch (error) {
         console.error('Error loading family members:', error);
         familyMembers = [];
+        renderDinersSelectors();
+    }
+}
+
+// Render diners selectors
+function renderDinersSelectors() {
+    const lunchSelector = document.getElementById('lunchDinersSelector');
+    const dinnerSelector = document.getElementById('dinnerDinersSelector');
+    
+    if (!lunchSelector || !dinnerSelector) return;
+    
+    if (familyMembers.length === 0) {
+        const emptyMessage = '<p class="info-message">No hay comensales disponibles. <a href="/family-members.html">Añadir miembros de familia</a></p>';
+        lunchSelector.innerHTML = emptyMessage;
+        dinnerSelector.innerHTML = emptyMessage;
+        return;
+    }
+    
+    lunchSelector.innerHTML = renderDinerCheckboxes('lunch');
+    dinnerSelector.innerHTML = renderDinerCheckboxes('dinner');
+}
+
+// Render diner checkboxes
+function renderDinerCheckboxes(mealType) {
+    const selectedSet = mealType === 'lunch' ? selectedLunchDiners : selectedDinnerDiners;
+    
+    return familyMembers.map(member => `
+        <label class="diner-checkbox">
+            <input type="checkbox" 
+                   value="${member.id}"
+                   ${selectedSet.has(member.id) ? 'checked' : ''}
+                   onchange="toggleDiner('${mealType}', '${member.id}', this.checked)">
+            <span class="diner-name">${member.name}</span>
+            ${member.dietary_restrictions ? `
+                <span class="diner-restrictions">(${member.dietary_restrictions})</span>
+            ` : ''}
+        </label>
+    `).join('');
+}
+
+// Toggle diner selection
+function toggleDiner(mealType, dinerId, isSelected) {
+    const selectedSet = mealType === 'lunch' ? selectedLunchDiners : selectedDinnerDiners;
+    
+    if (isSelected) {
+        selectedSet.add(dinerId);
+    } else {
+        selectedSet.delete(dinerId);
     }
 }
 
@@ -115,7 +161,6 @@ if (menuPlanForm) {
         // Get form data
         const startDate = document.getElementById('startDate').value;
         const endDate = document.getElementById('endDate').value;
-        const defaultDiners = parseInt(document.getElementById('defaultDiners').value);
         
         const daysCheckboxes = document.querySelectorAll('input[name="days"]:checked');
         const days = Array.from(daysCheckboxes).map(cb => cb.value);
@@ -139,8 +184,9 @@ if (menuPlanForm) {
             return;
         }
         
-        if (!defaultDiners || defaultDiners < 1 || defaultDiners > 20) {
-            showPlanMessage('El número de comensales debe estar entre 1 y 20', 'error');
+        // Validar que se hayan seleccionado comensales
+        if (selectedLunchDiners.size === 0 && selectedDinnerDiners.size === 0) {
+            showPlanMessage('Por favor, selecciona al menos un comensal para las comidas o cenas', 'error');
             return;
         }
         
@@ -148,6 +194,9 @@ if (menuPlanForm) {
         toggleLoading(true);
         
         try {
+            // Calcular el número máximo de comensales entre lunch y dinner
+            const maxDiners = Math.max(selectedLunchDiners.size, selectedDinnerDiners.size);
+            
             const response = await authenticatedFetch(`${API_URL}/menu-plans`, {
                 method: 'POST',
                 body: JSON.stringify({
@@ -155,7 +204,7 @@ if (menuPlanForm) {
                     endDate,
                     days,
                     mealTypes,
-                    customDiners: defaultDiners
+                    customDiners: maxDiners || 1  // Al menos 1 comensal por defecto
                 })
             });
             

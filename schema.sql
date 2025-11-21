@@ -5,6 +5,7 @@
 DROP TABLE IF EXISTS "ShoppingList" CASCADE;
 DROP TABLE IF EXISTS "Dish" CASCADE;
 DROP TABLE IF EXISTS "MealDiner" CASCADE;
+DROP TABLE IF EXISTS "UserDinerPreferences" CASCADE;
 DROP TABLE IF EXISTS "Diner" CASCADE;
 DROP TABLE IF EXISTS "FamilyMember" CASCADE;
 DROP TABLE IF EXISTS "Meal" CASCADE;
@@ -40,6 +41,7 @@ CREATE TABLE "Meal" (
   menu_plan_id UUID REFERENCES "MenuPlan"(id) ON DELETE CASCADE,
   day_of_week VARCHAR(20) NOT NULL,
   meal_type VARCHAR(20) NOT NULL,
+  has_custom_diners BOOLEAN DEFAULT FALSE,
   created_at TIMESTAMP DEFAULT NOW(),
   updated_at TIMESTAMP DEFAULT NOW()
 );
@@ -72,6 +74,16 @@ CREATE TABLE "MealDiner" (
   UNIQUE(meal_id, family_member_id)
 );
 
+-- Tabla UserDinerPreferences (preferencias masivas de comensales por tipo de comida)
+CREATE TABLE "UserDinerPreferences" (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES "User"(id) ON DELETE CASCADE,
+  meal_type VARCHAR(20) NOT NULL,
+  family_member_id UUID REFERENCES "FamilyMember"(id) ON DELETE CASCADE,
+  created_at TIMESTAMP DEFAULT NOW(),
+  UNIQUE(user_id, meal_type, family_member_id)
+);
+
 -- Tabla Dish
 CREATE TABLE "Dish" (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -99,6 +111,8 @@ CREATE INDEX idx_familymember_user ON "FamilyMember"(user_id);
 CREATE INDEX idx_diner_meal ON "Diner"(meal_id);
 CREATE INDEX idx_mealdiner_meal ON "MealDiner"(meal_id);
 CREATE INDEX idx_mealdiner_familymember ON "MealDiner"(family_member_id);
+CREATE INDEX idx_userdinerprefs_user_mealtype ON "UserDinerPreferences"(user_id, meal_type);
+CREATE INDEX idx_userdinerprefs_familymember ON "UserDinerPreferences"(family_member_id);
 CREATE INDEX idx_dish_meal ON "Dish"(meal_id);
 CREATE INDEX idx_shoppinglist_menuplan ON "ShoppingList"(menu_plan_id);
 
@@ -109,6 +123,7 @@ COMMENT ON TABLE "Meal" IS 'Comidas individuales dentro de una planificación';
 COMMENT ON TABLE "FamilyMember" IS 'Miembros de familia y personas relacionadas con cada usuario';
 COMMENT ON TABLE "Diner" IS 'Comensales para cada comida (deprecated - usar MealDiner)';
 COMMENT ON TABLE "MealDiner" IS 'Relación entre comidas y miembros de familia que comerán';
+COMMENT ON TABLE "UserDinerPreferences" IS 'Preferencias masivas de comensales por tipo de comida (lunch/dinner)';
 COMMENT ON TABLE "Dish" IS 'Platos de cada comida';
 COMMENT ON TABLE "ShoppingList" IS 'Listas de compra generadas';
 
