@@ -53,25 +53,25 @@ git push origin develop
     - Testear limpieza de preferencias
     - _Requisitos: 4.1, 4.2, 4.4, 4.5_
 
-- [ ] 3. Backend: Extensiones de DatabaseService
-  - [ ] 3.1 Añadir métodos de base de datos para preferencias de comensales
+- [x] 3. Backend: Extensiones de DatabaseService
+  - [x] 3.1 Añadir métodos de base de datos para preferencias de comensales
     - Implementar getUserDinerPreferences(userId, mealType)
     - Implementar setUserDinerPreferences(userId, mealType, familyMemberIds)
     - Implementar deleteUserDinerPreferences(userId, mealType)
     - Implementar setMealCustomDinersFlag(mealId, hasCustom)
     - _Requisitos: 4.1, 4.5, 2.2_
 
-  - [ ] 3.2 Implementar lógica de resolución de comensales
+  - [x] 3.2 Implementar lógica de resolución de comensales
     - Crear método getMealWithResolvedDiners(mealId)
     - Resolver selecciones masivas cuando has_custom_diners es false
     - Usar comensales personalizados de la comida cuando has_custom_diners es true
     - _Requisitos: 5.2, 5.3_
 
-  - [ ] 3.3 Escribir test de propiedad para corrección de resolución de comensales
+  - [x] 3.3 Escribir test de propiedad para corrección de resolución de comensales
     - **Propiedad 8: Corrección de resolución de comensales**
     - **Valida: Requisitos 5.2, 5.3**
 
-  - [ ] 3.4 Escribir test de propiedad para integridad referencial
+  - [x] 3.4 Escribir test de propiedad para integridad referencial
     - **Propiedad 10: Integridad referencial**
     - **Valida: Requisitos 5.5**
 
@@ -97,37 +97,37 @@ git push origin develop
     - Testear funcionalidad de revertir a masivo
     - _Requisitos: 4.1, 4.2, 4.3, 2.4_
 
-- [ ] 5. Backend: MenuPlanService mejorado
-  - [ ] 5.1 Modificar createMenuPlan para aplicar selecciones masivas
+- [x] 5. Backend: MenuPlanService mejorado
+  - [x] 5.1 Modificar createMenuPlan para aplicar selecciones masivas
     - Cargar preferencias masivas de comensales del usuario para lunch y dinner
     - Aplicar selección masiva apropiada a cada comida basada en el tipo de comida
     - Establecer has_custom_diners=false para todas las comidas nuevas
     - _Requisitos: 1.3, 1.4_
 
-  - [ ] 5.2 Modificar updateMeal para establecer flag de comensales personalizados
+  - [x] 5.2 Modificar updateMeal para establecer flag de comensales personalizados
     - Establecer has_custom_diners=true cuando se proporcionan customDiners
     - Mantener flag al regenerar platos sin cambiar comensales
     - _Requisitos: 2.2_
 
-  - [ ] 5.3 Implementar método applyBulkDiners
+  - [x] 5.3 Implementar método applyBulkDiners
     - Actualizar todas las comidas sin flag de comensales personalizados
     - Aplicar selección masiva basada en tipo de comida
     - Saltar comidas con has_custom_diners=true
     - _Requisitos: 1.5, 2.3_
 
-  - [ ] 5.4 Escribir test de propiedad para aplicación de selección masiva
+  - [x] 5.4 Escribir test de propiedad para aplicación de selección masiva
     - **Propiedad 1: Aplicación de selección masiva**
     - **Valida: Requisitos 1.3, 1.4**
 
-  - [ ] 5.5 Escribir test de propiedad para aislamiento de sobrescritura
+  - [x] 5.5 Escribir test de propiedad para aislamiento de sobrescritura
     - **Propiedad 2: Aislamiento de sobrescritura**
     - **Valida: Requisitos 1.5, 2.3**
 
-  - [ ] 5.6 Escribir test de propiedad para persistencia de flag de sobrescritura
+  - [x] 5.6 Escribir test de propiedad para persistencia de flag de sobrescritura
     - **Propiedad 3: Persistencia de flag de sobrescritura**
     - **Valida: Requisitos 2.2**
 
-  - [ ] 5.7 Escribir test de propiedad para reversión de sobrescritura
+  - [x] 5.7 Escribir test de propiedad para reversión de sobrescritura
     - **Propiedad 4: Reversión de sobrescritura**
     - **Valida: Requisitos 2.4**
 

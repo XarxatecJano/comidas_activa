@@ -190,8 +190,8 @@ class DatabaseService {
   async getMealById(mealId: string): Promise<Meal | null> {
     const query = `
       SELECT id, menu_plan_id as "menuPlanId", day_of_week as "dayOfWeek",
-             meal_type as "mealType", created_at as "createdAt",
-             updated_at as "updatedAt"
+             meal_type as "mealType", has_custom_diners as "hasCustomDiners",
+             created_at as "createdAt", updated_at as "updatedAt"
       FROM "Meal"
       WHERE id = $1
     `;
@@ -370,6 +370,17 @@ class DatabaseService {
 
     const result = await pool.query(query, values);
     return result.rows[0];
+  }
+
+  async getFamilyMemberById(memberId: string): Promise<any | null> {
+    const query = `
+      SELECT id, user_id as "userId", name, preferences, dietary_restrictions as "dietaryRestrictions",
+             created_at as "createdAt", updated_at as "updatedAt"
+      FROM "FamilyMember"
+      WHERE id = $1
+    `;
+    const result = await pool.query(query, [memberId]);
+    return result.rows[0] || null;
   }
 
   // ==================== SHOPPING LIST METHODS ====================

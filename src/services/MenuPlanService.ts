@@ -42,6 +42,14 @@ class MenuPlanService {
       throw new Error('User not found');
     }
 
+    // Load bulk diner preferences for lunch and dinner
+    const lunchPrefs = await DatabaseService.getUserDinerPreferences(userId, 'lunch');
+    const dinnerPrefs = await DatabaseService.getUserDinerPreferences(userId, 'dinner');
+
+    // Get family members for bulk selection
+    const lunchFamilyMemberIds = lunchPrefs.map(p => p.familyMemberId);
+    const dinnerFamilyMemberIds = dinnerPrefs.map(p => p.familyMemberId);
+
     // Normalizar customDiners: puede ser un número o un array
     let dinersArray: Array<{ name: string; preferences?: string }>;
     let dinersCount: number;
@@ -59,9 +67,10 @@ class MenuPlanService {
       dinersCount = customDiners.length;
       dinersArray = customDiners;
     } else {
-      // Si no se proporciona, usar los comensales por defecto del usuario
-      dinersCount = user.defaultDiners;
-      dinersArray = this.createDefaultDiners(user.defaultDiners);
+      // Use bulk selection count if available, otherwise use default
+      const maxBulkCount = Math.max(lunchFamilyMemberIds.length, dinnerFamilyMemberIds.length);
+      dinersCount = maxBulkCount > 0 ? maxBulkCount : user.defaultDiners;
+      dinersArray = this.createDefaultDiners(dinersCount);
     }
 
     // Crear el plan de menú en la base de datos
@@ -88,7 +97,8 @@ class MenuPlanService {
         const meal = await this.createMealFromGenerated(
           menuPlan.id,
           generatedMeal,
-          dinersArray
+          dinersArray,
+          generatedMeal.mealType === 'lunch' ? lunchFamilyMemberIds : dinnerFamilyMemberIds
         );
         meals.push(meal);
       }
@@ -147,6 +157,11 @@ class MenuPlanService {
       if (dinerErrors.length > 0) {
         throw new Error(dinerErrors.join(', '));
       }
+    }
+
+    // Set has_custom_diners flag if customDiners are provided
+    if (customDiners && customDiners.length > 0) {
+      await DatabaseService.setMealCustomDinersFlag(mealId, true);
     }
 
     // Determinar comensales a usar
@@ -277,14 +292,63 @@ class MenuPlanService {
   }
 
   /**
+   * Apply bulk diner selection to meals without custom diners
+   */
+  async applyBulkDiners(menuPlanId: string): Promise<void> {
+    const plan = await DatabaseService.getMenuPlanById(menuPlanId);
+    if (!plan) {
+      throw new Error('Menu plan not found');
+    }
+
+    // Get bulk preferences for lunch and dinner
+    const lunchPrefs = await DatabaseService.getUserDinerPreferences(plan.userId, 'lunch');
+    const dinnerPrefs = await DatabaseService.getUserDinerPreferences(plan.userId, 'dinner');
+
+    const lunchFamilyMemberIds = lunchPrefs.map(p => p.familyMemberId);
+    const dinnerFamilyMemberIds = dinnerPrefs.map(p => p.familyMemberId);
+
+    // Get all meals for this plan
+    const meals = await DatabaseService.getMealsByMenuPlanId(menuPlanId);
+
+    // Update meals that don't have custom diners
+    for (const meal of meals) {
+      const mealWithFlag = await DatabaseService.getMealById(meal.id);
+      if (!mealWithFlag) continue;
+
+      // Skip meals with custom diners flag
+      if ((mealWithFlag as any).hasCustomDiners) {
+        continue;
+      }
+
+      // Apply bulk selection based on meal type
+      const familyMemberIds = meal.mealType === 'lunch' ? lunchFamilyMemberIds : dinnerFamilyMemberIds;
+
+      // Delete existing diners
+      await DatabaseService.deleteDinersByMealId(meal.id);
+
+      // Create new diners from family members
+      for (const familyMemberId of familyMemberIds) {
+        const familyMember = await DatabaseService.getFamilyMemberById(familyMemberId);
+        if (familyMember) {
+          await DatabaseService.createDiner(meal.id, {
+            name: familyMember.name,
+            preferences: familyMember.preferences,
+          });
+        }
+      }
+    }
+  }
+
+  /**
    * Crear comida desde datos generados por IA
    */
   private async createMealFromGenerated(
     menuPlanId: string,
     generatedMeal: { dayOfWeek: string; mealType: 'lunch' | 'dinner'; dishes: Dish[] },
-    diners: Array<{ name: string; preferences?: string }>
+    diners: Array<{ name: string; preferences?: string }>,
+    bulkFamilyMemberIds: string[] = []
   ): Promise<Meal> {
-    // Crear la comida
+    // Crear la comida with has_custom_diners=false (using bulk selection)
     const meal = await DatabaseService.createMeal({
       menuPlanId,
       dayOfWeek: generatedMeal.dayOfWeek,
@@ -293,12 +357,29 @@ class MenuPlanService {
       numberOfDishes: generatedMeal.dishes.length,
     });
 
-    // Crear comensales
-    for (const dinerData of diners) {
-      await DatabaseService.createDiner(meal.id, {
-        name: dinerData.name,
-        preferences: dinerData.preferences,
-      });
+    // Set has_custom_diners to false for new meals
+    await DatabaseService.setMealCustomDinersFlag(meal.id, false);
+
+    // If bulk selection is available, use it; otherwise use default diners
+    if (bulkFamilyMemberIds.length > 0) {
+      // Create diners from family members (bulk selection)
+      for (const familyMemberId of bulkFamilyMemberIds) {
+        const familyMember = await DatabaseService.getFamilyMemberById(familyMemberId);
+        if (familyMember) {
+          await DatabaseService.createDiner(meal.id, {
+            name: familyMember.name,
+            preferences: familyMember.preferences,
+          });
+        }
+      }
+    } else {
+      // Create default diners
+      for (const dinerData of diners) {
+        await DatabaseService.createDiner(meal.id, {
+          name: dinerData.name,
+          preferences: dinerData.preferences,
+        });
+      }
     }
 
     // Crear platos
