@@ -1,0 +1,163 @@
+
+> appcomidassemana@1.0.0 test
+> jest tests/shopping-list-calculation.test.ts
+
+  console.log
+    [dotenv@17.2.3] injecting env (5) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+  console.log
+    ✓ New client connected to PostgreSQL database
+
+      at BoundPool.<anonymous> (src/config/database.ts:17:11)
+
+  console.log
+    ✓ New client connected to PostgreSQL database
+
+      at BoundPool.<anonymous> (src/config/database.ts:17:11)
+
+  console.log
+    DEBUG: Fetched meals: [
+      {
+        "id": "ed3a72a9-7db6-4872-97eb-27945d11f019",
+        "menu_plan_id": "91754fa4-e50f-4cb1-9397-f9ea9355a315",
+        "day_of_week": "thursday",
+        "meal_type": "lunch",
+        "created_at": "2025-11-21T12:19:35.435Z",
+        "updated_at": "2025-11-21T12:19:35.435Z",
+        "has_custom_diners": false,
+        "diners": [
+          {
+            "id": "cc924e7e-4337-4aa4-8238-4f882805e6a3",
+            "familyMemberId": "5744fb30-788a-44e4-bd02-b839b7dd7c23",
+            "name": "Member 1",
+            "preferences": "None",
+            "dietaryRestrictions": ""
+          },
+          {
+            "id": "ff92c9c0-5129-4d9b-9077-9591402f6e87",
+            "familyMemberId": "ece6b6a0-a9b3-4adb-ab14-b7c158ef5cef",
+            "name": "Member 2",
+            "preferences": "None",
+            "dietaryRestrictions": ""
+          }
+        ],
+        "dishes": [
+          {
+            "id": "a252a052-6768-473c-b9ba-d5c4c01738d7",
+            "mealId": "ed3a72a9-7db6-4872-97eb-27945d11f019",
+            "name": "Ensalada Mixta",
+            "description": "Ensalada fresca con lechuga, tomate, cebolla, pimiento, aceitunas y aceite de oliva",
+            "ingredients": [
+              "Lechuga",
+              "Tomate",
+              "Cebolla",
+              "Pimiento",
+              "Aceitunas",
+              "Aceite de oliva"
+            ],
+            "course": "dessert"
+          },
+          {
+            "id": "4aa3e184-ed1b-4868-96a9-2ed926663bd0",
+            "mealId": "ed3a72a9-7db6-4872-97eb-27945d11f019",
+            "name": "Paella Valenciana",
+            "description": "Arroz con pollo, conejo, judías verdes, tomate, azafrán y aceite de oliva",
+            "ingredients": [
+              "Arroz",
+              "Pollo",
+              "Conejo",
+              "Judías verdes",
+              "Tomate",
+              "Azafrán",
+              "Aceite de oliva"
+            ],
+            "course": "main"
+          }
+        ]
+      }
+    ]
+
+      at Object.<anonymous> (tests/shopping-list-calculation.test.ts:121:17)
+
+FAIL tests/shopping-list-calculation.test.ts (14.892 s)
+  Shopping List Calculation with Bulk Diners
+    ✕ should correctly resolve diners for shopping list generation (5501 ms)
+    ✕ should reflect updated preferences in shopping list (dynamic resolution) (2811 ms)
+
+  ● Shopping List Calculation with Bulk Diners › should correctly resolve diners for shopping list generation
+
+    expect(received).toHaveLength(expected)
+
+    Matcher error: received value must have a length property whose value must be a number
+
+    Received has value: undefined
+
+      74 |         const dinnerMeal = meals.find(m => m.mealType === 'dinner');
+      75 |
+    > 76 |         expect(lunchMeal?.diners).toHaveLength(1);
+         |                                   ^
+      77 |         expect(dinnerMeal?.diners).toHaveLength(2);
+      78 |
+      79 |         // Now generate shopping list (simulated via AIService -> MockAIService)
+
+      at Object.<anonymous> (tests/shopping-list-calculation.test.ts:76:35)
+
+  ● Shopping List Calculation with Bulk Diners › should reflect updated preferences in shopping list (dynamic resolution)
+
+    expect(received).toHaveLength(expected)
+
+    Matcher error: received value must have a length property whose value must be a number
+
+    Received has value: undefined
+
+      123 |
+      124 |         // This expectation will fail if we use snapshot, pass if we use dynamic
+    > 125 |         expect(lunchMeal?.diners).toHaveLength(2);
+          |                                   ^
+      126 |         expect(lunchMeal?.diners.map(d => d.name)).toContain('Member 2');
+      127 |     });
+      128 | });
+
+      at Object.<anonymous> (tests/shopping-list-calculation.test.ts:125:35)
+
+Test Suites: 1 failed, 1 total
+Tests:       2 failed, 2 total
+Snapshots:   0 total
+Time:        16.168 s, estimated 17 s
+Ran all test suites matching /tests\/shopping-list-calculation.test.ts/i.
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "Client removed from pool".
+
+      25 | // Evento de eliminación de cliente
+      26 | pool.on('remove', (client) => {
+    > 27 |   console.log('Client removed from pool');
+         |           ^
+      28 | });
+      29 |
+      30 | // Función para verificar la conexión
+
+      at console.log (node_modules/@jest/console/build/CustomConsole.js:141:10)
+      at BoundPool.<anonymous> (src/config/database.ts:27:11)
+      at Connection.<anonymous> (node_modules/pg-pool/index.js:174:15)
+      at Socket.<anonymous> (node_modules/pg/lib/connection.js:62:12)
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "Client removed from pool".
+
+      25 | // Evento de eliminación de cliente
+      26 | pool.on('remove', (client) => {
+    > 27 |   console.log('Client removed from pool');
+         |           ^
+      28 | });
+      29 |
+      30 | // Función para verificar la conexión
+
+      at console.log (node_modules/@jest/console/build/CustomConsole.js:141:10)
+      at BoundPool.<anonymous> (src/config/database.ts:27:11)
+      at Connection.<anonymous> (node_modules/pg-pool/index.js:174:15)
+      at Socket.<anonymous> (node_modules/pg/lib/connection.js:62:12)
+

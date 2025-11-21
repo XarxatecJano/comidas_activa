@@ -210,19 +210,37 @@ class DatabaseService {
 
   async getMealsByMenuPlanId(menuPlanId: string): Promise<Meal[]> {
     const query = `
-      SELECT id, menu_plan_id as "menuPlanId", day_of_week as "dayOfWeek",
-             meal_type as "mealType", created_at as "createdAt",
-             updated_at as "updatedAt"
-      FROM "Meal"
-      WHERE menu_plan_id = $1
-      ORDER BY day_of_week, meal_type
+      SELECT m.id, m.menu_plan_id as "menuPlanId", m.day_of_week as "dayOfWeek",
+             m.meal_type as "mealType", m.has_custom_diners as "hasCustomDiners",
+             m.created_at as "createdAt", m.updated_at as "updatedAt",
+             mp.user_id as "userId"
+      FROM "Meal" m
+      JOIN "MenuPlan" mp ON m.menu_plan_id = mp.id
+      WHERE m.menu_plan_id = $1
+      ORDER BY 
+        CASE m.day_of_week
+          WHEN 'monday' THEN 1
+          WHEN 'tuesday' THEN 2
+          WHEN 'wednesday' THEN 3
+          WHEN 'thursday' THEN 4
+          WHEN 'friday' THEN 5
+          WHEN 'saturday' THEN 6
+          WHEN 'sunday' THEN 7
+        END,
+        CASE m.meal_type
+          WHEN 'lunch' THEN 1
+          WHEN 'dinner' THEN 2
+        END
     `;
     const result = await pool.query(query, [menuPlanId]);
 
     const meals = await Promise.all(
       result.rows.map(async (meal) => {
-        meal.diners = await this.getDinersByMealId(meal.id);
+        // Use dynamic resolution for diners
+        meal.diners = await this.getResolvedDiners(meal.id, meal.hasCustomDiners, meal.userId, meal.mealType);
         meal.dishes = await this.getDishesByMealId(meal.id);
+        // Remove userId from result as it's not part of Meal interface
+        delete meal.userId;
         return meal;
       })
     );
@@ -532,28 +550,7 @@ class DatabaseService {
     const meal = mealResult.rows[0];
 
     // Get diners based on whether meal has custom diners or uses bulk selection
-    let diners = [];
-    if (meal.hasCustomDiners) {
-      // Get custom diners from MealDiner table
-      const dinersQuery = `
-        SELECT md.id, fm.id as "familyMemberId", fm.name, fm.preferences, fm.dietary_restrictions as "dietaryRestrictions"
-        FROM "MealDiner" md
-        JOIN "FamilyMember" fm ON md.family_member_id = fm.id
-        WHERE md.meal_id = $1
-      `;
-      const dinersResult = await pool.query(dinersQuery, [mealId]);
-      diners = dinersResult.rows;
-    } else {
-      // Get bulk selection diners from UserDinerPreferences
-      const bulkDinersQuery = `
-        SELECT udp.id, udp.family_member_id as "familyMemberId", fm.name, fm.preferences, fm.dietary_restrictions as "dietaryRestrictions"
-        FROM "UserDinerPreferences" udp
-        JOIN "FamilyMember" fm ON udp.family_member_id = fm.id
-        WHERE udp.user_id = $1 AND udp.meal_type = $2
-      `;
-      const bulkDinersResult = await pool.query(bulkDinersQuery, [meal.userId, meal.mealType]);
-      diners = bulkDinersResult.rows;
-    }
+    const diners = await this.getResolvedDiners(meal.id, meal.hasCustomDiners, meal.userId, meal.mealType);
 
     // Get dishes
     const dishesQuery = `
@@ -568,6 +565,33 @@ class DatabaseService {
       diners,
       dishes: dishesResult.rows
     };
+  }
+
+  /**
+   * Helper to resolve diners dynamically
+   */
+  private async getResolvedDiners(mealId: string, hasCustomDiners: boolean, userId: string, mealType: string): Promise<any[]> {
+    if (hasCustomDiners) {
+      // Get custom diners from Diner table
+      const dinersQuery = `
+        SELECT d.id, fm.id as "familyMemberId", fm.name, fm.preferences, fm.dietary_restrictions as "dietaryRestrictions"
+        FROM "Diner" d
+        LEFT JOIN "FamilyMember" fm ON d.name = fm.name AND fm.user_id = $2
+        WHERE d.meal_id = $1
+      `;
+      const dinersResult = await pool.query(dinersQuery, [mealId, userId]);
+      return dinersResult.rows;
+    } else {
+      // Get bulk selection diners from UserDinerPreferences
+      const bulkDinersQuery = `
+        SELECT udp.id, udp.family_member_id as "familyMemberId", fm.name, fm.preferences, fm.dietary_restrictions as "dietaryRestrictions"
+        FROM "UserDinerPreferences" udp
+        JOIN "FamilyMember" fm ON udp.family_member_id = fm.id
+        WHERE udp.user_id = $1 AND udp.meal_type = $2
+      `;
+      const bulkDinersResult = await pool.query(bulkDinersQuery, [userId, mealType]);
+      return bulkDinersResult.rows;
+    }
   }
 }
 

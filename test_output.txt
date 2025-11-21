@@ -1,0 +1,112 @@
+
+> appcomidassemana@1.0.0 test
+> jest tests/shopping-list-calculation.test.ts
+
+  console.log
+    [dotenv@17.2.3] injecting env (5) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+  console.log
+    ✓ New client connected to PostgreSQL database
+
+      at BoundPool.<anonymous> (src/config/database.ts:17:11)
+
+  console.log
+    DEBUG: createMenuPlan bulk IDs: {
+      lunch: [ '7c873493-a6c6-4c59-925f-28991e9b279e' ],
+      dinner: [
+        '7c873493-a6c6-4c59-925f-28991e9b279e',
+        '8d241433-bc71-4495-9c8d-ea51dea0e083'
+      ]
+    }
+
+      at MenuPlanService.createMenuPlan (src/services/MenuPlanService.ts:52:13)
+
+  console.log
+    DEBUG: Creating bulk diners for meal: 90c0a572-000c-44d5-bf06-bce9dcf99899 [ '7c873493-a6c6-4c59-925f-28991e9b279e' ]
+
+      at MenuPlanService.createMealFromGenerated (src/services/MenuPlanService.ts:366:15)
+
+  console.log
+    DEBUG: Creating bulk diners for meal: 17d16d90-3011-4491-bd82-bca529c58c52 [
+      '7c873493-a6c6-4c59-925f-28991e9b279e',
+      '8d241433-bc71-4495-9c8d-ea51dea0e083'
+    ]
+
+      at MenuPlanService.createMealFromGenerated (src/services/MenuPlanService.ts:366:15)
+
+  console.log
+    ✓ New client connected to PostgreSQL database
+
+      at BoundPool.<anonymous> (src/config/database.ts:17:11)
+
+FAIL tests/shopping-list-calculation.test.ts (8.638 s)
+  Shopping List Calculation with Bulk Diners
+    ✕ should correctly resolve diners for shopping list generation (3267 ms)
+
+  ● Shopping List Calculation with Bulk Diners › should correctly resolve diners for shopping list generation
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 7
+
+    - Array []
+    + Array [
+    +   Object {
+    +     "id": "e5c33d2b-e247-4bfd-bdb1-7559d2d6c7ef",
+    +     "name": "Member 1",
+    +     "preferences": "None",
+    +   },
+    + ]
+
+      72 |         const dinnerMeal = meals.find(m => m.mealType === 'dinner');
+      73 |
+    > 74 |         expect(lunchMeal?.diners).toEqual([]);
+         |                                   ^
+      75 |         expect(dinnerMeal?.diners).toEqual([]);
+      76 |
+      77 |         // Now generate shopping list (simulated via AIService -> MockAIService)
+
+      at Object.<anonymous> (tests/shopping-list-calculation.test.ts:74:35)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 1 total
+Snapshots:   0 total
+Time:        10.359 s
+Ran all test suites matching /tests\/shopping-list-calculation.test.ts/i.
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "Client removed from pool".
+
+      25 | // Evento de eliminación de cliente
+      26 | pool.on('remove', (client) => {
+    > 27 |   console.log('Client removed from pool');
+         |           ^
+      28 | });
+      29 |
+      30 | // Función para verificar la conexión
+
+      at console.log (node_modules/@jest/console/build/CustomConsole.js:141:10)
+      at BoundPool.<anonymous> (src/config/database.ts:27:11)
+      at Connection.<anonymous> (node_modules/pg-pool/index.js:174:15)
+      at Socket.<anonymous> (node_modules/pg/lib/connection.js:62:12)
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "Client removed from pool".
+
+      25 | // Evento de eliminación de cliente
+      26 | pool.on('remove', (client) => {
+    > 27 |   console.log('Client removed from pool');
+         |           ^
+      28 | });
+      29 |
+      30 | // Función para verificar la conexión
+
+      at console.log (node_modules/@jest/console/build/CustomConsole.js:141:10)
+      at BoundPool.<anonymous> (src/config/database.ts:27:11)
+      at Connection.<anonymous> (node_modules/pg-pool/index.js:174:15)
+      at Socket.<anonymous> (node_modules/pg/lib/connection.js:62:12)
+

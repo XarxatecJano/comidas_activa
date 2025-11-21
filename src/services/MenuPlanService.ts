@@ -363,6 +363,7 @@ class MenuPlanService {
     // If bulk selection is available, use it; otherwise use default diners
     if (bulkFamilyMemberIds.length > 0) {
       // Create diners from family members (bulk selection)
+      // Create diners from family members (bulk selection)
       for (const familyMemberId of bulkFamilyMemberIds) {
         const familyMember = await DatabaseService.getFamilyMemberById(familyMemberId);
         if (familyMember) {
