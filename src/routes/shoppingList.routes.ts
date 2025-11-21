@@ -55,8 +55,16 @@ shoppingListRoutes.post('/', async (c) => {
       );
     }
 
-    // Generar lista de compra con IA
-    const items = await AIService.generateShoppingList(menuPlan.meals);
+    // Resolver comensales para cada comida antes de generar la lista de compra
+    const mealsWithResolvedDiners = await Promise.all(
+      menuPlan.meals.map(meal => DatabaseService.getMealWithResolvedDiners(meal.id))
+    );
+
+    // Filtrar comidas que no se pudieron resolver (null)
+    const validMeals = mealsWithResolvedDiners.filter((meal): meal is NonNullable<typeof meal> => meal !== null);
+
+    // Generar lista de compra con IA usando comidas con comensales resueltos
+    const items = await AIService.generateShoppingList(validMeals);
 
     // Guardar lista de compra en la base de datos
     const shoppingList = await DatabaseService.createShoppingList({

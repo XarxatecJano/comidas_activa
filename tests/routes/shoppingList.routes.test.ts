@@ -263,6 +263,43 @@ describe('ShoppingList Routes', () => {
       expect(data.error.code).toBe('VALIDATION_ERROR');
       expect(data.error.message).toContain('confirmed');
     });
+
+    // Feature: bulk-diner-selection, Property 9: Shopping list quantity accuracy
+    it('should call generateShoppingList with meals that have resolved diners', async () => {
+      const mockShoppingItems = [
+        { ingredient: 'Pasta', quantity: '200', unit: 'g' },
+        { ingredient: 'Tomato', quantity: '3', unit: 'units' },
+      ];
+
+      MockedAIService.generateShoppingList.mockResolvedValue(mockShoppingItems);
+
+      const createListReq = new Request('http://localhost/api/shopping-lists', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${testToken}`,
+        },
+        body: JSON.stringify({ menuPlanId: confirmedPlanId }),
+      });
+
+      const createListRes = await app.fetch(createListReq);
+      const createListData = await parseResponse(createListRes);
+
+      expect(createListRes.status).toBe(201);
+      expect(createListData.shoppingList).toBeDefined();
+
+      // Verificar que generateShoppingList fue llamado con comidas que tienen diners resueltos
+      expect(MockedAIService.generateShoppingList).toHaveBeenCalled();
+      const callArgs = MockedAIService.generateShoppingList.mock.calls[0][0];
+      expect(callArgs).toBeDefined();
+      expect(Array.isArray(callArgs)).toBe(true);
+      expect(callArgs.length).toBeGreaterThan(0);
+      
+      // Verificar que las comidas tienen la propiedad diners
+      const firstMeal = callArgs[0] as unknown as { diners?: unknown[] };
+      expect(firstMeal.diners).toBeDefined();
+      expect(Array.isArray(firstMeal.diners)).toBe(true);
+    });
   });
 
   describe('GET /api/shopping-lists/:id', () => {

@@ -131,18 +131,18 @@ git push origin develop
     - **Propiedad 4: Reversión de sobrescritura**
     - **Valida: Requisitos 2.4**
 
-- [ ] 6. Backend: Actualizaciones del servicio de lista de compra
-  - [ ] 6.1 Actualizar cálculo de lista de compra para usar comensales resueltos
+- [x] 6. Backend: Actualizaciones del servicio de lista de compra
+  - [x] 6.1 Actualizar cálculo de lista de compra para usar comensales resueltos
     - Usar getMealWithResolvedDiners para cada comida
     - Calcular cantidades basadas en el conteo real de comensales
     - Manejar comidas con cero comensales (caso extremo)
     - _Requisitos: 5.1, 5.2, 5.3, 5.4_
 
-  - [ ] 6.2 Escribir test de propiedad para precisión de cantidad de lista de compra
+  - [x] 6.2 Escribir test de propiedad para precisión de cantidad de lista de compra
     - **Propiedad 9: Precisión de cantidad de lista de compra**
     - **Valida: Requisitos 5.1**
 
-  - [ ] 6.3 Escribir tests unitarios para lista de compra con comidas mixtas
+  - [x] 6.3 Escribir tests unitarios para lista de compra con comidas mixtas
     - Testear plan con todas las comidas de selección masiva
     - Testear plan con todas las comidas de comensales personalizados
     - Testear plan con comidas mixtas masivas y personalizadas

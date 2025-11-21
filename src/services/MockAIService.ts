@@ -134,23 +134,40 @@ class MockAIService {
   async generateShoppingList(meals: Meal[]): Promise<ShoppingItem[]> {
     console.log('🧪 Using Mock AI Service - Generating shopping list');
     
+    // Calcular el número total de comensales
+    const totalDiners = meals.reduce((sum, meal) => {
+      const dinersCount = (meal as unknown as { diners?: unknown[] }).diners?.length ?? 0;
+      return sum + dinersCount;
+    }, 0);
+
+    // Si no hay comensales, retornar lista vacía
+    if (totalDiners === 0) {
+      console.log('🧪 No diners found, returning empty shopping list');
+      return [];
+    }
+
+    // Ajustar cantidades basadas en el número de comensales (base: 4 comensales)
+    const multiplier = totalDiners / 4;
+    
     const items: ShoppingItem[] = [
-      { ingredient: 'Arroz', quantity: '500', unit: 'g' },
-      { ingredient: 'Pasta', quantity: '400', unit: 'g' },
-      { ingredient: 'Pollo', quantity: '1', unit: 'kg' },
-      { ingredient: 'Salmón', quantity: '600', unit: 'g' },
-      { ingredient: 'Tomate', quantity: '6', unit: 'unidades' },
-      { ingredient: 'Cebolla', quantity: '3', unit: 'unidades' },
-      { ingredient: 'Ajo', quantity: '1', unit: 'cabeza' },
-      { ingredient: 'Lechuga', quantity: '2', unit: 'unidades' },
-      { ingredient: 'Zanahoria', quantity: '500', unit: 'g' },
-      { ingredient: 'Patata', quantity: '1', unit: 'kg' },
-      { ingredient: 'Huevos', quantity: '12', unit: 'unidades' },
-      { ingredient: 'Leche', quantity: '1', unit: 'litro' },
-      { ingredient: 'Queso parmesano', quantity: '200', unit: 'g' },
-      { ingredient: 'Aceite de oliva', quantity: '1', unit: 'botella' },
-      { ingredient: 'Limón', quantity: '4', unit: 'unidades' }
+      { ingredient: 'Arroz', quantity: String(Math.round(500 * multiplier)), unit: 'g' },
+      { ingredient: 'Pasta', quantity: String(Math.round(400 * multiplier)), unit: 'g' },
+      { ingredient: 'Pollo', quantity: String(Math.round(1 * multiplier * 10) / 10), unit: 'kg' },
+      { ingredient: 'Salmón', quantity: String(Math.round(600 * multiplier)), unit: 'g' },
+      { ingredient: 'Tomate', quantity: String(Math.round(6 * multiplier)), unit: 'unidades' },
+      { ingredient: 'Cebolla', quantity: String(Math.round(3 * multiplier)), unit: 'unidades' },
+      { ingredient: 'Ajo', quantity: String(Math.max(1, Math.round(1 * multiplier))), unit: 'cabeza' },
+      { ingredient: 'Lechuga', quantity: String(Math.round(2 * multiplier)), unit: 'unidades' },
+      { ingredient: 'Zanahoria', quantity: String(Math.round(500 * multiplier)), unit: 'g' },
+      { ingredient: 'Patata', quantity: String(Math.round(1 * multiplier * 10) / 10), unit: 'kg' },
+      { ingredient: 'Huevos', quantity: String(Math.round(12 * multiplier)), unit: 'unidades' },
+      { ingredient: 'Leche', quantity: String(Math.round(1 * multiplier * 10) / 10), unit: 'litro' },
+      { ingredient: 'Queso parmesano', quantity: String(Math.round(200 * multiplier)), unit: 'g' },
+      { ingredient: 'Aceite de oliva', quantity: String(Math.max(1, Math.round(1 * multiplier))), unit: 'botella' },
+      { ingredient: 'Limón', quantity: String(Math.round(4 * multiplier)), unit: 'unidades' }
     ];
+
+    console.log(`🧪 Generated shopping list for ${totalDiners} diners (multiplier: ${multiplier.toFixed(2)})`);
 
     // Simular delay de API
     await new Promise(resolve => setTimeout(resolve, 500));

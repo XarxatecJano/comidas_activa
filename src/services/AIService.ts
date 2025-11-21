@@ -308,17 +308,23 @@ Asegúrate de que:
   }
 
   private buildShoppingListPrompt(meals: Meal[]): string {
-    const allDishes = meals.flatMap(meal => meal.dishes);
-    const dishesText = allDishes.map(dish => 
-      `${dish.name}: ${dish.ingredients.join(', ')}`
-    ).join('\n');
+    // Construir texto con platos y número de comensales
+    const mealsText = meals.map(meal => {
+      const dinersCount = (meal as unknown as { diners?: unknown[] }).diners?.length ?? 0;
+      const dishesText = meal.dishes.map(dish => 
+        `  - ${dish.name}: ${dish.ingredients.join(', ')}`
+      ).join('\n');
+      
+      return `${meal.mealType} (${dinersCount} comensales):\n${dishesText}`;
+    }).join('\n\n');
 
     return `
-Genera una lista de la compra consolidada a partir de estos platos:
+Genera una lista de la compra consolidada a partir de estos platos y número de comensales:
 
-${dishesText}
+${mealsText}
 
-Agrupa ingredientes similares y suma las cantidades totales.
+Agrupa ingredientes similares y suma las cantidades totales, ajustando las cantidades según el número de comensales de cada comida.
+Si una comida tiene 0 comensales, no incluyas sus ingredientes en la lista.
 
 Responde ÚNICAMENTE con un JSON válido en este formato:
 {
@@ -334,8 +340,10 @@ Responde ÚNICAMENTE con un JSON válido en este formato:
 Asegúrate de:
 - Agrupar ingredientes similares (ej: "tomate" y "tomates" son lo mismo)
 - Sumar cantidades cuando sea posible
+- Ajustar cantidades según el número de comensales (más comensales = más cantidad)
 - Usar unidades estándar (g, kg, l, ml, unidades)
 - Ordenar por categorías (verduras, carnes, lácteos, etc.)
+- Excluir ingredientes de comidas con 0 comensales
 `;
   }
 
