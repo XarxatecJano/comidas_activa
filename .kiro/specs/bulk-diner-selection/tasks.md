@@ -25,7 +25,7 @@ git push origin develop
 
 ---
 
-- [ ] 1. Actualizaciones de esquema de base de datos y migraciones
+- [x] 1. Actualizaciones de esquema de base de datos y migraciones
   - Crear tabla UserDinerPreferences con índices apropiados
   - Añadir columna has_custom_diners a tabla Meal
   - Crear script de migración para establecer has_custom_diners=true para comidas existentes
