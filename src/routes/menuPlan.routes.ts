@@ -216,4 +216,59 @@ menuPlanRoutes.post('/:id/confirm', async (c) => {
   }
 });
 
+// POST /api/menu-plans/:planId/meals/:mealId/revert-diners
+menuPlanRoutes.post('/:planId/meals/:mealId/revert-diners', async (c) => {
+  try {
+    const planId = c.req.param('planId');
+    const mealId = c.req.param('mealId');
+    const userId = c.get('userId');
+
+    // Verify user owns the plan
+    const plan = await MenuPlanService.getMenuPlanById(planId);
+    if (!plan) {
+      return c.json(
+        { error: 'Menu plan not found' },
+        404
+      );
+    }
+
+    if (plan.userId !== userId) {
+      return c.json(
+        { error: 'Access denied to this resource' },
+        403
+      );
+    }
+
+    // Check if plan is confirmed (cannot modify confirmed plans)
+    if (plan.status === 'confirmed') {
+      return c.json(
+        { error: 'Cannot modify confirmed menu plan' },
+        403
+      );
+    }
+
+    // Clear custom diners flag and revert to bulk selection
+    await DatabaseService.setMealCustomDinersFlag(mealId, false);
+    
+    // Get the updated meal with resolved diners
+    const updatedMeal = await DatabaseService.getMealWithResolvedDiners(mealId);
+    
+    return c.json({ meal: updatedMeal }, 200);
+  } catch (error: any) {
+    console.error('Revert meal diners error:', error);
+    
+    if (error.message.includes('not found')) {
+      return c.json(
+        { error: 'Meal not found' },
+        404
+      );
+    }
+    
+    return c.json(
+      { error: 'Failed to revert meal diners' },
+      500
+    );
+  }
+});
+
 export default menuPlanRoutes;

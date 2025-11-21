@@ -1,6 +1,7 @@
 import { Hono } from 'hono';
 import { authMiddleware } from '../middleware/auth';
 import UserService from '../services/UserService';
+import UserDinerPreferencesService from '../services/UserDinerPreferencesService';
 
 type Variables = {
   userId: string;
@@ -188,6 +189,127 @@ userRoutes.delete('/:id', async (c) => {
 
     return c.json(
       { error: { code: 'INTERNAL_ERROR', message: 'Internal server error' } },
+      500
+    );
+  }
+});
+
+// ==================== DINER PREFERENCES ROUTES ====================
+
+// GET /api/users/:userId/diner-preferences/:mealType
+userRoutes.get('/:userId/diner-preferences/:mealType', authMiddleware, async (c) => {
+  try {
+    const userId = c.req.param('userId');
+    const mealType = c.req.param('mealType') as 'lunch' | 'dinner';
+    const authenticatedUserId = c.get('userId');
+
+    // Verify user can only access their own preferences
+    if (userId !== authenticatedUserId) {
+      return c.json(
+        { error: 'Access denied to this resource' },
+        403
+      );
+    }
+
+    // Validate meal type
+    if (mealType !== 'lunch' && mealType !== 'dinner') {
+      return c.json(
+        { error: 'Invalid meal type. Must be "lunch" or "dinner"' },
+        400
+      );
+    }
+
+    const familyMemberIds = await UserDinerPreferencesService.getPreferences(userId, mealType);
+    return c.json({ familyMemberIds }, 200);
+  } catch (error: any) {
+    console.error('Get diner preferences error:', error);
+    return c.json(
+      { error: 'Failed to get diner preferences' },
+      500
+    );
+  }
+});
+
+// POST /api/users/:userId/diner-preferences/:mealType
+userRoutes.post('/:userId/diner-preferences/:mealType', authMiddleware, async (c) => {
+  try {
+    const userId = c.req.param('userId');
+    const mealType = c.req.param('mealType') as 'lunch' | 'dinner';
+    const authenticatedUserId = c.get('userId');
+    const { familyMemberIds } = await c.req.json();
+
+    // Verify user can only modify their own preferences
+    if (userId !== authenticatedUserId) {
+      return c.json(
+        { error: 'Access denied to this resource' },
+        403
+      );
+    }
+
+    // Validate meal type
+    if (mealType !== 'lunch' && mealType !== 'dinner') {
+      return c.json(
+        { error: 'Invalid meal type. Must be "lunch" or "dinner"' },
+        400
+      );
+    }
+
+    // Validate familyMemberIds
+    if (!Array.isArray(familyMemberIds)) {
+      return c.json(
+        { error: 'familyMemberIds must be an array' },
+        400
+      );
+    }
+
+    await UserDinerPreferencesService.setPreferences(userId, mealType, familyMemberIds);
+    return c.json({ success: true }, 200);
+  } catch (error: any) {
+    console.error('Set diner preferences error:', error);
+    
+    if (error.message.includes('Invalid family member ID')) {
+      return c.json(
+        { error: error.message },
+        400
+      );
+    }
+    
+    return c.json(
+      { error: 'Failed to set diner preferences' },
+      500
+    );
+  }
+});
+
+// DELETE /api/users/:userId/diner-preferences/:mealType
+userRoutes.delete('/:userId/diner-preferences/:mealType', authMiddleware, async (c) => {
+  try {
+    const userId = c.req.param('userId');
+    const mealType = c.req.param('mealType') as 'lunch' | 'dinner';
+    const authenticatedUserId = c.get('userId');
+
+    // Verify user can only modify their own preferences
+    if (userId !== authenticatedUserId) {
+      return c.json(
+        { error: 'Access denied to this resource' },
+        403
+      );
+    }
+
+    // Validate meal type
+    if (mealType !== 'lunch' && mealType !== 'dinner') {
+      return c.json(
+        { error: 'Invalid meal type. Must be "lunch" or "dinner"' },
+        400
+      );
+    }
+
+    await UserDinerPreferencesService.clearPreferences(userId, mealType);
+    return c.json({ success: true }, 200);
+  } catch (error: any) {
+    console.error('Clear diner preferences error:', error);
+    return c.json(
+      { error: 'Failed to clear diner preferences' },
       500
     );
   }

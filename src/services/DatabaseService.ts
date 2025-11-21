@@ -352,6 +352,26 @@ class DatabaseService {
     return result.rowCount !== null && result.rowCount >= 0;
   }
 
+  // ==================== FAMILY MEMBER METHODS ====================
+
+  async createFamilyMember(memberData: { userId: string; name: string; preferences?: string; dietaryRestrictions?: string }): Promise<any> {
+    const query = `
+      INSERT INTO "FamilyMember" (user_id, name, preferences, dietary_restrictions)
+      VALUES ($1, $2, $3, $4)
+      RETURNING id, user_id as "userId", name, preferences, dietary_restrictions as "dietaryRestrictions",
+                created_at as "createdAt", updated_at as "updatedAt"
+    `;
+    const values = [
+      memberData.userId,
+      memberData.name,
+      memberData.preferences || '',
+      memberData.dietaryRestrictions || '',
+    ];
+
+    const result = await pool.query(query, values);
+    return result.rows[0];
+  }
+
   // ==================== SHOPPING LIST METHODS ====================
 
   async createShoppingList(listData: CreateShoppingListDTO): Promise<ShoppingList> {
@@ -427,6 +447,115 @@ class DatabaseService {
   async rollbackTransaction(client: PoolClient): Promise<void> {
     await client.query('ROLLBACK');
     client.release();
+  }
+
+  // ==================== USER DINER PREFERENCES METHODS ====================
+
+  async getUserDinerPreferences(userId: string, mealType: string): Promise<Array<{ id: string; userId: string; mealType: string; familyMemberId: string; createdAt: Date }>> {
+    const query = `
+      SELECT id, user_id as "userId", meal_type as "mealType", 
+             family_member_id as "familyMemberId", created_at as "createdAt"
+      FROM "UserDinerPreferences"
+      WHERE user_id = $1 AND meal_type = $2
+      ORDER BY created_at ASC
+    `;
+    const result = await pool.query(query, [userId, mealType]);
+    return result.rows;
+  }
+
+  async setUserDinerPreferences(userId: string, mealType: string, familyMemberIds: string[]): Promise<void> {
+    const client = await this.beginTransaction();
+    
+    try {
+      // First, delete existing preferences for this user and meal type
+      await client.query(
+        'DELETE FROM "UserDinerPreferences" WHERE user_id = $1 AND meal_type = $2',
+        [userId, mealType]
+      );
+
+      // Then, insert new preferences
+      if (familyMemberIds.length > 0) {
+        const insertQuery = `
+          INSERT INTO "UserDinerPreferences" (user_id, meal_type, family_member_id)
+          VALUES ${familyMemberIds.map((_, index) => `($1, $2, $${index + 3})`).join(', ')}
+        `;
+        const values = [userId, mealType, ...familyMemberIds];
+        await client.query(insertQuery, values);
+      }
+
+      await this.commitTransaction(client);
+    } catch (error) {
+      await this.rollbackTransaction(client);
+      throw error;
+    }
+  }
+
+  async deleteUserDinerPreferences(userId: string, mealType: string): Promise<void> {
+    const query = 'DELETE FROM "UserDinerPreferences" WHERE user_id = $1 AND meal_type = $2';
+    await pool.query(query, [userId, mealType]);
+  }
+
+  async setMealCustomDinersFlag(mealId: string, hasCustom: boolean): Promise<void> {
+    const query = 'UPDATE "Meal" SET has_custom_diners = $1 WHERE id = $2';
+    await pool.query(query, [hasCustom, mealId]);
+  }
+
+  async getMealWithResolvedDiners(mealId: string): Promise<any> {
+    // First get the meal with its basic info
+    const mealQuery = `
+      SELECT m.id, m.menu_plan_id as "menuPlanId", m.day_of_week as "dayOfWeek",
+             m.meal_type as "mealType", m.has_custom_diners as "hasCustomDiners",
+             m.created_at as "createdAt", m.updated_at as "updatedAt",
+             mp.user_id as "userId"
+      FROM "Meal" m
+      JOIN "MenuPlan" mp ON m.menu_plan_id = mp.id
+      WHERE m.id = $1
+    `;
+    const mealResult = await pool.query(mealQuery, [mealId]);
+    
+    if (mealResult.rows.length === 0) {
+      return null;
+    }
+
+    const meal = mealResult.rows[0];
+    
+    // Get diners based on whether meal has custom diners or uses bulk selection
+    let diners = [];
+    if (meal.hasCustomDiners) {
+      // Get custom diners from MealDiner table
+      const dinersQuery = `
+        SELECT md.id, fm.id as "familyMemberId", fm.name, fm.preferences, fm.dietary_restrictions as "dietaryRestrictions"
+        FROM "MealDiner" md
+        JOIN "FamilyMember" fm ON md.family_member_id = fm.id
+        WHERE md.meal_id = $1
+      `;
+      const dinersResult = await pool.query(dinersQuery, [mealId]);
+      diners = dinersResult.rows;
+    } else {
+      // Get bulk selection diners from UserDinerPreferences
+      const bulkDinersQuery = `
+        SELECT udp.id, udp.family_member_id as "familyMemberId", fm.name, fm.preferences, fm.dietary_restrictions as "dietaryRestrictions"
+        FROM "UserDinerPreferences" udp
+        JOIN "FamilyMember" fm ON udp.family_member_id = fm.id
+        WHERE udp.user_id = $1 AND udp.meal_type = $2
+      `;
+      const bulkDinersResult = await pool.query(bulkDinersQuery, [meal.userId, meal.mealType]);
+      diners = bulkDinersResult.rows;
+    }
+
+    // Get dishes
+    const dishesQuery = `
+      SELECT id, name, description, ingredients, course
+      FROM "Dish"
+      WHERE meal_id = $1
+    `;
+    const dishesResult = await pool.query(dishesQuery, [mealId]);
+
+    return {
+      ...meal,
+      diners,
+      dishes: dishesResult.rows
+    };
   }
 }
 
