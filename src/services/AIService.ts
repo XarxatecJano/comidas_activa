@@ -71,14 +71,15 @@ class AIService {
       }
 
       return this.parseWeeklyMenuResponse(content);
-    } catch (error: any) {
-      console.error('Error generating weekly menu:', error);
+    } catch (error: unknown) {
+      const err = error as Error & { code?: string; status?: number };
+      console.error('Error generating weekly menu:', err);
       
-      if (error.code === 'ECONNABORTED' || error.message?.includes('timeout')) {
+      if (err.code === 'ECONNABORTED' || err.message?.includes('timeout')) {
         throw new Error('ChatGPT API timeout - please try again');
       }
       
-      if (error.status === 429) {
+      if (err.status === 429) {
         throw new Error('Rate limit exceeded - please wait a moment');
       }
       
@@ -120,14 +121,15 @@ class AIService {
       }
 
       return this.parseSingleMealResponse(content);
-    } catch (error: any) {
-      console.error('Error regenerating meal:', error);
+    } catch (error: unknown) {
+      const err = error as Error & { code?: string; status?: number };
+      console.error('Error regenerating meal:', err);
       
-      if (error.code === 'ECONNABORTED' || error.message?.includes('timeout')) {
+      if (err.code === 'ECONNABORTED' || err.message?.includes('timeout')) {
         throw new Error('ChatGPT API timeout - please try again');
       }
       
-      if (error.status === 429) {
+      if (err.status === 429) {
         throw new Error('Rate limit exceeded - please wait a moment');
       }
       
@@ -169,14 +171,15 @@ class AIService {
       }
 
       return this.parseShoppingListResponse(content);
-    } catch (error: any) {
-      console.error('Error generating shopping list:', error);
+    } catch (error: unknown) {
+      const err = error as Error & { code?: string; status?: number };
+      console.error('Error generating shopping list:', err);
       
-      if (error.code === 'ECONNABORTED' || error.message?.includes('timeout')) {
+      if (err.code === 'ECONNABORTED' || err.message?.includes('timeout')) {
         throw new Error('ChatGPT API timeout - please try again');
       }
       
-      if (error.status === 429) {
+      if (err.status === 429) {
         throw new Error('Rate limit exceeded - please wait a moment');
       }
       

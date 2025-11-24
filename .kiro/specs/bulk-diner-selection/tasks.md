@@ -149,8 +149,11 @@ git push origin develop
     - Testear comida con cero comensales (caso extremo)
     - _Requisitos: 5.1, 5.2, 5.3, 5.4_
 
-- [ ] 7. Checkpoint - Tests de backend pasando
+- [x] 7. Checkpoint - Tests de backend pasando
   - Asegurar que todos los tests pasen, preguntar al usuario si surgen dudas
+  - ✅ 214 tests de backend pasando
+  - ✅ 109 tests de frontend pasando
+  - ✅ Código sin tipos `any` en TypeScript
 
 - [ ] 8. Frontend: Componente BulkDinerSelector
   - [ ] 8.1 Crear clase BulkDinerSelector

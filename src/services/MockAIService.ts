@@ -92,7 +92,7 @@ class MockAIService {
   /**
    * Regenerar comida de prueba
    */
-  async regenerateMeal(params: any): Promise<Dish[]> {
+  async regenerateMeal(params: { preferences: string; diners: { name: string; preferences?: string }[]; numberOfDishes: number; dayOfWeek: string; mealType: 'lunch' | 'dinner' }): Promise<Dish[]> {
     console.log('🧪 Using Mock AI Service - Regenerating meal');
     
     const alternativeDishes = [
@@ -118,7 +118,7 @@ class MockAIService {
 
     const dishes: Dish[] = alternativeDishes.map((template, index) => ({
       id: `mock-regenerated-${Date.now()}-${index}`,
-      mealId: params.mealId || 'mock-meal',
+      mealId: 'mock-meal',
       ...template
     }));
 

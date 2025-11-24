@@ -10,11 +10,14 @@ import {
   CreateMealDTO,
   Diner,
   CreateDinerDTO,
+  ResolvedDiner,
   Dish,
   CreateDishDTO,
   ShoppingList,
   CreateShoppingListDTO,
   UserDinerPreferences,
+  FamilyMember,
+  CreateFamilyMemberDTO,
 } from '../models';
 
 class DatabaseService {
@@ -66,7 +69,7 @@ class DatabaseService {
 
   async updateUser(userId: string, userData: UpdateUserDTO): Promise<User | null> {
     const fields: string[] = [];
-    const values: any[] = [];
+    const values: (string | number | boolean)[] = [];
     let paramCount = 1;
 
     if (userData.email !== undefined) {
@@ -250,7 +253,7 @@ class DatabaseService {
 
   async updateMeal(mealId: string, dayOfWeek?: string, mealType?: string): Promise<Meal | null> {
     const fields: string[] = [];
-    const values: any[] = [];
+    const values: string[] = [];
     let paramCount = 1;
 
     if (dayOfWeek !== undefined) {
@@ -373,7 +376,7 @@ class DatabaseService {
 
   // ==================== FAMILY MEMBER METHODS ====================
 
-  async createFamilyMember(memberData: { userId: string; name: string; preferences?: string; dietaryRestrictions?: string }): Promise<any> {
+  async createFamilyMember(memberData: CreateFamilyMemberDTO): Promise<FamilyMember> {
     const query = `
       INSERT INTO "FamilyMember" (user_id, name, preferences, dietary_restrictions)
       VALUES ($1, $2, $3, $4)
@@ -391,7 +394,7 @@ class DatabaseService {
     return result.rows[0];
   }
 
-  async getFamilyMemberById(memberId: string): Promise<any | null> {
+  async getFamilyMemberById(memberId: string): Promise<FamilyMember | null> {
     const query = `
       SELECT id, user_id as "userId", name, preferences, dietary_restrictions as "dietaryRestrictions",
              created_at as "createdAt", updated_at as "updatedAt"
@@ -530,7 +533,7 @@ class DatabaseService {
     await pool.query(query, [hasCustom, mealId]);
   }
 
-  async getMealWithResolvedDiners(mealId: string): Promise<(Meal & { diners: any[] }) | null> {
+  async getMealWithResolvedDiners(mealId: string): Promise<(Meal & { diners: ResolvedDiner[] }) | null> {
     // First get the meal with its basic info
     const mealQuery = `
       SELECT m.id, m.menu_plan_id as "menuPlanId", m.day_of_week as "dayOfWeek",
@@ -570,7 +573,7 @@ class DatabaseService {
   /**
    * Helper to resolve diners dynamically
    */
-  private async getResolvedDiners(mealId: string, hasCustomDiners: boolean, userId: string, mealType: string): Promise<any[]> {
+  private async getResolvedDiners(mealId: string, hasCustomDiners: boolean, userId: string, mealType: string): Promise<ResolvedDiner[]> {
     if (hasCustomDiners) {
       // Get custom diners from Diner table
       const dinersQuery = `

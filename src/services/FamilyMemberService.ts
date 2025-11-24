@@ -69,7 +69,7 @@ export async function updateFamilyMember(
   data: UpdateFamilyMemberData
 ): Promise<FamilyMember | null> {
   const updates: string[] = [];
-  const values: any[] = [];
+  const values: string[] = [];
   let paramCount = 1;
   
   if (data.name !== undefined) {

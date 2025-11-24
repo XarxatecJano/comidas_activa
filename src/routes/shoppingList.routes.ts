@@ -73,19 +73,20 @@ shoppingListRoutes.post('/', async (c) => {
     });
 
     return c.json({ shoppingList }, 201);
-  } catch (error: any) {
-    console.error('Create shopping list error:', error);
+  } catch (error: unknown) {
+    const err = error as Error;
+    console.error('Create shopping list error:', err);
 
-    if (error.message.includes('not found')) {
+    if (err.message.includes('not found')) {
       return c.json(
-        { error: { code: 'NOT_FOUND', message: error.message } },
+        { error: { code: 'NOT_FOUND', message: err.message } },
         404
       );
     }
 
-    if (error.message.includes('Failed to generate shopping list')) {
+    if (err.message.includes('Failed to generate shopping list')) {
       return c.json(
-        { error: { code: 'AI_ERROR', message: error.message } },
+        { error: { code: 'AI_ERROR', message: err.message } },
         500
       );
     }
@@ -130,7 +131,7 @@ shoppingListRoutes.get('/:id', async (c) => {
     }
 
     return c.json({ shoppingList }, 200);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Get shopping list error:', error);
     return c.json(
       { error: { code: 'INTERNAL_ERROR', message: 'Internal server error' } },

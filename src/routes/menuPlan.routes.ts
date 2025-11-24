@@ -42,29 +42,30 @@ menuPlanRoutes.post('/', async (c) => {
     });
 
     return c.json({ menuPlan }, 201);
-  } catch (error: any) {
-    console.error('Create menu plan error:', error);
+  } catch (error: unknown) {
+    const err = error as Error;
+    console.error('Create menu plan error:', err);
 
-    if (error.message.includes('User not found')) {
+    if (err.message.includes('User not found')) {
       return c.json(
         { error: { code: 'NOT_FOUND', message: 'User not found' } },
         404
       );
     }
 
-    if (error.message.includes('End date must be after start date') ||
-        error.message.includes('Maximum') ||
-        error.message.includes('Minimum') ||
-        error.message.includes('diner')) {
+    if (err.message.includes('End date must be after start date') ||
+        err.message.includes('Maximum') ||
+        err.message.includes('Minimum') ||
+        err.message.includes('diner')) {
       return c.json(
-        { error: { code: 'VALIDATION_ERROR', message: error.message } },
+        { error: { code: 'VALIDATION_ERROR', message: err.message } },
         400
       );
     }
 
-    if (error.message.includes('Failed to generate menu')) {
+    if (err.message.includes('Failed to generate menu')) {
       return c.json(
-        { error: { code: 'AI_ERROR', message: error.message } },
+        { error: { code: 'AI_ERROR', message: err.message } },
         500
       );
     }
@@ -100,8 +101,9 @@ menuPlanRoutes.get('/:id', async (c) => {
     }
 
     return c.json({ menuPlan }, 200);
-  } catch (error: any) {
-    console.error('Get menu plan error:', error);
+  } catch (error: unknown) {
+    const err = error as Error;
+    console.error('Get menu plan error:', err);
     return c.json(
       { error: { code: 'INTERNAL_ERROR', message: 'Internal server error' } },
       500
@@ -142,26 +144,27 @@ menuPlanRoutes.put('/:id/meals/:mealId', async (c) => {
     });
 
     return c.json({ meal: updatedMeal }, 200);
-  } catch (error: any) {
-    console.error('Update meal error:', error);
+  } catch (error: unknown) {
+    const err = error as Error;
+    console.error('Update meal error:', err);
 
-    if (error.message.includes('Meal not found')) {
+    if (err.message.includes('Meal not found')) {
       return c.json(
         { error: { code: 'NOT_FOUND', message: 'Meal not found' } },
         404
       );
     }
 
-    if (error.message.includes('Cannot update meals in a confirmed plan')) {
+    if (err.message.includes('Cannot update meals in a confirmed plan')) {
       return c.json(
         { error: { code: 'FORBIDDEN', message: 'Cannot update meals in a confirmed plan' } },
         403
       );
     }
 
-    if (error.message.includes('diner')) {
+    if (err.message.includes('diner')) {
       return c.json(
-        { error: { code: 'VALIDATION_ERROR', message: error.message } },
+        { error: { code: 'VALIDATION_ERROR', message: err.message } },
         400
       );
     }
@@ -199,10 +202,11 @@ menuPlanRoutes.post('/:id/confirm', async (c) => {
     const confirmedPlan = await MenuPlanService.confirmMenuPlan(planId);
 
     return c.json({ menuPlan: confirmedPlan }, 200);
-  } catch (error: any) {
-    console.error('Confirm menu plan error:', error);
+  } catch (error: unknown) {
+    const err = error as Error;
+    console.error('Confirm menu plan error:', err);
 
-    if (error.message.includes('not found')) {
+    if (err.message.includes('not found')) {
       return c.json(
         { error: { code: 'NOT_FOUND', message: 'Menu plan not found' } },
         404
@@ -254,10 +258,11 @@ menuPlanRoutes.post('/:planId/meals/:mealId/revert-diners', async (c) => {
     const updatedMeal = await DatabaseService.getMealWithResolvedDiners(mealId);
     
     return c.json({ meal: updatedMeal }, 200);
-  } catch (error: any) {
-    console.error('Revert meal diners error:', error);
+  } catch (error: unknown) {
+    const err = error as Error;
+    console.error('Revert meal diners error:', err);
     
-    if (error.message.includes('not found')) {
+    if (err.message.includes('not found')) {
       return c.json(
         { error: 'Meal not found' },
         404

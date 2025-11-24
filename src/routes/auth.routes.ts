@@ -46,19 +46,20 @@ authRoutes.post('/register', async (c) => {
       },
       201
     );
-  } catch (error: any) {
-    console.error('Register error:', error);
+  } catch (error: unknown) {
+    const err = error as Error;
+    console.error('Register error:', err);
     
-    if (error.message.includes('Email already exists')) {
+    if (err.message.includes('Email already exists')) {
       return c.json(
         { error: { code: 'DUPLICATE_EMAIL', message: 'Email already exists' } },
         400
       );
     }
 
-    if (error.message.includes('Validation failed')) {
+    if (err.message.includes('Validation failed')) {
       return c.json(
-        { error: { code: 'VALIDATION_ERROR', message: error.message } },
+        { error: { code: 'VALIDATION_ERROR', message: err.message } },
         400
       );
     }
@@ -88,10 +89,11 @@ authRoutes.post('/login', async (c) => {
     const result = await AuthService.login(email, password);
 
     return c.json(result, 200);
-  } catch (error: any) {
-    console.error('Login error:', error);
+  } catch (error: unknown) {
+    const err = error as Error;
+    console.error('Login error:', err);
 
-    if (error.message.includes('Invalid credentials')) {
+    if (err.message.includes('Invalid credentials')) {
       return c.json(
         { error: { code: 'INVALID_CREDENTIALS', message: 'Invalid email or password' } },
         401

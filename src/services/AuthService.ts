@@ -54,8 +54,8 @@ class AuthService {
    */
   generateToken(payload: TokenPayload): string {
     return jwt.sign(payload, JWT_SECRET, {
-      expiresIn: JWT_EXPIRES_IN as any,
-    });
+      expiresIn: JWT_EXPIRES_IN,
+    } as SignOptions);
   }
 
   /**

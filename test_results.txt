@@ -1,0 +1,3023 @@
+
+> appcomidassemana@1.0.0 test
+> jest
+
+  console.log
+    [dotenv@17.2.3] injecting env (5) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+  console.log
+    [dotenv@17.2.3] injecting env (5) from .env -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+  console.log
+    [dotenv@17.2.3] injecting env (5) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+  console.log
+    [dotenv@17.2.3] injecting env (5) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+  console.log
+    [dotenv@17.2.3] injecting env (5) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+  console.log
+    [dotenv@17.2.3] injecting env (5) from .env -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+  console.log
+    [dotenv@17.2.3] injecting env (5) from .env -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+  console.log
+    ✓ New client connected to PostgreSQL database
+
+      at BoundPool.<anonymous> (src/config/database.ts:17:11)
+
+  console.error
+    === Error Handler ===
+
+      60 | export function errorHandler(err: Error, c: Context) {
+      61 |   // Log del error
+    > 62 |   console.error('=== Error Handler ===');
+         |           ^
+      63 |   console.error('Error Name:', err.name);
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:62:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:33:29)
+
+  console.error
+    Error Name: ValidationError
+
+      61 |   // Log del error
+      62 |   console.error('=== Error Handler ===');
+    > 63 |   console.error('Error Name:', err.name);
+         |           ^
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:63:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:33:29)
+
+  console.error
+    Error Message: Invalid input data
+
+      62 |   console.error('=== Error Handler ===');
+      63 |   console.error('Error Name:', err.name);
+    > 64 |   console.error('Error Message:', err.message);
+         |           ^
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:64:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:33:29)
+
+  console.error
+    Error Stack: ValidationError: Invalid input data
+        at Array.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/middleware/errorHandler.test.ts:29:15)
+        at Hono.#dispatch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/hono-base.js:210:38)
+        at Hono.fetch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/hono-base.js:236:26)
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/middleware/errorHandler.test.ts:33:29)
+        at Promise.then.completed (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:298:28)
+        at new Promise (<anonymous>)
+        at callAsyncCircusFn (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:231:10)
+        at _callCircusTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:316:40)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at _runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:252:3)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:126:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at run (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:71:3)
+        at runAndTransformResultsToJestFormat (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+        at jestAdapter (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+        at runTestInternal (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:367:16)
+        at runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:444:34)
+        at Object.worker (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/testWorker.js:106:12)
+
+      63 |   console.error('Error Name:', err.name);
+      64 |   console.error('Error Message:', err.message);
+    > 65 |   console.error('Error Stack:', err.stack);
+         |           ^
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+      68 |   console.error('=====================');
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:65:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:33:29)
+
+  console.error
+    Request Path: /test
+
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+    > 66 |   console.error('Request Path:', c.req.path);
+         |           ^
+      67 |   console.error('Request Method:', c.req.method);
+      68 |   console.error('=====================');
+      69 |
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:66:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:33:29)
+
+  console.error
+    Request Method: GET
+
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+    > 67 |   console.error('Request Method:', c.req.method);
+         |           ^
+      68 |   console.error('=====================');
+      69 |
+      70 |   const timestamp = new Date().toISOString();
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:67:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:33:29)
+
+  console.error
+    =====================
+
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+    > 68 |   console.error('=====================');
+         |           ^
+      69 |
+      70 |   const timestamp = new Date().toISOString();
+      71 |
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:68:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:33:29)
+
+  console.error
+    === Error Handler ===
+
+      60 | export function errorHandler(err: Error, c: Context) {
+      61 |   // Log del error
+    > 62 |   console.error('=== Error Handler ===');
+         |           ^
+      63 |   console.error('Error Name:', err.name);
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:62:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:48:29)
+
+  console.error
+    Error Name: AuthenticationError
+
+      61 |   // Log del error
+      62 |   console.error('=== Error Handler ===');
+    > 63 |   console.error('Error Name:', err.name);
+         |           ^
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:63:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:48:29)
+
+  console.error
+    Error Message: Invalid token
+
+      62 |   console.error('=== Error Handler ===');
+      63 |   console.error('Error Name:', err.name);
+    > 64 |   console.error('Error Message:', err.message);
+         |           ^
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:64:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:48:29)
+
+  console.log
+    ✓ New client connected to PostgreSQL database
+
+      at BoundPool.<anonymous> (src/config/database.ts:17:11)
+
+  console.log
+    ✓ New client connected to PostgreSQL database
+
+      at BoundPool.<anonymous> (src/config/database.ts:17:11)
+
+  console.log
+    ✓ New client connected to PostgreSQL database
+
+      at BoundPool.<anonymous> (src/config/database.ts:17:11)
+
+  console.error
+    Error Stack: AuthenticationError: Invalid token
+        at Array.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/middleware/errorHandler.test.ts:44:15)
+        at Hono.#dispatch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/hono-base.js:210:38)
+        at Hono.fetch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/hono-base.js:236:26)
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/middleware/errorHandler.test.ts:48:29)
+        at Promise.then.completed (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:298:28)
+        at new Promise (<anonymous>)
+        at callAsyncCircusFn (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:231:10)
+        at _callCircusTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:316:40)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at _runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:252:3)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:126:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at run (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:71:3)
+        at runAndTransformResultsToJestFormat (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+        at jestAdapter (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+        at runTestInternal (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:367:16)
+        at runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:444:34)
+        at Object.worker (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/testWorker.js:106:12)
+
+      63 |   console.error('Error Name:', err.name);
+      64 |   console.error('Error Message:', err.message);
+    > 65 |   console.error('Error Stack:', err.stack);
+         |           ^
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+      68 |   console.error('=====================');
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:65:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:48:29)
+
+  console.error
+    Request Path: /test
+
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+    > 66 |   console.error('Request Path:', c.req.path);
+         |           ^
+      67 |   console.error('Request Method:', c.req.method);
+      68 |   console.error('=====================');
+      69 |
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:66:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:48:29)
+
+  console.error
+    Request Method: GET
+
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+    > 67 |   console.error('Request Method:', c.req.method);
+         |           ^
+      68 |   console.error('=====================');
+      69 |
+      70 |   const timestamp = new Date().toISOString();
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:67:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:48:29)
+
+  console.error
+    =====================
+
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+    > 68 |   console.error('=====================');
+         |           ^
+      69 |
+      70 |   const timestamp = new Date().toISOString();
+      71 |
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:68:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:48:29)
+
+  console.error
+    === Error Handler ===
+
+      60 | export function errorHandler(err: Error, c: Context) {
+      61 |   // Log del error
+    > 62 |   console.error('=== Error Handler ===');
+         |           ^
+      63 |   console.error('Error Name:', err.name);
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:62:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:62:29)
+
+  console.error
+    Error Name: AuthorizationError
+
+      61 |   // Log del error
+      62 |   console.error('=== Error Handler ===');
+    > 63 |   console.error('Error Name:', err.name);
+         |           ^
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:63:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:62:29)
+
+  console.error
+    Error Message: Access denied
+
+      62 |   console.error('=== Error Handler ===');
+      63 |   console.error('Error Name:', err.name);
+    > 64 |   console.error('Error Message:', err.message);
+         |           ^
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:64:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:62:29)
+
+  console.error
+    Error Stack: AuthorizationError: Access denied
+        at Array.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/middleware/errorHandler.test.ts:58:15)
+        at Hono.#dispatch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/hono-base.js:210:38)
+        at Hono.fetch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/hono-base.js:236:26)
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/middleware/errorHandler.test.ts:62:29)
+        at Promise.then.completed (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:298:28)
+        at new Promise (<anonymous>)
+        at callAsyncCircusFn (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:231:10)
+        at _callCircusTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:316:40)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at _runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:252:3)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:126:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at run (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:71:3)
+        at runAndTransformResultsToJestFormat (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+        at jestAdapter (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+        at runTestInternal (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:367:16)
+        at runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:444:34)
+        at Object.worker (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/testWorker.js:106:12)
+
+      63 |   console.error('Error Name:', err.name);
+      64 |   console.error('Error Message:', err.message);
+    > 65 |   console.error('Error Stack:', err.stack);
+         |           ^
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+      68 |   console.error('=====================');
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:65:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:62:29)
+
+  console.error
+    Request Path: /test
+
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+    > 66 |   console.error('Request Path:', c.req.path);
+         |           ^
+      67 |   console.error('Request Method:', c.req.method);
+      68 |   console.error('=====================');
+      69 |
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:66:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:62:29)
+
+  console.error
+    Request Method: GET
+
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+    > 67 |   console.error('Request Method:', c.req.method);
+         |           ^
+      68 |   console.error('=====================');
+      69 |
+      70 |   const timestamp = new Date().toISOString();
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:67:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:62:29)
+
+  console.error
+    =====================
+
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+    > 68 |   console.error('=====================');
+         |           ^
+      69 |
+      70 |   const timestamp = new Date().toISOString();
+      71 |
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:68:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:62:29)
+
+  console.error
+    === Error Handler ===
+
+      60 | export function errorHandler(err: Error, c: Context) {
+      61 |   // Log del error
+    > 62 |   console.error('=== Error Handler ===');
+         |           ^
+      63 |   console.error('Error Name:', err.name);
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:62:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:76:29)
+
+  console.error
+    Error Name: NotFoundError
+
+      61 |   // Log del error
+      62 |   console.error('=== Error Handler ===');
+    > 63 |   console.error('Error Name:', err.name);
+         |           ^
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:63:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:76:29)
+
+  console.error
+    Error Message: Resource not found
+
+      62 |   console.error('=== Error Handler ===');
+      63 |   console.error('Error Name:', err.name);
+    > 64 |   console.error('Error Message:', err.message);
+         |           ^
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:64:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:76:29)
+
+  console.error
+    Error Stack: NotFoundError: Resource not found
+        at Array.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/middleware/errorHandler.test.ts:72:15)
+        at Hono.#dispatch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/hono-base.js:210:38)
+        at Hono.fetch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/hono-base.js:236:26)
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/middleware/errorHandler.test.ts:76:29)
+        at Promise.then.completed (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:298:28)
+        at new Promise (<anonymous>)
+        at callAsyncCircusFn (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:231:10)
+        at _callCircusTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:316:40)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at _runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:252:3)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:126:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at run (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:71:3)
+        at runAndTransformResultsToJestFormat (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+        at jestAdapter (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+        at runTestInternal (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:367:16)
+        at runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:444:34)
+        at Object.worker (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/testWorker.js:106:12)
+
+      63 |   console.error('Error Name:', err.name);
+      64 |   console.error('Error Message:', err.message);
+    > 65 |   console.error('Error Stack:', err.stack);
+         |           ^
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+      68 |   console.error('=====================');
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:65:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:76:29)
+
+  console.error
+    Request Path: /test
+
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+    > 66 |   console.error('Request Path:', c.req.path);
+         |           ^
+      67 |   console.error('Request Method:', c.req.method);
+      68 |   console.error('=====================');
+      69 |
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:66:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:76:29)
+
+  console.error
+    Request Method: GET
+
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+    > 67 |   console.error('Request Method:', c.req.method);
+         |           ^
+      68 |   console.error('=====================');
+      69 |
+      70 |   const timestamp = new Date().toISOString();
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:67:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:76:29)
+
+  console.error
+    =====================
+
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+    > 68 |   console.error('=====================');
+         |           ^
+      69 |
+      70 |   const timestamp = new Date().toISOString();
+      71 |
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:68:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:76:29)
+
+  console.error
+    === Error Handler ===
+
+      60 | export function errorHandler(err: Error, c: Context) {
+      61 |   // Log del error
+    > 62 |   console.error('=== Error Handler ===');
+         |           ^
+      63 |   console.error('Error Name:', err.name);
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:62:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:90:29)
+
+  console.error
+    Error Name: AIServiceError
+
+      61 |   // Log del error
+      62 |   console.error('=== Error Handler ===');
+    > 63 |   console.error('Error Name:', err.name);
+         |           ^
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:63:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:90:29)
+
+  console.error
+    Error Message: AI service failed
+
+      62 |   console.error('=== Error Handler ===');
+      63 |   console.error('Error Name:', err.name);
+    > 64 |   console.error('Error Message:', err.message);
+         |           ^
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:64:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:90:29)
+
+  console.error
+    Error Stack: AIServiceError: AI service failed
+        at Array.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/middleware/errorHandler.test.ts:86:15)
+        at Hono.#dispatch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/hono-base.js:210:38)
+        at Hono.fetch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/hono-base.js:236:26)
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/middleware/errorHandler.test.ts:90:29)
+        at Promise.then.completed (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:298:28)
+        at new Promise (<anonymous>)
+        at callAsyncCircusFn (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:231:10)
+        at _callCircusTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:316:40)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at _runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:252:3)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:126:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at run (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:71:3)
+        at runAndTransformResultsToJestFormat (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+        at jestAdapter (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+        at runTestInternal (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:367:16)
+        at runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:444:34)
+        at Object.worker (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/testWorker.js:106:12)
+
+      63 |   console.error('Error Name:', err.name);
+      64 |   console.error('Error Message:', err.message);
+    > 65 |   console.error('Error Stack:', err.stack);
+         |           ^
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+      68 |   console.error('=====================');
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:65:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:90:29)
+
+  console.error
+    Request Path: /test
+
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+    > 66 |   console.error('Request Path:', c.req.path);
+         |           ^
+      67 |   console.error('Request Method:', c.req.method);
+      68 |   console.error('=====================');
+      69 |
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:66:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:90:29)
+
+  console.error
+    Request Method: GET
+
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+    > 67 |   console.error('Request Method:', c.req.method);
+         |           ^
+      68 |   console.error('=====================');
+      69 |
+      70 |   const timestamp = new Date().toISOString();
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:67:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:90:29)
+
+  console.log
+    ✓ New client connected to PostgreSQL database
+
+      at BoundPool.<anonymous> (src/config/database.ts:17:11)
+
+  console.error
+    =====================
+
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+    > 68 |   console.error('=====================');
+         |           ^
+      69 |
+      70 |   const timestamp = new Date().toISOString();
+      71 |
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:68:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:90:29)
+
+  console.error
+    === Error Handler ===
+
+      60 | export function errorHandler(err: Error, c: Context) {
+      61 |   // Log del error
+    > 62 |   console.error('=== Error Handler ===');
+         |           ^
+      63 |   console.error('Error Name:', err.name);
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:62:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:104:29)
+
+  console.error
+    Error Name: DatabaseError
+
+      61 |   // Log del error
+      62 |   console.error('=== Error Handler ===');
+    > 63 |   console.error('Error Name:', err.name);
+         |           ^
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:63:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:104:29)
+
+  console.error
+    Error Message: Database connection failed
+
+      62 |   console.error('=== Error Handler ===');
+      63 |   console.error('Error Name:', err.name);
+    > 64 |   console.error('Error Message:', err.message);
+         |           ^
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:64:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:104:29)
+
+  console.error
+    Error Stack: DatabaseError: Database connection failed
+        at Array.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/middleware/errorHandler.test.ts:100:15)
+        at Hono.#dispatch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/hono-base.js:210:38)
+        at Hono.fetch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/hono-base.js:236:26)
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/middleware/errorHandler.test.ts:104:29)
+        at Promise.then.completed (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:298:28)
+        at new Promise (<anonymous>)
+        at callAsyncCircusFn (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:231:10)
+        at _callCircusTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:316:40)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at _runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:252:3)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:126:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at run (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:71:3)
+        at runAndTransformResultsToJestFormat (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+        at jestAdapter (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+        at runTestInternal (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:367:16)
+        at runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:444:34)
+        at Object.worker (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/testWorker.js:106:12)
+
+      63 |   console.error('Error Name:', err.name);
+      64 |   console.error('Error Message:', err.message);
+    > 65 |   console.error('Error Stack:', err.stack);
+         |           ^
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+      68 |   console.error('=====================');
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:65:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:104:29)
+
+  console.error
+    Request Path: /test
+
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+    > 66 |   console.error('Request Path:', c.req.path);
+         |           ^
+      67 |   console.error('Request Method:', c.req.method);
+      68 |   console.error('=====================');
+      69 |
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:66:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:104:29)
+
+  console.error
+    Request Method: GET
+
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+    > 67 |   console.error('Request Method:', c.req.method);
+         |           ^
+      68 |   console.error('=====================');
+      69 |
+      70 |   const timestamp = new Date().toISOString();
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:67:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:104:29)
+
+  console.error
+    =====================
+
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+    > 68 |   console.error('=====================');
+         |           ^
+      69 |
+      70 |   const timestamp = new Date().toISOString();
+      71 |
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:68:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:104:29)
+
+  console.error
+    === Error Handler ===
+
+      60 | export function errorHandler(err: Error, c: Context) {
+      61 |   // Log del error
+    > 62 |   console.error('=== Error Handler ===');
+         |           ^
+      63 |   console.error('Error Name:', err.name);
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:62:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:120:29)
+
+  console.error
+    Error Name: Error
+
+      61 |   // Log del error
+      62 |   console.error('=== Error Handler ===');
+    > 63 |   console.error('Error Name:', err.name);
+         |           ^
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:63:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:120:29)
+
+  console.error
+    Error Message: Validation failed: email is required
+
+      62 |   console.error('=== Error Handler ===');
+      63 |   console.error('Error Name:', err.name);
+    > 64 |   console.error('Error Message:', err.message);
+         |           ^
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:64:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:120:29)
+
+  console.log
+    ✓ New client connected to PostgreSQL database
+
+      at BoundPool.<anonymous> (src/config/database.ts:17:11)
+
+  console.error
+    Error Stack: Error: Validation failed: email is required
+        at Array.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/middleware/errorHandler.test.ts:116:15)
+        at Hono.#dispatch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/hono-base.js:210:38)
+        at Hono.fetch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/hono-base.js:236:26)
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/middleware/errorHandler.test.ts:120:29)
+        at Promise.then.completed (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:298:28)
+        at new Promise (<anonymous>)
+        at callAsyncCircusFn (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:231:10)
+        at _callCircusTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:316:40)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at _runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:252:3)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:126:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at run (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:71:3)
+        at runAndTransformResultsToJestFormat (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+        at jestAdapter (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+        at runTestInternal (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:367:16)
+        at runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:444:34)
+        at Object.worker (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/testWorker.js:106:12)
+
+      63 |   console.error('Error Name:', err.name);
+      64 |   console.error('Error Message:', err.message);
+    > 65 |   console.error('Error Stack:', err.stack);
+         |           ^
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+      68 |   console.error('=====================');
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:65:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:120:29)
+
+  console.error
+    Request Path: /test
+
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+    > 66 |   console.error('Request Path:', c.req.path);
+         |           ^
+      67 |   console.error('Request Method:', c.req.method);
+      68 |   console.error('=====================');
+      69 |
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:66:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:120:29)
+
+  console.error
+    Request Method: GET
+
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+    > 67 |   console.error('Request Method:', c.req.method);
+         |           ^
+      68 |   console.error('=====================');
+      69 |
+      70 |   const timestamp = new Date().toISOString();
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:67:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:120:29)
+
+  console.error
+    =====================
+
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+    > 68 |   console.error('=====================');
+         |           ^
+      69 |
+      70 |   const timestamp = new Date().toISOString();
+      71 |
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:68:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:120:29)
+
+  console.error
+    === Error Handler ===
+
+      60 | export function errorHandler(err: Error, c: Context) {
+      61 |   // Log del error
+    > 62 |   console.error('=== Error Handler ===');
+         |           ^
+      63 |   console.error('Error Name:', err.name);
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:62:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:133:29)
+
+  console.error
+    Error Name: Error
+
+      61 |   // Log del error
+      62 |   console.error('=== Error Handler ===');
+    > 63 |   console.error('Error Name:', err.name);
+         |           ^
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:63:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:133:29)
+
+  console.error
+    Error Message: Invalid credentials provided
+
+      62 |   console.error('=== Error Handler ===');
+      63 |   console.error('Error Name:', err.name);
+    > 64 |   console.error('Error Message:', err.message);
+         |           ^
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:64:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:133:29)
+
+  console.error
+    Error Stack: Error: Invalid credentials provided
+        at Array.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/middleware/errorHandler.test.ts:129:15)
+        at Hono.#dispatch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/hono-base.js:210:38)
+        at Hono.fetch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/hono-base.js:236:26)
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/middleware/errorHandler.test.ts:133:29)
+        at Promise.then.completed (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:298:28)
+        at new Promise (<anonymous>)
+        at callAsyncCircusFn (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:231:10)
+        at _callCircusTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:316:40)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at _runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:252:3)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:126:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at run (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:71:3)
+        at runAndTransformResultsToJestFormat (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+        at jestAdapter (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+        at runTestInternal (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:367:16)
+        at runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:444:34)
+        at Object.worker (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/testWorker.js:106:12)
+
+      63 |   console.error('Error Name:', err.name);
+      64 |   console.error('Error Message:', err.message);
+    > 65 |   console.error('Error Stack:', err.stack);
+         |           ^
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+      68 |   console.error('=====================');
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:65:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:133:29)
+
+  console.error
+    Request Path: /test
+
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+    > 66 |   console.error('Request Path:', c.req.path);
+         |           ^
+      67 |   console.error('Request Method:', c.req.method);
+      68 |   console.error('=====================');
+      69 |
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:66:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:133:29)
+
+  console.error
+    Request Method: GET
+
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+    > 67 |   console.error('Request Method:', c.req.method);
+         |           ^
+      68 |   console.error('=====================');
+      69 |
+      70 |   const timestamp = new Date().toISOString();
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:67:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:133:29)
+
+  console.error
+    =====================
+
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+    > 68 |   console.error('=====================');
+         |           ^
+      69 |
+      70 |   const timestamp = new Date().toISOString();
+      71 |
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:68:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:133:29)
+
+  console.error
+    === Error Handler ===
+
+      60 | export function errorHandler(err: Error, c: Context) {
+      61 |   // Log del error
+    > 62 |   console.error('=== Error Handler ===');
+         |           ^
+      63 |   console.error('Error Name:', err.name);
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:62:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:146:29)
+
+  console.error
+    Error Name: Error
+
+      61 |   // Log del error
+      62 |   console.error('=== Error Handler ===');
+    > 63 |   console.error('Error Name:', err.name);
+         |           ^
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:63:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:146:29)
+
+  console.error
+    Error Message: Access denied to this resource
+
+      62 |   console.error('=== Error Handler ===');
+      63 |   console.error('Error Name:', err.name);
+    > 64 |   console.error('Error Message:', err.message);
+         |           ^
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:64:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:146:29)
+
+  console.error
+    Error Stack: Error: Access denied to this resource
+        at Array.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/middleware/errorHandler.test.ts:142:15)
+        at Hono.#dispatch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/hono-base.js:210:38)
+        at Hono.fetch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/hono-base.js:236:26)
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/middleware/errorHandler.test.ts:146:29)
+        at Promise.then.completed (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:298:28)
+        at new Promise (<anonymous>)
+        at callAsyncCircusFn (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:231:10)
+        at _callCircusTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:316:40)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at _runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:252:3)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:126:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at run (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:71:3)
+        at runAndTransformResultsToJestFormat (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+        at jestAdapter (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+        at runTestInternal (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:367:16)
+        at runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:444:34)
+        at Object.worker (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/testWorker.js:106:12)
+
+      63 |   console.error('Error Name:', err.name);
+      64 |   console.error('Error Message:', err.message);
+    > 65 |   console.error('Error Stack:', err.stack);
+         |           ^
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+      68 |   console.error('=====================');
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:65:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:146:29)
+
+  console.error
+    Request Path: /test
+
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+    > 66 |   console.error('Request Path:', c.req.path);
+         |           ^
+      67 |   console.error('Request Method:', c.req.method);
+      68 |   console.error('=====================');
+      69 |
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:66:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:146:29)
+
+  console.error
+    Request Method: GET
+
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+    > 67 |   console.error('Request Method:', c.req.method);
+         |           ^
+      68 |   console.error('=====================');
+      69 |
+      70 |   const timestamp = new Date().toISOString();
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:67:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:146:29)
+
+  console.error
+    =====================
+
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+    > 68 |   console.error('=====================');
+         |           ^
+      69 |
+      70 |   const timestamp = new Date().toISOString();
+      71 |
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:68:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:146:29)
+
+  console.error
+    === Error Handler ===
+
+      60 | export function errorHandler(err: Error, c: Context) {
+      61 |   // Log del error
+    > 62 |   console.error('=== Error Handler ===');
+         |           ^
+      63 |   console.error('Error Name:', err.name);
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:62:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:159:29)
+
+PASS tests/services/DatabaseService.test.ts (8.615 s)
+  DatabaseService
+    User Methods
+      ✓ createUser should create a new user (185 ms)
+      ✓ getUserById should return user by id (4 ms)
+      ✓ getUserByEmail should return user by email (33 ms)
+      ✓ updateUser should update user data (14 ms)
+      ✓ getUserById should return null for non-existent user (80 ms)
+    MenuPlan Methods
+      ✓ createMenuPlan should create a new menu plan (8 ms)
+      ✓ getMenuPlanById should return menu plan by id (54 ms)
+      ✓ confirmMenuPlan should change status to confirmed (13 ms)
+      ✓ getMenuPlanById should return null for non-existent plan (5 ms)
+    Meal Methods
+      ✓ createMeal should create a new meal (12 ms)
+      ✓ getMealById should return meal by id (7 ms)
+      ✓ getMealsByMenuPlanId should return all meals for a plan (6 ms)
+      ✓ updateMeal should update meal data (4 ms)
+      ✓ getMealById should return null for non-existent meal (27 ms)
+    Diner Methods
+      ✓ createDiner should create a new diner (10 ms)
+      ✓ getDinersByMealId should return all diners for a meal (3 ms)
+      ✓ deleteDinersByMealId should delete all diners for a meal (32 ms)
+    Dish Methods
+      ✓ createDish should create a new dish (11 ms)
+      ✓ getDishesByMealId should return all dishes for a meal (2 ms)
+      ✓ deleteDishesByMealId should delete all dishes for a meal (4 ms)
+    ShoppingList Methods
+      ✓ createShoppingList should create a new shopping list (5 ms)
+      ✓ getShoppingListByMenuPlanId should return shopping list for a plan (3 ms)
+      ✓ getShoppingListById should return shopping list by id (5 ms)
+      ✓ getShoppingListById should return null for non-existent list (2 ms)
+    Transaction Methods
+      ✓ should handle transactions correctly (9 ms)
+      ✓ should rollback transaction on error (10 ms)
+    Delete Methods
+      ✓ deleteMeal should delete a meal (5 ms)
+      ✓ deleteUser should delete a user and cascade (14 ms)
+      ✓ deleteUser should return false for non-existent user (1 ms)
+
+  console.error
+    Error Name: Error
+
+      61 |   // Log del error
+      62 |   console.error('=== Error Handler ===');
+    > 63 |   console.error('Error Name:', err.name);
+         |           ^
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:63:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:159:29)
+
+  console.error
+    Error Message: User not found
+
+      62 |   console.error('=== Error Handler ===');
+      63 |   console.error('Error Name:', err.name);
+    > 64 |   console.error('Error Message:', err.message);
+         |           ^
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:64:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:159:29)
+
+  console.error
+    Error Stack: Error: User not found
+        at Array.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/middleware/errorHandler.test.ts:155:15)
+        at Hono.#dispatch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/hono-base.js:210:38)
+        at Hono.fetch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/hono-base.js:236:26)
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/middleware/errorHandler.test.ts:159:29)
+        at Promise.then.completed (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:298:28)
+        at new Promise (<anonymous>)
+        at callAsyncCircusFn (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:231:10)
+        at _callCircusTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:316:40)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at _runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:252:3)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:126:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at run (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:71:3)
+        at runAndTransformResultsToJestFormat (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+        at jestAdapter (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+        at runTestInternal (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:367:16)
+        at runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:444:34)
+        at Object.worker (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/testWorker.js:106:12)
+
+      63 |   console.error('Error Name:', err.name);
+      64 |   console.error('Error Message:', err.message);
+    > 65 |   console.error('Error Stack:', err.stack);
+         |           ^
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+      68 |   console.error('=====================');
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:65:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:159:29)
+
+  console.error
+    Request Path: /test
+
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+    > 66 |   console.error('Request Path:', c.req.path);
+         |           ^
+      67 |   console.error('Request Method:', c.req.method);
+      68 |   console.error('=====================');
+      69 |
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:66:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:159:29)
+
+  console.error
+    Request Method: GET
+
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+    > 67 |   console.error('Request Method:', c.req.method);
+         |           ^
+      68 |   console.error('=====================');
+      69 |
+      70 |   const timestamp = new Date().toISOString();
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:67:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:159:29)
+
+  console.error
+    =====================
+
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+    > 68 |   console.error('=====================');
+         |           ^
+      69 |
+      70 |   const timestamp = new Date().toISOString();
+      71 |
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:68:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:159:29)
+
+  console.error
+    === Error Handler ===
+
+      60 | export function errorHandler(err: Error, c: Context) {
+      61 |   // Log del error
+    > 62 |   console.error('=== Error Handler ===');
+         |           ^
+      63 |   console.error('Error Name:', err.name);
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:62:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:174:29)
+
+  console.error
+    Error Name: Error
+
+      61 |   // Log del error
+      62 |   console.error('=== Error Handler ===');
+    > 63 |   console.error('Error Name:', err.name);
+         |           ^
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:63:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:174:29)
+
+  console.error
+    Error Message: Something went wrong
+
+      62 |   console.error('=== Error Handler ===');
+      63 |   console.error('Error Name:', err.name);
+    > 64 |   console.error('Error Message:', err.message);
+         |           ^
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:64:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:174:29)
+
+  console.error
+    Error Stack: Error: Something went wrong
+        at Array.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/middleware/errorHandler.test.ts:170:15)
+        at Hono.#dispatch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/hono-base.js:210:38)
+        at Hono.fetch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/hono-base.js:236:26)
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/middleware/errorHandler.test.ts:174:29)
+        at Promise.then.completed (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:298:28)
+        at new Promise (<anonymous>)
+        at callAsyncCircusFn (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:231:10)
+        at _callCircusTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:316:40)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at _runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:252:3)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:126:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at run (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:71:3)
+        at runAndTransformResultsToJestFormat (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+        at jestAdapter (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+        at runTestInternal (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:367:16)
+        at runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:444:34)
+        at Object.worker (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/testWorker.js:106:12)
+
+      63 |   console.error('Error Name:', err.name);
+      64 |   console.error('Error Message:', err.message);
+    > 65 |   console.error('Error Stack:', err.stack);
+         |           ^
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+      68 |   console.error('=====================');
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:65:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:174:29)
+
+  console.error
+    Request Path: /test
+
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+    > 66 |   console.error('Request Path:', c.req.path);
+         |           ^
+      67 |   console.error('Request Method:', c.req.method);
+      68 |   console.error('=====================');
+      69 |
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:66:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:174:29)
+
+  console.error
+    Request Method: GET
+
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+    > 67 |   console.error('Request Method:', c.req.method);
+         |           ^
+      68 |   console.error('=====================');
+      69 |
+      70 |   const timestamp = new Date().toISOString();
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:67:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:174:29)
+
+  console.error
+    =====================
+
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+    > 68 |   console.error('=====================');
+         |           ^
+      69 |
+      70 |   const timestamp = new Date().toISOString();
+      71 |
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:68:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:174:29)
+
+  console.error
+    === Error Handler ===
+
+      60 | export function errorHandler(err: Error, c: Context) {
+      61 |   // Log del error
+    > 62 |   console.error('=== Error Handler ===');
+         |           ^
+      63 |   console.error('Error Name:', err.name);
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:62:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:188:29)
+
+  console.error
+    Error Name: Error
+
+      61 |   // Log del error
+      62 |   console.error('=== Error Handler ===');
+    > 63 |   console.error('Error Name:', err.name);
+         |           ^
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:63:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:188:29)
+
+  console.error
+    Error Message: Test error
+
+      62 |   console.error('=== Error Handler ===');
+      63 |   console.error('Error Name:', err.name);
+    > 64 |   console.error('Error Message:', err.message);
+         |           ^
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:64:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:188:29)
+
+  console.error
+    Error Stack: Error: Test error
+        at Array.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/middleware/errorHandler.test.ts:184:15)
+        at Hono.#dispatch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/hono-base.js:210:38)
+        at Hono.fetch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/hono-base.js:236:26)
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/middleware/errorHandler.test.ts:188:29)
+        at Promise.then.completed (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:298:28)
+        at new Promise (<anonymous>)
+        at callAsyncCircusFn (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:231:10)
+        at _callCircusTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:316:40)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at _runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:252:3)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:126:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at run (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:71:3)
+        at runAndTransformResultsToJestFormat (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+        at jestAdapter (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+        at runTestInternal (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:367:16)
+        at runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:444:34)
+        at Object.worker (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/testWorker.js:106:12)
+
+      63 |   console.error('Error Name:', err.name);
+      64 |   console.error('Error Message:', err.message);
+    > 65 |   console.error('Error Stack:', err.stack);
+         |           ^
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+      68 |   console.error('=====================');
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:65:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:188:29)
+
+  console.error
+    Request Path: /test
+
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+    > 66 |   console.error('Request Path:', c.req.path);
+         |           ^
+      67 |   console.error('Request Method:', c.req.method);
+      68 |   console.error('=====================');
+      69 |
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:66:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:188:29)
+
+  console.error
+    Request Method: GET
+
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+    > 67 |   console.error('Request Method:', c.req.method);
+         |           ^
+      68 |   console.error('=====================');
+      69 |
+      70 |   const timestamp = new Date().toISOString();
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:67:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:188:29)
+
+  console.error
+    =====================
+
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+    > 68 |   console.error('=====================');
+         |           ^
+      69 |
+      70 |   const timestamp = new Date().toISOString();
+      71 |
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:68:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:188:29)
+
+  console.error
+    === Error Handler ===
+
+      60 | export function errorHandler(err: Error, c: Context) {
+      61 |   // Log del error
+    > 62 |   console.error('=== Error Handler ===');
+         |           ^
+      63 |   console.error('Error Name:', err.name);
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:62:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:229:29)
+
+  console.error
+    Error Name: ValidationError
+
+      61 |   // Log del error
+      62 |   console.error('=== Error Handler ===');
+    > 63 |   console.error('Error Name:', err.name);
+         |           ^
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:63:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:229:29)
+
+  console.error
+    Error Message: Test error
+
+      62 |   console.error('=== Error Handler ===');
+      63 |   console.error('Error Name:', err.name);
+    > 64 |   console.error('Error Message:', err.message);
+         |           ^
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:64:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:229:29)
+
+  console.error
+    Error Stack: ValidationError: Test error
+        at Array.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/middleware/errorHandler.test.ts:225:15)
+        at Hono.#dispatch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/hono-base.js:210:38)
+        at Hono.fetch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/hono-base.js:236:26)
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/middleware/errorHandler.test.ts:229:29)
+        at Promise.then.completed (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:298:28)
+        at new Promise (<anonymous>)
+        at callAsyncCircusFn (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:231:10)
+        at _callCircusTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:316:40)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at _runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:252:3)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:126:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at run (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:71:3)
+        at runAndTransformResultsToJestFormat (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+        at jestAdapter (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+        at runTestInternal (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:367:16)
+        at runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:444:34)
+        at Object.worker (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/testWorker.js:106:12)
+
+      63 |   console.error('Error Name:', err.name);
+      64 |   console.error('Error Message:', err.message);
+    > 65 |   console.error('Error Stack:', err.stack);
+         |           ^
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+      68 |   console.error('=====================');
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:65:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:229:29)
+
+  console.error
+    Request Path: /test
+
+      64 |   console.error('Error Message:', err.message);
+      65 |   console.error('Error Stack:', err.stack);
+    > 66 |   console.error('Request Path:', c.req.path);
+         |           ^
+      67 |   console.error('Request Method:', c.req.method);
+      68 |   console.error('=====================');
+      69 |
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:66:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:229:29)
+
+  console.error
+    Request Method: GET
+
+      65 |   console.error('Error Stack:', err.stack);
+      66 |   console.error('Request Path:', c.req.path);
+    > 67 |   console.error('Request Method:', c.req.method);
+         |           ^
+      68 |   console.error('=====================');
+      69 |
+      70 |   const timestamp = new Date().toISOString();
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:67:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:229:29)
+
+  console.error
+    =====================
+
+      66 |   console.error('Request Path:', c.req.path);
+      67 |   console.error('Request Method:', c.req.method);
+    > 68 |   console.error('=====================');
+         |           ^
+      69 |
+      70 |   const timestamp = new Date().toISOString();
+      71 |
+
+      at Hono.errorHandler (src/middleware/errorHandler.ts:68:11)
+      at Hono.#handleError (node_modules/hono/dist/cjs/hono-base.js:190:19)
+      at Hono.#dispatch (node_modules/hono/dist/cjs/hono-base.js:214:33)
+      at Hono.fetch (node_modules/hono/dist/cjs/hono-base.js:236:26)
+      at Object.<anonymous> (tests/middleware/errorHandler.test.ts:229:29)
+
+PASS tests/middleware/errorHandler.test.ts (8.752 s)
+  Error Handler Middleware
+    Custom Error Classes
+      ✓ should handle ValidationError (460 ms)
+      ✓ should handle AuthenticationError (93 ms)
+      ✓ should handle AuthorizationError (106 ms)
+      ✓ should handle NotFoundError (55 ms)
+      ✓ should handle AIServiceError (23 ms)
+      ✓ should handle DatabaseError (47 ms)
+    Error Detection by Message
+      ✓ should detect validation errors by message (27 ms)
+      ✓ should detect authentication errors by message (46 ms)
+      ✓ should detect authorization errors by message (47 ms)
+      ✓ should detect not found errors by message (24 ms)
+    Generic Errors
+      ✓ should handle generic errors as internal server error (18 ms)
+      ✓ should include timestamp in all error responses (26 ms)
+    Not Found Handler
+      ✓ should handle 404 for non-existent routes (2 ms)
+      ✓ should include request method in 404 message
+    Error Response Format
+      ✓ should have consistent error response structure (26 ms)
+
+PASS tests/services/UserDinerPreferencesService.test.ts (8.832 s)
+  UserDinerPreferencesService
+    getPreferences
+      ✓ should return empty array when no preferences are set (358 ms)
+      ✓ should return family member IDs for lunch preferences (89 ms)
+      ✓ should return family member IDs for dinner preferences (19 ms)
+      ✓ should return different preferences for lunch and dinner (32 ms)
+      ✓ should throw error for invalid meal type (16 ms)
+      ✓ should throw error for missing userId (5 ms)
+    setPreferences
+      ✓ should set preferences for lunch (10 ms)
+      ✓ should set preferences for dinner (6 ms)
+      ✓ should update existing preferences (8 ms)
+      ✓ should handle empty family member IDs array (5 ms)
+      ✓ should handle multiple family member IDs (7 ms)
+      ✓ should throw error for invalid meal type (5 ms)
+      ✓ should throw error for invalid family member ID format (57 ms)
+      ✓ should throw error for non-array family member IDs (30 ms)
+    clearPreferences
+      ✓ should clear lunch preferences (22 ms)
+      ✓ should clear dinner preferences (31 ms)
+      ✓ should only clear preferences for specified meal type (68 ms)
+      ✓ should not throw error when clearing non-existent preferences (17 ms)
+      ✓ should throw error for invalid meal type (17 ms)
+    Property Tests
+      ✓ should persist bulk selections correctly (Property 6) (52 ms)
+      ✓ should isolate preferences between different users (Property 7) (76 ms)
+
+PASS tests/services/UserService.test.ts (8.909 s)
+  UserService
+    createUser
+      ✓ should create a new user with hashed password (203 ms)
+      ✓ should throw error for invalid email (47 ms)
+      ✓ should throw error for short password
+      ✓ should throw error for duplicate email (4 ms)
+      ✓ should throw error for empty name
+    getUserById
+      ✓ should return user by id (6 ms)
+      ✓ should return null for non-existent user (35 ms)
+    getUserByEmail
+      ✓ should return user by email (1 ms)
+      ✓ should throw error for invalid email format
+      ✓ should return null for non-existent email (3 ms)
+    updateUser
+      ✓ should update user data (13 ms)
+      ✓ should throw error for non-existent user (2 ms)
+      ✓ should throw error for invalid email format
+      ✓ should throw error for duplicate email (29 ms)
+    updatePreferences
+      ✓ should update user preferences (2 ms)
+      ✓ should throw error for non-existent user (2 ms)
+    verifyPassword
+      ✓ should verify correct password (81 ms)
+      ✓ should reject incorrect password (82 ms)
+      ✓ should return false for non-existent user (3 ms)
+    verifyPasswordByEmail
+      ✓ should verify correct password by email (83 ms)
+      ✓ should reject incorrect password by email (81 ms)
+      ✓ should return false for non-existent email (2 ms)
+    deleteUser
+      ✓ should throw error for non-existent user (1 ms)
+      ✓ should delete user successfully (6 ms)
+
+PASS tests/services/DatabaseService.diner-preferences.test.ts (8.926 s)
+  DatabaseService - Diner Preferences Methods
+    getUserDinerPreferences
+      ✓ should return empty array when no preferences are set (248 ms)
+      ✓ should return preferences for lunch (140 ms)
+      ✓ should return multiple preferences (79 ms)
+      ✓ should return different preferences for lunch and dinner (60 ms)
+    setUserDinerPreferences
+      ✓ should set preferences for a meal type (41 ms)
+      ✓ should replace existing preferences (106 ms)
+      ✓ should handle empty array (clear preferences) (32 ms)
+      ✓ should handle multiple family members (17 ms)
+    deleteUserDinerPreferences
+      ✓ should delete preferences for a meal type (18 ms)
+      ✓ should only delete preferences for specified meal type (24 ms)
+      ✓ should not throw error when deleting non-existent preferences (31 ms)
+    setMealCustomDinersFlag
+      ✓ should set has_custom_diners to true (19 ms)
+      ✓ should set has_custom_diners to false (11 ms)
+    getMealWithResolvedDiners
+      ✓ should return meal with bulk selection diners when has_custom_diners is false (17 ms)
+      ✓ should return empty diners array when no bulk preferences are set (10 ms)
+      ✓ should return null for non-existent meal (6 ms)
+    Property Test: Diner Resolution Correctness (Property 8)
+      ✓ should correctly resolve diners based on has_custom_diners flag (10 ms)
+
+  console.log
+    ✓ New client connected to PostgreSQL database
+
+      at BoundPool.<anonymous> (src/config/database.ts:17:11)
+
+  console.log
+    [dotenv@17.2.3] injecting env (5) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+  console.log
+    [dotenv@17.2.3] injecting env (5) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+  console.log
+    [dotenv@17.2.3] injecting env (5) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+  console.log
+    [dotenv@17.2.3] injecting env (5) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+  console.log
+    [dotenv@17.2.3] injecting env (5) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+  console.error
+    Error generating weekly menu: Error: No response from OpenAI
+        at AIService.generateWeeklyMenu (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/services/AIService.ts:70:15)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/services/AIService.test.ts:121:7)
+
+      74 |     } catch (error: unknown) {
+      75 |       const err = error as Error & { code?: string; status?: number };
+    > 76 |       console.error('Error generating weekly menu:', err);
+         |               ^
+      77 |       
+      78 |       if (err.code === 'ECONNABORTED' || err.message?.includes('timeout')) {
+      79 |         throw new Error('ChatGPT API timeout - please try again');
+
+      at AIService.generateWeeklyMenu (src/services/AIService.ts:76:15)
+      at Object.<anonymous> (tests/services/AIService.test.ts:121:7)
+
+  console.error
+    Error generating weekly menu: Error: timeout
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/services/AIService.test.ts:127:33)
+        at Promise.then.completed (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:298:28)
+        at new Promise (<anonymous>)
+        at callAsyncCircusFn (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:231:10)
+        at _callCircusTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:316:40)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at _runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:252:3)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:126:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at run (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:71:3)
+        at runAndTransformResultsToJestFormat (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+        at jestAdapter (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+        at runTestInternal (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:367:16)
+        at runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:444:34)
+        at Object.worker (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/testWorker.js:106:12) {
+      code: 'ECONNABORTED'
+    }
+
+      74 |     } catch (error: unknown) {
+      75 |       const err = error as Error & { code?: string; status?: number };
+    > 76 |       console.error('Error generating weekly menu:', err);
+         |               ^
+      77 |       
+      78 |       if (err.code === 'ECONNABORTED' || err.message?.includes('timeout')) {
+      79 |         throw new Error('ChatGPT API timeout - please try again');
+
+      at AIService.generateWeeklyMenu (src/services/AIService.ts:76:15)
+      at Object.<anonymous> (tests/services/AIService.test.ts:131:7)
+
+  console.error
+    Error generating weekly menu: Error: Rate limit
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/services/AIService.test.ts:137:35)
+        at Promise.then.completed (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:298:28)
+        at new Promise (<anonymous>)
+        at callAsyncCircusFn (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:231:10)
+        at _callCircusTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:316:40)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at _runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:252:3)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:126:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at run (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:71:3)
+        at runAndTransformResultsToJestFormat (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+        at jestAdapter (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+        at runTestInternal (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:367:16)
+        at runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:444:34)
+        at Object.worker (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/testWorker.js:106:12) {
+      status: 429
+    }
+
+      74 |     } catch (error: unknown) {
+      75 |       const err = error as Error & { code?: string; status?: number };
+    > 76 |       console.error('Error generating weekly menu:', err);
+         |               ^
+      77 |       
+      78 |       if (err.code === 'ECONNABORTED' || err.message?.includes('timeout')) {
+      79 |         throw new Error('ChatGPT API timeout - please try again');
+
+      at AIService.generateWeeklyMenu (src/services/AIService.ts:76:15)
+      at Object.<anonymous> (tests/services/AIService.test.ts:141:7)
+
+  console.error
+    Error parsing weekly menu response: Error: No JSON found in response
+        at AIService.parseWeeklyMenuResponse (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/services/AIService.ts:358:15)
+        at AIService.generateWeeklyMenu (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/services/AIService.ts:73:19)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/services/AIService.test.ts:159:7)
+
+      367 |       return parsed.meals;
+      368 |     } catch (error) {
+    > 369 |       console.error('Error parsing weekly menu response:', error);
+          |               ^
+      370 |       throw new Error('Failed to parse AI response');
+      371 |     }
+      372 |   }
+
+      at AIService.parseWeeklyMenuResponse (src/services/AIService.ts:369:15)
+      at AIService.generateWeeklyMenu (src/services/AIService.ts:73:19)
+      at Object.<anonymous> (tests/services/AIService.test.ts:159:7)
+
+  console.error
+    Error generating weekly menu: Error: Failed to parse AI response
+        at AIService.parseWeeklyMenuResponse (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/services/AIService.ts:370:13)
+        at AIService.generateWeeklyMenu (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/services/AIService.ts:73:19)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/services/AIService.test.ts:159:7)
+
+      74 |     } catch (error: unknown) {
+      75 |       const err = error as Error & { code?: string; status?: number };
+    > 76 |       console.error('Error generating weekly menu:', err);
+         |               ^
+      77 |       
+      78 |       if (err.code === 'ECONNABORTED' || err.message?.includes('timeout')) {
+      79 |         throw new Error('ChatGPT API timeout - please try again');
+
+      at AIService.generateWeeklyMenu (src/services/AIService.ts:76:15)
+      at Object.<anonymous> (tests/services/AIService.test.ts:159:7)
+
+  console.error
+    Error parsing weekly menu response: Error: Invalid response format: missing meals array
+        at AIService.parseWeeklyMenuResponse (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/services/AIService.ts:364:15)
+        at AIService.generateWeeklyMenu (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/services/AIService.ts:73:19)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/services/AIService.test.ts:177:7)
+
+      367 |       return parsed.meals;
+      368 |     } catch (error) {
+    > 369 |       console.error('Error parsing weekly menu response:', error);
+          |               ^
+      370 |       throw new Error('Failed to parse AI response');
+      371 |     }
+      372 |   }
+
+      at AIService.parseWeeklyMenuResponse (src/services/AIService.ts:369:15)
+      at AIService.generateWeeklyMenu (src/services/AIService.ts:73:19)
+      at Object.<anonymous> (tests/services/AIService.test.ts:177:7)
+
+  console.error
+    Error generating weekly menu: Error: Failed to parse AI response
+        at AIService.parseWeeklyMenuResponse (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/services/AIService.ts:370:13)
+        at AIService.generateWeeklyMenu (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/services/AIService.ts:73:19)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/services/AIService.test.ts:177:7)
+
+      74 |     } catch (error: unknown) {
+      75 |       const err = error as Error & { code?: string; status?: number };
+    > 76 |       console.error('Error generating weekly menu:', err);
+         |               ^
+      77 |       
+      78 |       if (err.code === 'ECONNABORTED' || err.message?.includes('timeout')) {
+      79 |         throw new Error('ChatGPT API timeout - please try again');
+
+      at AIService.generateWeeklyMenu (src/services/AIService.ts:76:15)
+      at Object.<anonymous> (tests/services/AIService.test.ts:177:7)
+
+  console.error
+    Error regenerating meal: Error: No response from OpenAI
+        at AIService.regenerateMeal (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/services/AIService.ts:120:15)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/services/AIService.test.ts:282:7)
+
+      124 |     } catch (error: unknown) {
+      125 |       const err = error as Error & { code?: string; status?: number };
+    > 126 |       console.error('Error regenerating meal:', err);
+          |               ^
+      127 |       
+      128 |       if (err.code === 'ECONNABORTED' || err.message?.includes('timeout')) {
+      129 |         throw new Error('ChatGPT API timeout - please try again');
+
+      at AIService.regenerateMeal (src/services/AIService.ts:126:15)
+      at Object.<anonymous> (tests/services/AIService.test.ts:282:7)
+
+  console.error
+    Error regenerating meal: Error: timeout occurred
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/services/AIService.test.ts:286:33)
+        at Promise.then.completed (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:298:28)
+        at new Promise (<anonymous>)
+        at callAsyncCircusFn (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:231:10)
+        at _callCircusTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:316:40)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at _runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:252:3)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:126:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at run (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:71:3)
+        at runAndTransformResultsToJestFormat (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+        at jestAdapter (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+        at runTestInternal (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:367:16)
+        at runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:444:34)
+        at Object.worker (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/testWorker.js:106:12)
+
+      124 |     } catch (error: unknown) {
+      125 |       const err = error as Error & { code?: string; status?: number };
+    > 126 |       console.error('Error regenerating meal:', err);
+          |               ^
+      127 |       
+      128 |       if (err.code === 'ECONNABORTED' || err.message?.includes('timeout')) {
+      129 |         throw new Error('ChatGPT API timeout - please try again');
+
+      at AIService.regenerateMeal (src/services/AIService.ts:126:15)
+      at Object.<anonymous> (tests/services/AIService.test.ts:298:7)
+
+  console.error
+    Error parsing single meal response: Error: Invalid response format: missing dishes array
+        at AIService.parseSingleMealResponse (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/services/AIService.ts:384:15)
+        at AIService.regenerateMeal (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/services/AIService.ts:123:19)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/services/AIService.test.ts:324:7)
+
+      387 |       return parsed.dishes;
+      388 |     } catch (error) {
+    > 389 |       console.error('Error parsing single meal response:', error);
+          |               ^
+      390 |       throw new Error('Failed to parse AI response');
+      391 |     }
+      392 |   }
+
+      at AIService.parseSingleMealResponse (src/services/AIService.ts:389:15)
+      at AIService.regenerateMeal (src/services/AIService.ts:123:19)
+      at Object.<anonymous> (tests/services/AIService.test.ts:324:7)
+
+  console.error
+    Error regenerating meal: Error: Failed to parse AI response
+        at AIService.parseSingleMealResponse (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/services/AIService.ts:390:13)
+        at AIService.regenerateMeal (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/services/AIService.ts:123:19)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/services/AIService.test.ts:324:7)
+
+      124 |     } catch (error: unknown) {
+      125 |       const err = error as Error & { code?: string; status?: number };
+    > 126 |       console.error('Error regenerating meal:', err);
+          |               ^
+      127 |       
+      128 |       if (err.code === 'ECONNABORTED' || err.message?.includes('timeout')) {
+      129 |         throw new Error('ChatGPT API timeout - please try again');
+
+      at AIService.regenerateMeal (src/services/AIService.ts:126:15)
+      at Object.<anonymous> (tests/services/AIService.test.ts:324:7)
+
+  console.error
+    Error generating shopping list: Error: No response from OpenAI
+        at AIService.generateShoppingList (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/services/AIService.ts:170:15)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/services/AIService.test.ts:453:7)
+
+      174 |     } catch (error: unknown) {
+      175 |       const err = error as Error & { code?: string; status?: number };
+    > 176 |       console.error('Error generating shopping list:', err);
+          |               ^
+      177 |       
+      178 |       if (err.code === 'ECONNABORTED' || err.message?.includes('timeout')) {
+      179 |         throw new Error('ChatGPT API timeout - please try again');
+
+      at AIService.generateShoppingList (src/services/AIService.ts:176:15)
+      at Object.<anonymous> (tests/services/AIService.test.ts:453:7)
+
+  console.error
+    Error generating shopping list: Error: Too many requests
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/services/AIService.test.ts:459:35)
+        at Promise.then.completed (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:298:28)
+        at new Promise (<anonymous>)
+        at callAsyncCircusFn (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:231:10)
+        at _callCircusTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:316:40)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at _runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:252:3)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:126:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at run (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:71:3)
+        at runAndTransformResultsToJestFormat (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+        at jestAdapter (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+        at runTestInternal (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:367:16)
+        at runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:444:34)
+        at Object.worker (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/testWorker.js:106:12) {
+      status: 429
+    }
+
+      174 |     } catch (error: unknown) {
+      175 |       const err = error as Error & { code?: string; status?: number };
+    > 176 |       console.error('Error generating shopping list:', err);
+          |               ^
+      177 |       
+      178 |       if (err.code === 'ECONNABORTED' || err.message?.includes('timeout')) {
+      179 |         throw new Error('ChatGPT API timeout - please try again');
+
+      at AIService.generateShoppingList (src/services/AIService.ts:176:15)
+      at Object.<anonymous> (tests/services/AIService.test.ts:477:7)
+
+  console.error
+    Error parsing shopping list response: Error: Invalid response format: missing items array
+        at AIService.parseShoppingListResponse (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/services/AIService.ts:404:15)
+        at AIService.generateShoppingList (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/services/AIService.ts:173:19)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/services/AIService.test.ts:509:7)
+
+      407 |       return parsed.items;
+      408 |     } catch (error) {
+    > 409 |       console.error('Error parsing shopping list response:', error);
+          |               ^
+      410 |       throw new Error('Failed to parse AI response');
+      411 |     }
+      412 |   }
+
+      at AIService.parseShoppingListResponse (src/services/AIService.ts:409:15)
+      at AIService.generateShoppingList (src/services/AIService.ts:173:19)
+      at Object.<anonymous> (tests/services/AIService.test.ts:509:7)
+
+  console.error
+    Error generating shopping list: Error: Failed to parse AI response
+        at AIService.parseShoppingListResponse (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/services/AIService.ts:410:13)
+        at AIService.generateShoppingList (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/services/AIService.ts:173:19)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/services/AIService.test.ts:509:7)
+
+      174 |     } catch (error: unknown) {
+      175 |       const err = error as Error & { code?: string; status?: number };
+    > 176 |       console.error('Error generating shopping list:', err);
+          |               ^
+      177 |       
+      178 |       if (err.code === 'ECONNABORTED' || err.message?.includes('timeout')) {
+      179 |         throw new Error('ChatGPT API timeout - please try again');
+
+      at AIService.generateShoppingList (src/services/AIService.ts:176:15)
+      at Object.<anonymous> (tests/services/AIService.test.ts:509:7)
+
+  console.error
+    Error generating weekly menu: Error: Generic API error
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/services/AIService.test.ts:567:36)
+        at Promise.then.completed (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:298:28)
+        at new Promise (<anonymous>)
+        at callAsyncCircusFn (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:231:10)
+        at _callCircusTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:316:40)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at _runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:252:3)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:126:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at run (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:71:3)
+        at runAndTransformResultsToJestFormat (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+        at jestAdapter (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+        at runTestInternal (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:367:16)
+        at runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:444:34)
+        at Object.worker (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/testWorker.js:106:12)
+
+      74 |     } catch (error: unknown) {
+      75 |       const err = error as Error & { code?: string; status?: number };
+    > 76 |       console.error('Error generating weekly menu:', err);
+         |               ^
+      77 |       
+      78 |       if (err.code === 'ECONNABORTED' || err.message?.includes('timeout')) {
+      79 |         throw new Error('ChatGPT API timeout - please try again');
+
+      at AIService.generateWeeklyMenu (src/services/AIService.ts:76:15)
+      at Object.<anonymous> (tests/services/AIService.test.ts:569:7)
+
+  console.error
+    Error regenerating meal: Error: Network error
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/services/AIService.test.ts:575:28)
+        at Promise.then.completed (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:298:28)
+        at new Promise (<anonymous>)
+        at callAsyncCircusFn (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/utils.js:231:10)
+        at _callCircusTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:316:40)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at _runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:252:3)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:126:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at _runTestsForDescribeBlock (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:121:9)
+        at run (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/run.js:71:3)
+        at runAndTransformResultsToJestFormat (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+        at jestAdapter (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+        at runTestInternal (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:367:16)
+        at runTest (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/runTest.js:444:34)
+        at Object.worker (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/jest-runner/build/testWorker.js:106:12)
+
+      124 |     } catch (error: unknown) {
+      125 |       const err = error as Error & { code?: string; status?: number };
+    > 126 |       console.error('Error regenerating meal:', err);
+          |               ^
+      127 |       
+      128 |       if (err.code === 'ECONNABORTED' || err.message?.includes('timeout')) {
+      129 |         throw new Error('ChatGPT API timeout - please try again');
+
+      at AIService.regenerateMeal (src/services/AIService.ts:126:15)
+      at Object.<anonymous> (tests/services/AIService.test.ts:586:7)
+
+PASS tests/services/AIService.test.ts
+  AIService
+    generateWeeklyMenu
+      ✓ should generate weekly menu successfully (4 ms)
+      ✓ should handle response with extra text around JSON
+      ✓ should throw error when no response from OpenAI (174 ms)
+      ✓ should handle timeout error (5 ms)
+      ✓ should handle rate limit error (4 ms)
+      ✓ should handle invalid JSON response (2 ms)
+      ✓ should handle response without meals array (100 ms)
+    regenerateMeal
+      ✓ should regenerate meal successfully (1 ms)
+      ✓ should handle multiple diners with preferences (1 ms)
+      ✓ should throw error when no response from OpenAI (2 ms)
+      ✓ should handle timeout error (2 ms)
+      ✓ should handle invalid response format (3 ms)
+    generateShoppingList
+      ✓ should generate shopping list successfully (2 ms)
+      ✓ should handle empty meals array
+      ✓ should throw error when no response from OpenAI (2 ms)
+      ✓ should handle rate limit error (2 ms)
+      ✓ should handle invalid response format (3 ms)
+      ✓ should handle response with JSON wrapped in text
+    Error handling
+      ✓ should handle generic OpenAI errors (2 ms)
+      ✓ should handle network errors (2 ms)
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "Client removed from pool".
+
+      25 | // Evento de eliminación de cliente
+      26 | pool.on('remove', (client) => {
+    > 27 |   console.log('Client removed from pool');
+         |           ^
+      28 | });
+      29 |
+      30 | // Función para verificar la conexión
+
+      at console.log (node_modules/@jest/console/build/CustomConsole.js:141:10)
+      at BoundPool.<anonymous> (src/config/database.ts:27:11)
+      at Connection.<anonymous> (node_modules/pg-pool/index.js:174:15)
+      at Socket.<anonymous> (node_modules/pg/lib/connection.js:62:12)
+
+PASS tests/services/MenuPlanService.test.ts (9.78 s)
+  MenuPlanService
+    Property Tests
+      Property 1: Bulk selection application
+        ✓ should apply bulk selection to all meals when creating menu plan (366 ms)
+        ✓ should use default diners when no bulk preferences are set (28 ms)
+      Property 2: Override isolation
+        ✓ should not update meals with custom diners when applying bulk selection (280 ms)
+      Property 3: Override flag persistence
+        ✓ should set has_custom_diners flag when updating meal with custom diners (31 ms)
+        ✓ should maintain has_custom_diners flag when regenerating dishes without changing diners (172 ms)
+      Property 4: Override reversion
+        ✓ should revert meal to bulk selection when clearing custom diners flag (39 ms)
+    Unit Tests
+      createMenuPlan
+        ✓ should create menu plan with bulk selection (18 ms)
+        ✓ should throw error for invalid date range (102 ms)
+        ✓ should throw error for non-existent user (5 ms)
+      updateMeal
+        ✓ should update meal with custom diners (46 ms)
+        ✓ should throw error for non-existent meal (41 ms)
+      applyBulkDiners
+        ✓ should apply bulk selection to all meals without custom diners (138 ms)
+        ✓ should throw error for non-existent menu plan (8 ms)
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "Client removed from pool".
+
+      25 | // Evento de eliminación de cliente
+      26 | pool.on('remove', (client) => {
+    > 27 |   console.log('Client removed from pool');
+         |           ^
+      28 | });
+      29 |
+      30 | // Función para verificar la conexión
+
+      at console.log (node_modules/@jest/console/build/CustomConsole.js:141:10)
+      at BoundPool.<anonymous> (src/config/database.ts:27:11)
+      at Connection.<anonymous> (node_modules/pg-pool/index.js:174:15)
+      at Socket.<anonymous> (node_modules/pg/lib/connection.js:62:12)
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "Client removed from pool".
+
+      25 | // Evento de eliminación de cliente
+      26 | pool.on('remove', (client) => {
+    > 27 |   console.log('Client removed from pool');
+         |           ^
+      28 | });
+      29 |
+      30 | // Función para verificar la conexión
+
+      at console.log (node_modules/@jest/console/build/CustomConsole.js:141:10)
+      at BoundPool.<anonymous> (src/config/database.ts:27:11)
+      at Connection.<anonymous> (node_modules/pg-pool/index.js:174:15)
+      at Socket.<anonymous> (node_modules/pg/lib/connection.js:62:12)
+
+  console.log
+    [dotenv@17.2.3] injecting env (5) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+  console.log
+    ✓ New client connected to PostgreSQL database
+
+      at BoundPool.<anonymous> (src/config/database.ts:17:11)
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "Client removed from pool".
+
+      25 | // Evento de eliminación de cliente
+      26 | pool.on('remove', (client) => {
+    > 27 |   console.log('Client removed from pool');
+         |           ^
+      28 | });
+      29 |
+      30 | // Función para verificar la conexión
+
+      at console.log (node_modules/@jest/console/build/CustomConsole.js:141:10)
+      at BoundPool.<anonymous> (src/config/database.ts:27:11)
+      at Connection.<anonymous> (node_modules/pg-pool/index.js:174:15)
+      at Socket.<anonymous> (node_modules/pg/lib/connection.js:62:12)
+
+  console.log
+    ✓ New client connected to PostgreSQL database
+
+      at BoundPool.<anonymous> (src/config/database.ts:17:11)
+
+  console.log
+    ✓ New client connected to PostgreSQL database
+
+      at BoundPool.<anonymous> (src/config/database.ts:17:11)
+
+PASS tests/services/AuthService.test.ts
+  AuthService
+    login
+      ✓ should login successfully with valid credentials (88 ms)
+      ✓ should fail login with invalid email (12 ms)
+      ✓ should fail login with invalid password (86 ms)
+    generateToken
+      ✓ should generate a valid JWT token (5 ms)
+    verifyToken
+      ✓ should verify a valid token (4 ms)
+      ✓ should fail to verify an invalid token (3 ms)
+      ✓ should fail to verify a malformed token
+    getUserFromToken
+      ✓ should get user from valid token (51 ms)
+      ✓ should return null for invalid token (1 ms)
+      ✓ should return null for token with non-existent user (19 ms)
+    logout
+      ✓ should return logout message
+    refreshToken
+      ✓ should refresh a valid token (1007 ms)
+      ✓ should fail to refresh invalid token
+      ✓ should fail to refresh token for deleted user (87 ms)
+    Integration: Full auth flow
+      ✓ should complete full authentication flow (86 ms)
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "Client removed from pool".
+
+      25 | // Evento de eliminación de cliente
+      26 | pool.on('remove', (client) => {
+    > 27 |   console.log('Client removed from pool');
+         |           ^
+      28 | });
+      29 |
+      30 | // Función para verificar la conexión
+
+      at console.log (node_modules/@jest/console/build/CustomConsole.js:141:10)
+      at BoundPool.<anonymous> (src/config/database.ts:27:11)
+      at Connection.<anonymous> (node_modules/pg-pool/index.js:174:15)
+      at Socket.<anonymous> (node_modules/pg/lib/connection.js:62:12)
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "Client removed from pool".
+
+      25 | // Evento de eliminación de cliente
+      26 | pool.on('remove', (client) => {
+    > 27 |   console.log('Client removed from pool');
+         |           ^
+      28 | });
+      29 |
+      30 | // Función para verificar la conexión
+
+      at console.log (node_modules/@jest/console/build/CustomConsole.js:141:10)
+      at BoundPool.<anonymous> (src/config/database.ts:27:11)
+      at Connection.<anonymous> (node_modules/pg-pool/index.js:174:15)
+      at Socket.<anonymous> (node_modules/pg/lib/connection.js:62:12)
+
+  console.log
+    ✓ New client connected to PostgreSQL database
+
+      at BoundPool.<anonymous> (src/config/database.ts:17:11)
+
+  console.error
+    Update user error: Error: Validation failed: Invalid email format
+        at UserService.updateUser (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/services/UserService.ts:49:13)
+        at /Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/routes/user.routes.ts:81:43
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at dispatch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/compose.js:44:17)
+        at authMiddleware (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/middleware/auth.ts:31:5)
+        at dispatch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/compose.js:44:17)
+        at /Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/hono-base.js:223:25
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/routes/user.routes.test.ts:233:19)
+
+      86 |   } catch (error: unknown) {
+      87 |     const err = error as Error;
+    > 88 |     console.error('Update user error:', err);
+         |             ^
+      89 |
+      90 |     if (err.message.includes('not found')) {
+      91 |       return c.json(
+
+      at src/routes/user.routes.ts:88:13
+      at dispatch (node_modules/hono/dist/cjs/compose.js:44:17)
+      at authMiddleware (src/middleware/auth.ts:31:5)
+      at dispatch (node_modules/hono/dist/cjs/compose.js:44:17)
+      at node_modules/hono/dist/cjs/hono-base.js:223:25
+      at Object.<anonymous> (tests/routes/user.routes.test.ts:233:19)
+
+  console.error
+    Update user error: Error: Email already exists
+        at UserService.updateUser (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/services/UserService.ts:62:15)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at /Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/routes/user.routes.ts:81:25
+        at dispatch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/compose.js:44:17)
+        at authMiddleware (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/middleware/auth.ts:31:5)
+        at dispatch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/compose.js:44:17)
+        at /Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/hono-base.js:223:25
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/routes/user.routes.test.ts:250:19)
+
+      86 |   } catch (error: unknown) {
+      87 |     const err = error as Error;
+    > 88 |     console.error('Update user error:', err);
+         |             ^
+      89 |
+      90 |     if (err.message.includes('not found')) {
+      91 |       return c.json(
+
+      at src/routes/user.routes.ts:88:13
+      at dispatch (node_modules/hono/dist/cjs/compose.js:44:17)
+      at authMiddleware (src/middleware/auth.ts:31:5)
+      at dispatch (node_modules/hono/dist/cjs/compose.js:44:17)
+      at node_modules/hono/dist/cjs/hono-base.js:223:25
+      at Object.<anonymous> (tests/routes/user.routes.test.ts:250:19)
+
+  console.error
+    Register error: Error: Validation failed: Invalid email format
+        at UserService.createUser (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/services/UserService.ts:13:13)
+        at Array.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/routes/auth.routes.ts:31:40)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/routes/auth.routes.test.ts:155:19)
+
+      49 |   } catch (error: unknown) {
+      50 |     const err = error as Error;
+    > 51 |     console.error('Register error:', err);
+         |             ^
+      52 |     
+      53 |     if (err.message.includes('Email already exists')) {
+      54 |       return c.json(
+
+      at Array.<anonymous> (src/routes/auth.routes.ts:51:13)
+      at Object.<anonymous> (tests/routes/auth.routes.test.ts:155:19)
+
+  console.error
+    Register error: Error: Validation failed: Password must be at least 8 characters long
+        at UserService.createUser (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/services/UserService.ts:13:13)
+        at Array.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/routes/auth.routes.ts:31:40)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/routes/auth.routes.test.ts:175:19)
+
+      49 |   } catch (error: unknown) {
+      50 |     const err = error as Error;
+    > 51 |     console.error('Register error:', err);
+         |             ^
+      52 |     
+      53 |     if (err.message.includes('Email already exists')) {
+      54 |       return c.json(
+
+      at Array.<anonymous> (src/routes/auth.routes.ts:51:13)
+      at Object.<anonymous> (tests/routes/auth.routes.test.ts:175:19)
+
+PASS tests/routes/user.routes.test.ts
+  User Routes
+    GET /api/users/:id
+      ✓ should get user data successfully (37 ms)
+      ✓ should return 401 without token (1 ms)
+      ✓ should return 403 when accessing other user data (2 ms)
+      ✓ should return 404 for non-existent user (3 ms)
+    PUT /api/users/:id
+      ✓ should update user data successfully (7 ms)
+      ✓ should update email successfully (7 ms)
+      ✓ should return 401 without token (1 ms)
+      ✓ should return 403 when updating other user (2 ms)
+      ✓ should return 400 for no fields provided (3 ms)
+      ✓ should return 400 for invalid email (38 ms)
+      ✓ should return 400 for duplicate email (10 ms)
+    PUT /api/users/:id/preferences
+      ✓ should update preferences successfully (7 ms)
+      ✓ should allow empty preferences (3 ms)
+      ✓ should return 401 without token
+      ✓ should return 403 when updating other user preferences (2 ms)
+      ✓ should return 400 for missing preferences field (1 ms)
+    DELETE /api/users/:id
+      ✓ should delete user successfully (89 ms)
+      ✓ should return 401 without token (1 ms)
+      ✓ should return 403 when deleting other user (2 ms)
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "Client removed from pool".
+
+      25 | // Evento de eliminación de cliente
+      26 | pool.on('remove', (client) => {
+    > 27 |   console.log('Client removed from pool');
+         |           ^
+      28 | });
+      29 |
+      30 | // Función para verificar la conexión
+
+      at console.log (node_modules/@jest/console/build/CustomConsole.js:141:10)
+      at BoundPool.<anonymous> (src/config/database.ts:27:11)
+      at Connection.<anonymous> (node_modules/pg-pool/index.js:174:15)
+      at Socket.<anonymous> (node_modules/pg/lib/connection.js:62:12)
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "Client removed from pool".
+
+      25 | // Evento de eliminación de cliente
+      26 | pool.on('remove', (client) => {
+    > 27 |   console.log('Client removed from pool');
+         |           ^
+      28 | });
+      29 |
+      30 | // Función para verificar la conexión
+
+      at console.log (node_modules/@jest/console/build/CustomConsole.js:141:10)
+      at BoundPool.<anonymous> (src/config/database.ts:27:11)
+      at Connection.<anonymous> (node_modules/pg-pool/index.js:174:15)
+      at Socket.<anonymous> (node_modules/pg/lib/connection.js:62:12)
+
+  console.error
+    Register error: Error: Email already exists
+        at UserService.createUser (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/services/UserService.ts:19:13)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at Array.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/routes/auth.routes.ts:31:22)
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/routes/auth.routes.test.ts:199:19)
+
+      49 |   } catch (error: unknown) {
+      50 |     const err = error as Error;
+    > 51 |     console.error('Register error:', err);
+         |             ^
+      52 |     
+      53 |     if (err.message.includes('Email already exists')) {
+      54 |       return c.json(
+
+      at Array.<anonymous> (src/routes/auth.routes.ts:51:13)
+      at Object.<anonymous> (tests/routes/auth.routes.test.ts:199:19)
+
+  console.log
+    ✓ New client connected to PostgreSQL database
+
+      at BoundPool.<anonymous> (src/config/database.ts:17:11)
+
+  console.error
+    Create menu plan error: Error: End date must be after start date, Minimum 1 day required per menu plan
+        at MenuPlanService.createMenuPlan (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/services/MenuPlanService.ts:36:13)
+        at /Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/routes/menuPlan.routes.ts:35:44
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at dispatch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/compose.js:44:17)
+        at authMiddleware (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/middleware/auth.ts:31:5)
+        at dispatch (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/compose.js:44:17)
+        at /Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/node_modules/hono/dist/cjs/hono-base.js:223:25
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/routes/menuPlan.routes.test.ts:177:19)
+
+      45 |   } catch (error: unknown) {
+      46 |     const err = error as Error;
+    > 47 |     console.error('Create menu plan error:', err);
+         |             ^
+      48 |
+      49 |     if (err.message.includes('User not found')) {
+      50 |       return c.json(
+
+      at src/routes/menuPlan.routes.ts:47:13
+      at dispatch (node_modules/hono/dist/cjs/compose.js:44:17)
+      at authMiddleware (src/middleware/auth.ts:31:5)
+      at dispatch (node_modules/hono/dist/cjs/compose.js:44:17)
+      at node_modules/hono/dist/cjs/hono-base.js:223:25
+      at Object.<anonymous> (tests/routes/menuPlan.routes.test.ts:177:19)
+
+PASS tests/routes/shoppingList.routes.test.ts
+  ShoppingList Routes
+    POST /api/shopping-lists
+      ✓ should create shopping list successfully (96 ms)
+      ✓ should return 401 without token (38 ms)
+      ✓ should return 400 for missing menuPlanId (33 ms)
+      ✓ should return 404 for non-existent menu plan (29 ms)
+      ✓ should return 400 for unconfirmed menu plan (43 ms)
+      ✓ should call generateShoppingList with meals that have resolved diners (48 ms)
+    GET /api/shopping-lists/:id
+      ✓ should get shopping list successfully (47 ms)
+      ✓ should return 401 without token (23 ms)
+      ✓ should return 403 when accessing other user shopping list (31 ms)
+      ✓ should return 404 for non-existent shopping list (29 ms)
+
+  console.error
+    Login error: Error: Invalid credentials
+        at AuthService.login (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/services/AuthService.ts:28:13)
+        at processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at Array.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/routes/auth.routes.ts:89:20)
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/routes/auth.routes.test.ts:289:19)
+
+      92 |   } catch (error: unknown) {
+      93 |     const err = error as Error;
+    > 94 |     console.error('Login error:', err);
+         |             ^
+      95 |
+      96 |     if (err.message.includes('Invalid credentials')) {
+      97 |       return c.json(
+
+      at Array.<anonymous> (src/routes/auth.routes.ts:94:13)
+      at Object.<anonymous> (tests/routes/auth.routes.test.ts:289:19)
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "Client removed from pool".
+
+      25 | // Evento de eliminación de cliente
+      26 | pool.on('remove', (client) => {
+    > 27 |   console.log('Client removed from pool');
+         |           ^
+      28 | });
+      29 |
+      30 | // Función para verificar la conexión
+
+      at console.log (node_modules/@jest/console/build/CustomConsole.js:141:10)
+      at BoundPool.<anonymous> (src/config/database.ts:27:11)
+      at Connection.<anonymous> (node_modules/pg-pool/index.js:174:15)
+      at Socket.<anonymous> (node_modules/pg/lib/connection.js:62:12)
+
+PASS tests/routes/menuPlan.routes.test.ts
+  MenuPlan Routes
+    POST /api/menu-plans
+      ✓ should create menu plan successfully (58 ms)
+      ✓ should return 401 without token (1 ms)
+      ✓ should return 400 for missing required fields (2 ms)
+      ✓ should return 400 for invalid date range (33 ms)
+    GET /api/menu-plans/:id
+      ✓ should get menu plan successfully (26 ms)
+      ✓ should return 401 without token (19 ms)
+      ✓ should return 403 when accessing other user plan (18 ms)
+      ✓ should return 404 for non-existent plan (11 ms)
+    PUT /api/menu-plans/:id/meals/:mealId
+      ✓ should update meal successfully (35 ms)
+      ✓ should return 401 without token (10 ms)
+      ✓ should return 403 when updating other user meal (19 ms)
+    POST /api/menu-plans/:id/confirm
+      ✓ should confirm menu plan successfully (16 ms)
+      ✓ should return 401 without token (9 ms)
+      ✓ should return 403 when confirming other user plan (11 ms)
+      ✓ should return 404 for non-existent plan (12 ms)
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "Client removed from pool".
+
+      25 | // Evento de eliminación de cliente
+      26 | pool.on('remove', (client) => {
+    > 27 |   console.log('Client removed from pool');
+         |           ^
+      28 | });
+      29 |
+      30 | // Función para verificar la conexión
+
+      at console.log (node_modules/@jest/console/build/CustomConsole.js:141:10)
+      at BoundPool.<anonymous> (src/config/database.ts:27:11)
+      at Connection.<anonymous> (node_modules/pg-pool/index.js:174:15)
+      at Socket.<anonymous> (node_modules/pg/lib/connection.js:62:12)
+
+  console.error
+    Login error: Error: Invalid credentials
+        at AuthService.login (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/services/AuthService.ts:34:13)
+        at Array.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/src/routes/auth.routes.ts:89:20)
+        at Object.<anonymous> (/Users/janosoler/Desktop/XarxaTecActiva/Activa2025/appComidasSemana/tests/routes/auth.routes.test.ts:308:19)
+
+      92 |   } catch (error: unknown) {
+      93 |     const err = error as Error;
+    > 94 |     console.error('Login error:', err);
+         |             ^
+      95 |
+      96 |     if (err.message.includes('Invalid credentials')) {
+      97 |       return c.json(
+
+      at Array.<anonymous> (src/routes/auth.routes.ts:94:13)
+      at Object.<anonymous> (tests/routes/auth.routes.test.ts:308:19)
+
+PASS tests/routes/auth.routes.test.ts
+  Auth Routes
+    POST /api/auth/register
+      ✓ should register a new user successfully (229 ms)
+      ✓ should register user with default values (90 ms)
+      ✓ should return 400 for missing email (4 ms)
+      ✓ should return 400 for missing password (6 ms)
+      ✓ should return 400 for missing name (3 ms)
+      ✓ should return 400 for invalid email format (21 ms)
+      ✓ should return 400 for short password (5 ms)
+      ✓ should return 400 for duplicate email (88 ms)
+    POST /api/auth/login
+      ✓ should login successfully with valid credentials (165 ms)
+      ✓ should return 400 for missing email (83 ms)
+      ✓ should return 400 for missing password (81 ms)
+      ✓ should return 401 for invalid email (87 ms)
+      ✓ should return 401 for invalid password (152 ms)
+    POST /api/auth/logout
+      ✓ should logout successfully (1 ms)
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "Client removed from pool".
+
+      25 | // Evento de eliminación de cliente
+      26 | pool.on('remove', (client) => {
+    > 27 |   console.log('Client removed from pool');
+         |           ^
+      28 | });
+      29 |
+      30 | // Función para verificar la conexión
+
+      at console.log (node_modules/@jest/console/build/CustomConsole.js:141:10)
+      at BoundPool.<anonymous> (src/config/database.ts:27:11)
+      at Connection.<anonymous> (node_modules/pg-pool/index.js:174:15)
+      at Socket.<anonymous> (node_modules/pg/lib/connection.js:62:12)
+
+  console.log
+    ✓ New client connected to PostgreSQL database
+
+      at BoundPool.<anonymous> (src/config/database.ts:17:11)
+
+PASS tests/shopping-list-calculation.test.ts (21.152 s)
+  Shopping List Calculation with Bulk Diners
+    ✓ should correctly resolve diners for shopping list generation (8927 ms)
+    ✓ should reflect updated preferences in shopping list (dynamic resolution) (3832 ms)
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "Client removed from pool".
+
+      25 | // Evento de eliminación de cliente
+      26 | pool.on('remove', (client) => {
+    > 27 |   console.log('Client removed from pool');
+         |           ^
+      28 | });
+      29 |
+      30 | // Función para verificar la conexión
+
+      at console.log (node_modules/@jest/console/build/CustomConsole.js:141:10)
+      at BoundPool.<anonymous> (src/config/database.ts:27:11)
+      at Connection.<anonymous> (node_modules/pg-pool/index.js:174:15)
+      at Socket.<anonymous> (node_modules/pg/lib/connection.js:62:12)
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "Client removed from pool".
+
+      25 | // Evento de eliminación de cliente
+      26 | pool.on('remove', (client) => {
+    > 27 |   console.log('Client removed from pool');
+         |           ^
+      28 | });
+      29 |
+      30 | // Función para verificar la conexión
+
+      at console.log (node_modules/@jest/console/build/CustomConsole.js:141:10)
+      at BoundPool.<anonymous> (src/config/database.ts:27:11)
+      at Connection.<anonymous> (node_modules/pg-pool/index.js:174:15)
+      at Socket.<anonymous> (node_modules/pg/lib/connection.js:62:12)
+
+Test Suites: 13 passed, 13 total
+Tests:       214 passed, 214 total
+Snapshots:   0 total
+Time:        23.459 s
+Ran all test suites.

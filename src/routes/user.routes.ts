@@ -39,7 +39,7 @@ userRoutes.get('/:id', async (c) => {
     // Retornar usuario sin contraseña
     const { passwordHash, ...userWithoutPassword } = user;
     return c.json({ user: userWithoutPassword }, 200);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Get user error:', error);
     return c.json(
       { error: { code: 'INTERNAL_ERROR', message: 'Internal server error' } },
@@ -73,7 +73,7 @@ userRoutes.put('/:id', async (c) => {
       );
     }
 
-    const updateData: any = {};
+    const updateData: { email?: string; name?: string; defaultDiners?: number } = {};
     if (email) updateData.email = email;
     if (name) updateData.name = name;
     if (defaultDiners !== undefined) updateData.defaultDiners = defaultDiners;
@@ -83,26 +83,27 @@ userRoutes.put('/:id', async (c) => {
     // Retornar usuario sin contraseña
     const { passwordHash, ...userWithoutPassword } = updatedUser;
     return c.json({ user: userWithoutPassword }, 200);
-  } catch (error: any) {
-    console.error('Update user error:', error);
+  } catch (error: unknown) {
+    const err = error as Error;
+    console.error('Update user error:', err);
 
-    if (error.message.includes('not found')) {
+    if (err.message.includes('not found')) {
       return c.json(
         { error: { code: 'NOT_FOUND', message: 'User not found' } },
         404
       );
     }
 
-    if (error.message.includes('Email already exists')) {
+    if (err.message.includes('Email already exists')) {
       return c.json(
         { error: { code: 'DUPLICATE_EMAIL', message: 'Email already exists' } },
         400
       );
     }
 
-    if (error.message.includes('Validation failed')) {
+    if (err.message.includes('Validation failed')) {
       return c.json(
-        { error: { code: 'VALIDATION_ERROR', message: error.message } },
+        { error: { code: 'VALIDATION_ERROR', message: err.message } },
         400
       );
     }
@@ -143,10 +144,11 @@ userRoutes.put('/:id/preferences', async (c) => {
     // Retornar usuario sin contraseña
     const { passwordHash, ...userWithoutPassword } = updatedUser;
     return c.json({ user: userWithoutPassword }, 200);
-  } catch (error: any) {
-    console.error('Update preferences error:', error);
+  } catch (error: unknown) {
+    const err = error as Error;
+    console.error('Update preferences error:', err);
 
-    if (error.message.includes('not found')) {
+    if (err.message.includes('not found')) {
       return c.json(
         { error: { code: 'NOT_FOUND', message: 'User not found' } },
         404
@@ -177,10 +179,11 @@ userRoutes.delete('/:id', async (c) => {
     await UserService.deleteUser(userId);
 
     return c.json({ message: 'User deleted successfully' }, 200);
-  } catch (error: any) {
-    console.error('Delete user error:', error);
+  } catch (error: unknown) {
+    const err = error as Error;
+    console.error('Delete user error:', err);
 
-    if (error.message.includes('not found')) {
+    if (err.message.includes('not found')) {
       return c.json(
         { error: { code: 'NOT_FOUND', message: 'User not found' } },
         404
@@ -221,7 +224,7 @@ userRoutes.get('/:userId/diner-preferences/:mealType', authMiddleware, async (c)
 
     const familyMemberIds = await UserDinerPreferencesService.getPreferences(userId, mealType);
     return c.json({ familyMemberIds }, 200);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Get diner preferences error:', error);
     return c.json(
       { error: 'Failed to get diner preferences' },
@@ -264,12 +267,13 @@ userRoutes.post('/:userId/diner-preferences/:mealType', authMiddleware, async (c
 
     await UserDinerPreferencesService.setPreferences(userId, mealType, familyMemberIds);
     return c.json({ success: true }, 200);
-  } catch (error: any) {
-    console.error('Set diner preferences error:', error);
+  } catch (error: unknown) {
+    const err = error as Error;
+    console.error('Set diner preferences error:', err);
     
-    if (error.message.includes('Invalid family member ID')) {
+    if (err.message.includes('Invalid family member ID')) {
       return c.json(
-        { error: error.message },
+        { error: err.message },
         400
       );
     }
@@ -306,7 +310,7 @@ userRoutes.delete('/:userId/diner-preferences/:mealType', authMiddleware, async 
 
     await UserDinerPreferencesService.clearPreferences(userId, mealType);
     return c.json({ success: true }, 200);
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Clear diner preferences error:', error);
     return c.json(
       { error: 'Failed to clear diner preferences' },
