@@ -155,8 +155,8 @@ git push origin develop
   - ✅ 109 tests de frontend pasando
   - ✅ Código sin tipos `any` en TypeScript
 
-- [ ] 8. Frontend: Componente BulkDinerSelector
-  - [ ] 8.1 Crear clase BulkDinerSelector
+- [x] 8. Frontend: Componente BulkDinerSelector
+  - [x] 8.1 Crear clase BulkDinerSelector
     - Implementar constructor(mealType, familyMembers, initialSelection)
     - Implementar método render() con checkboxes para cada miembro de familia
     - Implementar método getSelectedDiners()
@@ -164,17 +164,18 @@ git push origin develop
     - Añadir manejador de evento onChange
     - _Requisitos: 1.1, 1.2_
 
-  - [ ] 8.2 Añadir estilos CSS para selector masivo de comensales
+  - [x] 8.2 Añadir estilos CSS para selector masivo de comensales
     - Estilizar lista de checkboxes
     - Añadir agrupación visual para selectores de lunch vs dinner
     - Asegurar diseño responsive
     - _Requisitos: 1.1, 1.2_
 
-  - [ ] 8.3 Escribir tests unitarios para componente BulkDinerSelector
+  - [x] 8.3 Escribir tests unitarios para componente BulkDinerSelector
     - Testear renderizado con miembros de familia vacíos
     - Testear renderizado con múltiples miembros de familia
     - Testear gestión de estado de selección
     - Testear disparo de evento onChange
+    - ✅ 29 tests pasando
     - _Requisitos: 1.1, 1.2_
 
 - [ ] 9. Frontend: Actualizar menu-planner.js
