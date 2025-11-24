@@ -154,4 +154,164 @@ describe('Menu Planner Module', () => {
       expect(resultDiv.style.display).toBe('none');
     });
   });
+
+  describe('Bulk Diner Selection Integration', () => {
+    beforeEach(() => {
+      // Add containers for bulk diner selectors
+      document.body.innerHTML += `
+        <div id="lunchDinersSelector"></div>
+        <div id="dinnerDinersSelector"></div>
+      `;
+
+      // Mock BulkDinerSelector
+      global.BulkDinerSelector = jest.fn().mockImplementation((mealType, members, initial) => {
+        return {
+          mealType,
+          familyMembers: members,
+          selectedDinerIds: new Set(initial),
+          onChange: null,
+          render: jest.fn(() => {
+            const div = document.createElement('div');
+            div.className = 'bulk-diner-selector';
+            return div;
+          }),
+          setOnChange: jest.fn(function(callback) {
+            this.onChange = callback;
+          }),
+          getSelectedDiners: jest.fn(function() {
+            return Array.from(this.selectedDinerIds);
+          })
+        };
+      });
+
+      // Mock getUserData
+      global.getUserData = jest.fn(() => ({
+        id: 'user-123',
+        name: 'Test User',
+        email: 'test@example.com'
+      }));
+    });
+
+    test('should load family members and preferences on init', async () => {
+      const mockMembers = [
+        { id: '1', name: 'Member 1' },
+        { id: '2', name: 'Member 2' }
+      ];
+
+      global.authenticatedFetch = jest.fn()
+        .mockResolvedValueOnce({
+          ok: true,
+          json: async () => ({ members: mockMembers })
+        })
+        .mockResolvedValueOnce({
+          ok: true,
+          json: async () => ({ familyMemberIds: ['1'] })
+        })
+        .mockResolvedValueOnce({
+          ok: true,
+          json: async () => ({ familyMemberIds: ['2'] })
+        });
+
+      // Load the module
+      eval(require('fs').readFileSync('./public/js/menu-planner.js', 'utf8'));
+
+      await loadFamilyMembersAndPreferences();
+
+      expect(global.authenticatedFetch).toHaveBeenCalledTimes(3);
+      expect(global.BulkDinerSelector).toHaveBeenCalledWith('lunch', mockMembers, ['1']);
+      expect(global.BulkDinerSelector).toHaveBeenCalledWith('dinner', mockMembers, ['2']);
+    });
+
+    test('should save preferences when selection changes', async () => {
+      global.authenticatedFetch = jest.fn()
+        .mockResolvedValueOnce({
+          ok: true,
+          json: async () => ({ success: true })
+        });
+
+      // Load the module
+      eval(require('fs').readFileSync('./public/js/menu-planner.js', 'utf8'));
+
+      await saveBulkDinerPreferences('lunch', ['1', '2']);
+
+      expect(global.authenticatedFetch).toHaveBeenCalledWith(
+        expect.stringContaining('/diner-preferences/lunch'),
+        expect.objectContaining({
+          method: 'POST',
+          body: JSON.stringify({ familyMemberIds: ['1', '2'] })
+        })
+      );
+    });
+
+    test('should handle empty family members gracefully', async () => {
+      global.authenticatedFetch = jest.fn()
+        .mockResolvedValueOnce({
+          ok: true,
+          json: async () => ({ members: [] })
+        })
+        .mockResolvedValueOnce({
+          ok: true,
+          json: async () => ({ familyMemberIds: [] })
+        })
+        .mockResolvedValueOnce({
+          ok: true,
+          json: async () => ({ familyMemberIds: [] })
+        });
+
+      // Load the module
+      eval(require('fs').readFileSync('./public/js/menu-planner.js', 'utf8'));
+
+      await loadFamilyMembersAndPreferences();
+
+      expect(global.BulkDinerSelector).toHaveBeenCalledWith('lunch', [], []);
+      expect(global.BulkDinerSelector).toHaveBeenCalledWith('dinner', [], []);
+    });
+
+    test('should handle API errors when loading preferences', async () => {
+      global.authenticatedFetch = jest.fn()
+        .mockRejectedValueOnce(new Error('Network error'));
+
+      // Load the module
+      eval(require('fs').readFileSync('./public/js/menu-planner.js', 'utf8'));
+
+      await loadFamilyMembersAndPreferences();
+
+      // Should still render selectors with empty data
+      expect(global.BulkDinerSelector).toHaveBeenCalledWith('lunch', [], []);
+      expect(global.BulkDinerSelector).toHaveBeenCalledWith('dinner', [], []);
+    });
+
+    test('should show success message after saving preferences', async () => {
+      global.authenticatedFetch = jest.fn()
+        .mockResolvedValueOnce({
+          ok: true,
+          json: async () => ({ success: true })
+        });
+
+      // Load the module
+      eval(require('fs').readFileSync('./public/js/menu-planner.js', 'utf8'));
+
+      await saveBulkDinerPreferences('dinner', ['1']);
+
+      const messageEl = document.getElementById('planMessage');
+      expect(messageEl.textContent).toContain('cena');
+      expect(messageEl.textContent).toContain('guardadas');
+    });
+
+    test('should show error message when saving preferences fails', async () => {
+      global.authenticatedFetch = jest.fn()
+        .mockResolvedValueOnce({
+          ok: false,
+          json: async () => ({ error: 'Invalid data' })
+        });
+
+      // Load the module
+      eval(require('fs').readFileSync('./public/js/menu-planner.js', 'utf8'));
+
+      await saveBulkDinerPreferences('lunch', ['invalid']);
+
+      const messageEl = document.getElementById('planMessage');
+      expect(messageEl.textContent).toContain('Invalid data');
+    });
+  });
 });

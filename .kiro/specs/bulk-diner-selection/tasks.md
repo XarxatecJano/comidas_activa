@@ -178,28 +178,29 @@ git push origin develop
     - ✅ 29 tests pasando
     - _Requisitos: 1.1, 1.2_
 
-- [ ] 9. Frontend: Actualizar menu-planner.js
-  - [ ] 9.1 Cargar y mostrar preferencias masivas de comensales
+- [x] 9. Frontend: Actualizar menu-planner.js
+  - [x] 9.1 Cargar y mostrar preferencias masivas de comensales
     - Obtener preferencias masivas del usuario al cargar la página
     - Crear instancias de BulkDinerSelector para lunch y dinner
     - Renderizar selectores en el formulario
     - _Requisitos: 1.1, 1.2, 4.2_
 
-  - [ ] 9.2 Guardar preferencias masivas cuando cambien
+  - [x] 9.2 Guardar preferencias masivas cuando cambien
     - Añadir event listeners a selectores masivos
     - Llamar a API para guardar preferencias cuando cambie la selección
     - Mostrar mensajes de éxito/error
     - _Requisitos: 4.1, 4.5_
 
-  - [ ] 9.3 Aplicar selecciones masivas al crear plan de menú
+  - [x] 9.3 Aplicar selecciones masivas al crear plan de menú
     - Incluir selecciones masivas en la petición de creación de plan de menú
     - Actualizar llamada a API para pasar preferencias masivas de comensales
     - _Requisitos: 1.3, 1.4_
 
-  - [ ] 9.4 Escribir tests unitarios para flujo de selección masiva del planificador de menús
+  - [x] 9.4 Escribir tests unitarios para flujo de selección masiva del planificador de menús
     - Testear carga de preferencias guardadas
     - Testear guardado de cambios de preferencias
     - Testear creación de plan con selecciones masivas
+    - ✅ 6 tests nuevos pasando
     - _Requisitos: 1.1, 1.2, 1.3, 1.4, 4.1, 4.2, 4.5_
 
 - [ ] 10. Frontend: Componente MealCard mejorado
