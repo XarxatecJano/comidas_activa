@@ -265,7 +265,11 @@ userRoutes.post('/:userId/diner-preferences/:mealType', authMiddleware, async (c
       );
     }
 
-    await UserDinerPreferencesService.setPreferences(userId, mealType, familyMemberIds);
+    // Filter out the user's own ID from familyMemberIds
+    // The user is included in the frontend selector but shouldn't be saved as a family member preference
+    const filteredFamilyMemberIds = familyMemberIds.filter(id => id !== userId);
+
+    await UserDinerPreferencesService.setPreferences(userId, mealType, filteredFamilyMemberIds);
     return c.json({ success: true }, 200);
   } catch (error: unknown) {
     const err = error as Error;
