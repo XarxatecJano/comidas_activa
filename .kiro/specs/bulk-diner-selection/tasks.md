@@ -228,24 +228,24 @@ git push origin develop
     - Testear actualizaciones de flag de comensales personalizados
     - _Requisitos: 2.2, 2.4, 2.5_
 
-- [ ] 11. Frontend: Simplificar visualización de platos
-  - [ ] 11.1 Modificar renderizado de platos para mostrar solo nombres
+- [x] 11. Frontend: Simplificar visualización de platos
+  - [x] 11.1 Modificar renderizado de platos para mostrar solo nombres
     - Actualizar lógica de visualización de platos de MealCard
     - Eliminar lista de ingredientes de la salida renderizada
     - Eliminar descripción de la salida renderizada
     - Mantener ingredientes en el modelo de datos para lista de compra
     - _Requisitos: 3.1, 3.2, 3.3_
 
-  - [ ] 11.2 Actualizar CSS para visualización más limpia de platos
+  - [x] 11.2 Actualizar CSS para visualización más limpia de platos
     - Ajustar espaciado sin listas de ingredientes
     - Asegurar que los nombres de platos sean prominentes
     - _Requisitos: 3.1, 3.2, 3.3_
 
-  - [ ] 11.3 Escribir test de propiedad para exclusión de ingredientes
+  - [x] 11.3 Escribir test de propiedad para exclusión de ingredientes
     - **Propiedad 5: Exclusión de ingredientes de la visualización**
     - **Valida: Requisitos 3.1, 3.2, 3.3, 3.4, 3.5**
 
-  - [ ] 11.4 Escribir tests unitarios para visualización de platos
+  - [x] 11.4 Escribir tests unitarios para visualización de platos
     - Testear que el renderizado de platos contiene solo el nombre
     - Testear que los ingredientes no están presentes en el DOM
     - Testear que la descripción no está presente en el DOM

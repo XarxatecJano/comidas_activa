@@ -852,20 +852,16 @@ body {
 
 .dish-item {
     background: var(--bg-light);
-    padding: 15px;
-    margin-bottom: 10px;
+    padding: 12px 15px;
+    margin-bottom: 8px;
     border-radius: 8px;
 }
 
 .dish-item h5 {
     color: var(--primary-color);
-    margin-bottom: 8px;
-}
-
-.dish-item p {
-    color: var(--text-light);
-    font-size: 0.9rem;
-    margin-bottom: 8px;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
 }
 
 .ingredients-list {

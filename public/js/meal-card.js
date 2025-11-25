@@ -181,14 +181,6 @@ class MealCard {
         html += this.meal.dishes.map(dish => `
             <div class="dish-item">
                 <h5>${dish.name}</h5>
-                <p>${dish.description || ''}</p>
-                ${dish.ingredients && dish.ingredients.length > 0 ? `
-                    <div class="ingredients-list">
-                        ${dish.ingredients.map(ing => `
-                            <span class="ingredient-tag">${ing}</span>
-                        `).join('')}
-                    </div>
-                ` : ''}
             </div>
         `).join('');
         

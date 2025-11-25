@@ -136,12 +136,6 @@ class MealCard {
     return this.meal.dishes.map(dish => `
       <div class="dish-item">
         <h5>${dish.name}</h5>
-        <p>${dish.description || ''}</p>
-        ${dish.ingredients && dish.ingredients.length > 0 ? `
-          <div class="ingredients-list">
-            ${dish.ingredients.map(ing => `<span class="ingredient-tag">${ing}</span>`).join('')}
-          </div>
-        ` : ''}
       </div>
     `).join('');
   }
@@ -350,15 +344,15 @@ describe('MealCard Component', () => {
       expect(element.innerHTML).toContain('Almuerzo');
     });
 
-    test('should render dishes with ingredients', () => {
+    test('should render dishes with only names', () => {
       const card = new MealCard(mockMeal, mockMenuPlanId, mockOnUpdate);
       const element = card.render();
 
       expect(element.innerHTML).toContain('Paella');
-      expect(element.innerHTML).toContain('Arroz con mariscos');
-      expect(element.innerHTML).toContain('arroz');
-      expect(element.innerHTML).toContain('gambas');
-      expect(element.innerHTML).toContain('mejillones');
+      expect(element.innerHTML).not.toContain('Arroz con mariscos');
+      expect(element.innerHTML).not.toContain('arroz');
+      expect(element.innerHTML).not.toContain('gambas');
+      expect(element.innerHTML).not.toContain('mejillones');
     });
 
     test('should render edit and regenerate buttons', () => {
@@ -844,6 +838,97 @@ describe('MealCard Component', () => {
       await card.regenerateMeal();
 
       expect(card.meal.hasCustomDiners).toBe(true);
+    });
+  });
+
+  describe('Dish Display Simplification', () => {
+    // Feature: bulk-diner-selection, Property 5: Exclusión de ingredientes de la visualización
+    // For any dish, the display output should contain only the dish name and should not include ingredients or description fields
+    test('should display only dish names without ingredients', () => {
+      const card = new MealCard(mockMeal, mockMenuPlanId, mockOnUpdate);
+      const element = card.render();
+
+      expect(element.innerHTML).toContain('Paella');
+      expect(element.innerHTML).not.toContain('ingredients-list');
+      expect(element.innerHTML).not.toContain('ingredient-tag');
+      expect(element.innerHTML).not.toContain('arroz');
+      expect(element.innerHTML).not.toContain('gambas');
+      expect(element.innerHTML).not.toContain('mejillones');
+    });
+
+    test('should display only dish names without descriptions', () => {
+      const card = new MealCard(mockMeal, mockMenuPlanId, mockOnUpdate);
+      const element = card.render();
+
+      expect(element.innerHTML).toContain('Paella');
+      expect(element.innerHTML).not.toContain('Arroz con mariscos');
+    });
+
+    test('should render dish name for all dishes in meal', () => {
+      const mealWithMultipleDishes = {
+        ...mockMeal,
+        dishes: [
+          {
+            name: 'Paella',
+            description: 'Arroz con mariscos',
+            ingredients: ['arroz', 'gambas', 'mejillones']
+          },
+          {
+            name: 'Ensalada',
+            description: 'Ensalada fresca',
+            ingredients: ['lechuga', 'tomate', 'cebolla']
+          }
+        ]
+      };
+
+      const card = new MealCard(mealWithMultipleDishes, mockMenuPlanId, mockOnUpdate);
+      const element = card.render();
+
+      expect(element.innerHTML).toContain('Paella');
+      expect(element.innerHTML).toContain('Ensalada');
+      expect(element.innerHTML).not.toContain('Arroz con mariscos');
+      expect(element.innerHTML).not.toContain('Ensalada fresca');
+      expect(element.innerHTML).not.toContain('lechuga');
+      expect(element.innerHTML).not.toContain('tomate');
+    });
+
+    test('should handle dishes with empty ingredients array', () => {
+      const mealWithNoIngredients = {
+        ...mockMeal,
+        dishes: [
+          {
+            name: 'Plato Simple',
+            description: 'Un plato sin ingredientes',
+            ingredients: []
+          }
+        ]
+      };
+
+      const card = new MealCard(mealWithNoIngredients, mockMenuPlanId, mockOnUpdate);
+      const element = card.render();
+
+      expect(element.innerHTML).toContain('Plato Simple');
+      expect(element.innerHTML).not.toContain('Un plato sin ingredientes');
+      expect(element.innerHTML).not.toContain('ingredients-list');
+    });
+
+    test('should handle dishes without description field', () => {
+      const mealWithoutDescription = {
+        ...mockMeal,
+        dishes: [
+          {
+            name: 'Plato Sin Descripción',
+            ingredients: ['ingrediente1', 'ingrediente2']
+          }
+        ]
+      };
+
+      const card = new MealCard(mealWithoutDescription, mockMenuPlanId, mockOnUpdate);
+      const element = card.render();
+
+      expect(element.innerHTML).toContain('Plato Sin Descripción');
+      expect(element.innerHTML).not.toContain('ingrediente1');
+      expect(element.innerHTML).not.toContain('ingrediente2');
     });
   });
 });
