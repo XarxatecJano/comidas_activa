@@ -15,7 +15,20 @@ class MealCard {
             .map(diner => diner.familyMemberId || diner.id)
             .filter(id => id); // Filter out any null/undefined values
         
-        this.selectedMemberIds = new Set(dinerIds);
+        // Only include IDs that exist in familyMembers to avoid orphaned selections
+        const validFamilyMemberIds = new Set(familyMembers.map(m => m.id));
+        const validDinerIds = dinerIds.filter(id => validFamilyMemberIds.has(id));
+        
+        // Debug: log the IDs to see what we're comparing
+        console.log('MealCard Debug:', {
+            mealId: meal.id,
+            dinerIds: dinerIds,
+            validDinerIds: validDinerIds,
+            familyMemberIds: Array.from(validFamilyMemberIds),
+            mealDiners: meal.diners.map(d => ({ id: d.id, familyMemberId: d.familyMemberId, name: d.name }))
+        });
+        
+        this.selectedMemberIds = new Set(validDinerIds);
     }
 
     // Render the meal card
@@ -147,8 +160,8 @@ class MealCard {
                        ${this.selectedMemberIds.has(member.id) ? 'checked' : ''}
                        onchange="mealCards.get('${this.meal.id}').toggleMember('${member.id}', this.checked)">
                 <span class="member-name">${member.name}</span>
-                ${member.dietary_restrictions ? `
-                    <span class="member-restrictions">(${member.dietary_restrictions})</span>
+                ${member.preferences ? `
+                    <span class="member-restrictions">(${member.preferences})</span>
                 ` : ''}
             </label>
         `).join('');
