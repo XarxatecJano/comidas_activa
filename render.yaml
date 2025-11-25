@@ -1,7 +1,7 @@
 services:
   - type: web
     name: comidas-activa
-    env: node
+    runtime: node
     region: frankfurt
     plan: free
     buildCommand: npm install && npm run build
