@@ -73,8 +73,8 @@ describe('Shopping List Calculation with Bulk Diners', () => {
         const lunchMeal = meals.find(m => m.mealType === 'lunch');
         const dinnerMeal = meals.find(m => m.mealType === 'dinner');
 
-        expect(lunchMeal?.diners).toHaveLength(1);
-        expect(dinnerMeal?.diners).toHaveLength(2);
+        expect(lunchMeal?.diners).toHaveLength(2); // User + Member 1
+        expect(dinnerMeal?.diners).toHaveLength(3); // User + Member 1 & 2
 
         // Now generate shopping list (simulated via AIService -> MockAIService)
         // We need to verify that AIService receives resolved diners
@@ -93,8 +93,8 @@ describe('Shopping List Calculation with Bulk Diners', () => {
         const resolvedLunch = resolvedMeals.find(m => m.mealType === 'lunch');
         const resolvedDinner = resolvedMeals.find(m => m.mealType === 'dinner');
 
-        expect(resolvedLunch?.diners).toHaveLength(1); // Should be Member 1
-        expect(resolvedDinner?.diners).toHaveLength(2); // Should be Member 1 & 2
+        expect(resolvedLunch?.diners).toHaveLength(2); // User + Member 1
+        expect(resolvedDinner?.diners).toHaveLength(3); // User + Member 1 & 2
     });
 
     it('should reflect updated preferences in shopping list (dynamic resolution)', async () => {
@@ -121,7 +121,8 @@ describe('Shopping List Calculation with Bulk Diners', () => {
         const lunchMeal = meals.find(m => m.mealType === 'lunch');
 
         // This expectation will fail if we use snapshot, pass if we use dynamic
-        expect(lunchMeal?.diners).toHaveLength(2);
+        expect(lunchMeal?.diners).toHaveLength(3); // User + Member 1 & 2
+        expect(lunchMeal?.diners.map(d => d.name)).toContain('Test User');
         expect(lunchMeal?.diners.map(d => d.name)).toContain('Member 2');
     });
 });

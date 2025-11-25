@@ -583,7 +583,21 @@ class DatabaseService {
         WHERE d.meal_id = $1
       `;
       const dinersResult = await pool.query(dinersQuery, [mealId, userId]);
-      return dinersResult.rows;
+      
+      // For diners without familyMemberId, check if they match the user
+      const user = await this.getUserById(userId);
+      const resolvedDiners = dinersResult.rows.map(diner => {
+        if (!diner.familyMemberId && user && diner.name === user.name) {
+          // This is the user, add userId as familyMemberId for frontend consistency
+          return {
+            ...diner,
+            familyMemberId: userId
+          };
+        }
+        return diner;
+      });
+      
+      return resolvedDiners;
     } else {
       // Get bulk selection diners from UserDinerPreferences
       const bulkDinersQuery = `
@@ -593,7 +607,25 @@ class DatabaseService {
         WHERE udp.user_id = $1 AND udp.meal_type = $2
       `;
       const bulkDinersResult = await pool.query(bulkDinersQuery, [userId, mealType]);
-      return bulkDinersResult.rows;
+      
+      // Also include the user as a diner
+      const user = await this.getUserById(userId);
+      const diners: ResolvedDiner[] = [];
+      
+      if (user) {
+        diners.push({
+          id: undefined,
+          familyMemberId: userId,
+          name: user.name,
+          preferences: user.preferences,
+          dietaryRestrictions: undefined
+        });
+      }
+      
+      // Add family members
+      diners.push(...bulkDinersResult.rows);
+      
+      return diners;
     }
   }
 }

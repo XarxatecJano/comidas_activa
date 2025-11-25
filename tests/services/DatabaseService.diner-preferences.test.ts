@@ -216,12 +216,13 @@ describe('DatabaseService - Diner Preferences Methods', () => {
       expect(meal.hasCustomDiners).toBe(false);
       expect(meal).not.toBeNull();
       if (!meal) return;
-      expect(meal.diners).toHaveLength(2);
+      expect(meal.diners).toHaveLength(3); // User + 2 family members
+      expect(meal.diners.map((d: any) => d.familyMemberId)).toContain(testUserId); // User is included
       expect(meal.diners.map((d: any) => d.familyMemberId)).toContain(testFamilyMember1Id);
       expect(meal.diners.map((d: any) => d.familyMemberId)).toContain(testFamilyMember2Id);
     });
 
-    it('should return empty diners array when no bulk preferences are set', async () => {
+    it('should return user as diner when no bulk preferences are set', async () => {
       await DatabaseService.setMealCustomDinersFlag(testMealId, false);
 
       const meal = await DatabaseService.getMealWithResolvedDiners(testMealId);
@@ -229,7 +230,9 @@ describe('DatabaseService - Diner Preferences Methods', () => {
       expect(meal).toBeDefined();
       expect(meal).not.toBeNull();
       if (!meal) return;
-      expect(meal.diners).toEqual([]);
+      expect(meal.diners).toHaveLength(1); // Only the user
+      expect(meal.diners[0].familyMemberId).toBe(testUserId);
+      expect(meal.diners[0].name).toBe('Test User');
     });
 
     it('should return null for non-existent meal', async () => {
@@ -244,13 +247,14 @@ describe('DatabaseService - Diner Preferences Methods', () => {
       // Set bulk preferences
       await DatabaseService.setUserDinerPreferences(testUserId, 'lunch', [testFamilyMember1Id]);
 
-      // Test with has_custom_diners = false (should use bulk)
+      // Test with has_custom_diners = false (should use bulk + user)
       await DatabaseService.setMealCustomDinersFlag(testMealId, false);
       const meal = await DatabaseService.getMealWithResolvedDiners(testMealId);
       expect(meal).not.toBeNull();
       if (!meal) return;
-      expect(meal.diners).toHaveLength(1);
-      expect(meal.diners[0].familyMemberId).toBe(testFamilyMember1Id);
+      expect(meal.diners).toHaveLength(2); // User + 1 family member
+      expect(meal.diners.map((d: any) => d.familyMemberId)).toContain(testUserId);
+      expect(meal.diners.map((d: any) => d.familyMemberId)).toContain(testFamilyMember1Id);
     });
   });
 });
