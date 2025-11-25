@@ -203,26 +203,26 @@ git push origin develop
     - ✅ 6 tests nuevos pasando
     - _Requisitos: 1.1, 1.2, 1.3, 1.4, 4.1, 4.2, 4.5_
 
-- [ ] 10. Frontend: Componente MealCard mejorado
-  - [ ] 10.1 Añadir indicador de sobrescritura a tarjetas de comida
+- [x] 10. Frontend: Componente MealCard mejorado
+  - [x] 10.1 Añadir indicador de sobrescritura a tarjetas de comida
     - Verificar flag meal.hasCustomDiners
     - Mostrar badge/icono cuando la comida tiene comensales personalizados
     - Añadir tooltip explicando el indicador
     - _Requisitos: 2.5_
 
-  - [ ] 10.2 Añadir botón de revertir a masivo
+  - [x] 10.2 Añadir botón de revertir a masivo
     - Mostrar botón solo cuando la comida tiene comensales personalizados
     - Llamar a endpoint de API de revertir cuando se haga clic
     - Actualizar visualización de tarjeta de comida después de revertir
     - Mostrar diálogo de confirmación antes de revertir
     - _Requisitos: 2.4_
 
-  - [ ] 10.3 Actualizar funcionalidad de editar comensales
+  - [x] 10.3 Actualizar funcionalidad de editar comensales
     - Establecer flag has_custom_diners cuando se editan comensales
     - Actualizar indicador de sobrescritura después de editar
     - _Requisitos: 2.2_
 
-  - [ ] 10.4 Escribir tests unitarios para características de sobrescritura de MealCard
+  - [x] 10.4 Escribir tests unitarios para características de sobrescritura de MealCard
     - Testear visualización de indicador de sobrescritura
     - Testear funcionalidad de botón de revertir a masivo
     - Testear actualizaciones de flag de comensales personalizados

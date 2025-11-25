@@ -1447,3 +1447,47 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* ==================== Override Badge Styles ==================== */
+
+.override-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--warning-color);
+    color: var(--primary-dark);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-left: 10px;
+    cursor: help;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.override-badge:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(252, 185, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    .override-badge {
+        font-size: 0.75rem;
+        padding: 3px 10px;
+        margin-left: 8px;
+    }
+}
+
+/* ==================== Revert to Bulk Button Styles ==================== */
+
+.btn-revert {
+    background: var(--warning-color);
+    color: var(--primary-dark);
+    font-weight: 600;
+}
+
+.btn-revert:hover {
+    background: #e6a800;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(252, 185, 0, 0.3);
+}

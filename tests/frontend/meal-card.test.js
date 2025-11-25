@@ -36,8 +36,12 @@ class MealCard {
 
     card.innerHTML = `
       <div class="meal-card-header">
-        <h4>${dayName} - ${mealTypeName}</h4>
+        <h4>
+          ${dayName} - ${mealTypeName}
+          ${this.renderOverrideBadge()}
+        </h4>
         <div class="meal-card-actions">
+          ${this.renderRevertButton()}
           <button class="btn btn-small btn-secondary">
             ${this.isEditing ? 'Cancelar' : 'Editar'}
           </button>
@@ -53,6 +57,30 @@ class MealCard {
     `;
 
     return card;
+  }
+
+  renderOverrideBadge() {
+    if (!this.meal.hasCustomDiners) {
+      return '';
+    }
+
+    return `
+      <span class="override-badge" title="Esta comida tiene comensales personalizados que difieren de la selección masiva">
+        ✏️ Personalizado
+      </span>
+    `;
+  }
+
+  renderRevertButton() {
+    if (!this.meal.hasCustomDiners) {
+      return '';
+    }
+
+    return `
+      <button class="btn btn-small btn-revert" title="Revertir a selección masiva">
+        ↩️ Revertir
+      </button>
+    `;
   }
 
   renderEditForm() {
@@ -163,6 +191,7 @@ class MealCard {
 
       if (response.ok) {
         this.meal = data.meal;
+        this.meal.hasCustomDiners = true;
         this.isEditing = false;
         this.refresh();
         
@@ -176,6 +205,40 @@ class MealCard {
       }
     } catch (error) {
       console.error('Error saving meal settings:', error);
+      showNotification('Error de conexión', 'error');
+    }
+  }
+
+  async revertToBulkDiners() {
+    if (!confirm('¿Deseas revertir esta comida a la selección masiva? Se perderán los comensales personalizados.')) {
+      return;
+    }
+
+    try {
+      const response = await authenticatedFetch(
+        `${API_URL}/menu-plans/${this.menuPlanId}/meals/${this.meal.id}/revert-diners`,
+        {
+          method: 'POST'
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        this.meal = data.meal;
+        this.meal.hasCustomDiners = false;
+        this.refresh();
+        
+        if (this.onUpdate) {
+          this.onUpdate(data.meal);
+        }
+        
+        showNotification('Comida revertida a selección masiva exitosamente', 'success');
+      } else {
+        showNotification(data.error?.message || 'Error al revertir comida', 'error');
+      }
+    } catch (error) {
+      console.error('Error reverting to bulk diners:', error);
       showNotification('Error de conexión', 'error');
     }
   }
@@ -628,6 +691,159 @@ describe('MealCard Component', () => {
       mealCards.clear();
       
       expect(mealCards.size).toBe(0);
+    });
+  });
+
+  describe('Override Badge', () => {
+    test('should not display override badge when hasCustomDiners is false', () => {
+      const mealWithoutOverride = { ...mockMeal, hasCustomDiners: false };
+      const card = new MealCard(mealWithoutOverride, mockMenuPlanId, mockOnUpdate);
+      const element = card.render();
+
+      expect(element.innerHTML).not.toContain('override-badge');
+      expect(element.innerHTML).not.toContain('Personalizado');
+    });
+
+    test('should display override badge when hasCustomDiners is true', () => {
+      const mealWithOverride = { ...mockMeal, hasCustomDiners: true };
+      const card = new MealCard(mealWithOverride, mockMenuPlanId, mockOnUpdate);
+      const element = card.render();
+
+      expect(element.innerHTML).toContain('override-badge');
+      expect(element.innerHTML).toContain('Personalizado');
+    });
+
+    test('should include tooltip text in override badge', () => {
+      const mealWithOverride = { ...mockMeal, hasCustomDiners: true };
+      const card = new MealCard(mealWithOverride, mockMenuPlanId, mockOnUpdate);
+      const element = card.render();
+
+      expect(element.innerHTML).toContain('Esta comida tiene comensales personalizados');
+    });
+  });
+
+  describe('Revert to Bulk Button', () => {
+    test('should not display revert button when hasCustomDiners is false', () => {
+      const mealWithoutOverride = { ...mockMeal, hasCustomDiners: false };
+      const card = new MealCard(mealWithoutOverride, mockMenuPlanId, mockOnUpdate);
+      const element = card.render();
+
+      expect(element.innerHTML).not.toContain('btn-revert');
+      expect(element.innerHTML).not.toContain('Revertir');
+    });
+
+    test('should display revert button when hasCustomDiners is true', () => {
+      const mealWithOverride = { ...mockMeal, hasCustomDiners: true };
+      const card = new MealCard(mealWithOverride, mockMenuPlanId, mockOnUpdate);
+      const element = card.render();
+
+      expect(element.innerHTML).toContain('btn-revert');
+      expect(element.innerHTML).toContain('Revertir');
+    });
+
+    test('should ask for confirmation before reverting', async () => {
+      global.confirm.mockReturnValue(false);
+      const mealWithOverride = { ...mockMeal, hasCustomDiners: true };
+      const card = new MealCard(mealWithOverride, mockMenuPlanId, mockOnUpdate);
+
+      await card.revertToBulkDiners();
+
+      expect(global.confirm).toHaveBeenCalledWith(
+        expect.stringContaining('revertir')
+      );
+      expect(global.authenticatedFetch).not.toHaveBeenCalled();
+    });
+
+    test('should call API to revert diners when confirmed', async () => {
+      global.confirm.mockReturnValue(true);
+      const mealWithOverride = { ...mockMeal, hasCustomDiners: true };
+      const revertedMeal = { ...mealWithOverride, hasCustomDiners: false };
+      
+      global.authenticatedFetch.mockResolvedValue({
+        ok: true,
+        json: async () => ({ meal: revertedMeal })
+      });
+
+      const card = new MealCard(mealWithOverride, mockMenuPlanId, mockOnUpdate);
+
+      await card.revertToBulkDiners();
+
+      expect(global.authenticatedFetch).toHaveBeenCalledWith(
+        `${API_URL}/menu-plans/${mockMenuPlanId}/meals/${mockMeal.id}/revert-diners`,
+        expect.objectContaining({
+          method: 'POST'
+        })
+      );
+    });
+
+    test('should update meal state after successful revert', async () => {
+      global.confirm.mockReturnValue(true);
+      const mealWithOverride = { ...mockMeal, hasCustomDiners: true };
+      const revertedMeal = { ...mealWithOverride, hasCustomDiners: false, dinerIds: ['diner-1', 'diner-2'] };
+      
+      global.authenticatedFetch.mockResolvedValue({
+        ok: true,
+        json: async () => ({ meal: revertedMeal })
+      });
+
+      const card = new MealCard(mealWithOverride, mockMenuPlanId, mockOnUpdate);
+
+      await card.revertToBulkDiners();
+
+      expect(card.meal.hasCustomDiners).toBe(false);
+      expect(mockOnUpdate).toHaveBeenCalledWith(revertedMeal);
+    });
+
+    test('should show error message on revert failure', async () => {
+      global.confirm.mockReturnValue(true);
+      const mealWithOverride = { ...mockMeal, hasCustomDiners: true };
+      
+      global.authenticatedFetch.mockResolvedValue({
+        ok: false,
+        json: async () => ({ error: { message: 'Revert failed' } })
+      });
+
+      const card = new MealCard(mealWithOverride, mockMenuPlanId, mockOnUpdate);
+
+      await card.revertToBulkDiners();
+
+      const messageDiv = document.getElementById('planMessage');
+      expect(messageDiv.textContent).toContain('Revert failed');
+      expect(messageDiv.className).toContain('error');
+    });
+  });
+
+  describe('Custom Diners Flag Update', () => {
+    test('should set hasCustomDiners to true when saving meal settings', async () => {
+      global.authenticatedFetch.mockResolvedValue({
+        ok: true,
+        json: async () => ({ meal: { ...mockMeal, hasCustomDiners: true } })
+      });
+
+      const card = new MealCard(mockMeal, mockMenuPlanId, mockOnUpdate);
+      card.isEditing = true;
+      const element = card.render();
+      document.body.appendChild(element);
+
+      await card.saveMealSettings();
+
+      expect(card.meal.hasCustomDiners).toBe(true);
+    });
+
+    test('should maintain hasCustomDiners flag after regeneration', async () => {
+      global.confirm.mockReturnValue(true);
+      const mealWithOverride = { ...mockMeal, hasCustomDiners: true };
+      
+      global.authenticatedFetch.mockResolvedValue({
+        ok: true,
+        json: async () => ({ meal: { ...mealWithOverride, hasCustomDiners: true } })
+      });
+
+      const card = new MealCard(mealWithOverride, mockMenuPlanId, mockOnUpdate);
+
+      await card.regenerateMeal();
+
+      expect(card.meal.hasCustomDiners).toBe(true);
     });
   });
 });

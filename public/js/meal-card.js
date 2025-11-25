@@ -37,8 +37,12 @@ class MealCard {
 
         card.innerHTML = `
             <div class="meal-card-header">
-                <h4>${dayName} - ${mealTypeName}</h4>
+                <h4>
+                    ${dayName} - ${mealTypeName}
+                    ${this.renderOverrideBadge()}
+                </h4>
                 <div class="meal-card-actions">
+                    ${this.renderRevertButton()}
                     <button class="btn btn-small btn-secondary" onclick="mealCards.get('${this.meal.id}').toggleEdit()">
                         ${this.isEditing ? 'Cancelar' : 'Editar'}
                     </button>
@@ -55,6 +59,32 @@ class MealCard {
         `;
 
         return card;
+    }
+
+    // Render override badge
+    renderOverrideBadge() {
+        if (!this.meal.hasCustomDiners) {
+            return '';
+        }
+
+        return `
+            <span class="override-badge" title="Esta comida tiene comensales personalizados que difieren de la selección masiva">
+                ✏️ Personalizado
+            </span>
+        `;
+    }
+
+    // Render revert to bulk button
+    renderRevertButton() {
+        if (!this.meal.hasCustomDiners) {
+            return '';
+        }
+
+        return `
+            <button class="btn btn-small btn-revert" onclick="mealCards.get('${this.meal.id}').revertToBulkDiners()" title="Revertir a selección masiva">
+                ↩️ Revertir
+            </button>
+        `;
     }
 
     // Render edit form for meal settings
@@ -201,6 +231,7 @@ class MealCard {
             if (response.ok) {
                 this.meal = data.meal;
                 this.meal.dinerIds = familyMemberIds;
+                this.meal.hasCustomDiners = true;
                 this.isEditing = false;
                 this.refresh();
                 
@@ -257,6 +288,42 @@ class MealCard {
             }
         } catch (error) {
             console.error('Error regenerating meal:', error);
+            showNotification('Error de conexión', 'error');
+        }
+    }
+
+    // Revert to bulk diners
+    async revertToBulkDiners() {
+        if (!confirm('¿Deseas revertir esta comida a la selección masiva? Se perderán los comensales personalizados.')) {
+            return;
+        }
+
+        try {
+            const response = await authenticatedFetch(
+                `${API_URL}/menu-plans/${this.menuPlanId}/meals/${this.meal.id}/revert-diners`,
+                {
+                    method: 'POST'
+                }
+            );
+
+            const data = await response.json();
+
+            if (response.ok) {
+                this.meal = data.meal;
+                this.meal.hasCustomDiners = false;
+                this.selectedMemberIds = new Set(this.meal.dinerIds || []);
+                this.refresh();
+                
+                if (this.onUpdate) {
+                    this.onUpdate(data.meal);
+                }
+                
+                showNotification('Comida revertida a selección masiva exitosamente', 'success');
+            } else {
+                showNotification(data.error?.message || 'Error al revertir comida', 'error');
+            }
+        } catch (error) {
+            console.error('Error reverting to bulk diners:', error);
             showNotification('Error de conexión', 'error');
         }
     }
