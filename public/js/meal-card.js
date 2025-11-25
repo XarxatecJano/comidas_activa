@@ -19,15 +19,6 @@ class MealCard {
         const validFamilyMemberIds = new Set(familyMembers.map(m => m.id));
         const validDinerIds = dinerIds.filter(id => validFamilyMemberIds.has(id));
         
-        // Debug: log the IDs to see what we're comparing
-        console.log('MealCard Debug:', {
-            mealId: meal.id,
-            dinerIds: dinerIds,
-            validDinerIds: validDinerIds,
-            familyMemberIds: Array.from(validFamilyMemberIds),
-            mealDiners: meal.diners.map(d => ({ id: d.id, familyMemberId: d.familyMemberId, name: d.name }))
-        });
-        
         this.selectedMemberIds = new Set(validDinerIds);
     }
 
@@ -146,13 +137,6 @@ class MealCard {
 
     // Render family members selector
     renderFamilyMembersSelector() {
-        console.log('MealCard Debug:', {
-            mealId: this.meal.id,
-            selectedMemberIds: Array.from(this.selectedMemberIds),
-            familyMembers: this.familyMembers.map(m => ({ id: m.id, name: m.name })),
-            mealDiners: this.meal.diners
-        });
-        
         return this.familyMembers.map(member => `
             <label class="family-member-checkbox">
                 <input type="checkbox" 
@@ -160,9 +144,6 @@ class MealCard {
                        ${this.selectedMemberIds.has(member.id) ? 'checked' : ''}
                        onchange="mealCards.get('${this.meal.id}').toggleMember('${member.id}', this.checked)">
                 <span class="member-name">${member.name}</span>
-                ${member.preferences ? `
-                    <span class="member-restrictions">(${member.preferences})</span>
-                ` : ''}
             </label>
         `).join('');
     }

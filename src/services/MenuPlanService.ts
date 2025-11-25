@@ -152,29 +152,51 @@ class MenuPlanService {
       throw new Error('User not found');
     }
 
-    // Validar comensales si se proporcionan
+    // Process customDiners - can be either array of IDs or array of objects
+    let familyMemberIds: string[] = [];
+    let dinersForAI: Array<{ name: string; preferences?: string }> = [];
+    
     if (customDiners && customDiners.length > 0) {
-      const dinerErrors = this.validateDinersConfiguration(customDiners);
-      if (dinerErrors.length > 0) {
-        throw new Error(dinerErrors.join(', '));
+      // Check if customDiners is an array of strings (IDs) or objects
+      if (typeof customDiners[0] === 'string') {
+        // Array of family member IDs
+        familyMemberIds = customDiners as unknown as string[];
+        
+        // Convert IDs to diner objects for AI
+        for (const id of familyMemberIds) {
+          if (id === plan.userId) {
+            // This is the user
+            dinersForAI.push({ name: user.name, preferences: user.preferences });
+          } else {
+            // This is a family member
+            const familyMember = await DatabaseService.getFamilyMemberById(id);
+            if (familyMember) {
+              dinersForAI.push({ name: familyMember.name, preferences: familyMember.preferences });
+            }
+          }
+        }
+      } else {
+        // Array of diner objects (legacy format)
+        dinersForAI = customDiners as Array<{ name: string; preferences?: string }>;
+        const dinerErrors = this.validateDinersConfiguration(dinersForAI);
+        if (dinerErrors.length > 0) {
+          throw new Error(dinerErrors.join(', '));
+        }
       }
-    }
-
-    // Set has_custom_diners flag if customDiners are provided
-    if (customDiners && customDiners.length > 0) {
+      
+      // Set has_custom_diners flag
       await DatabaseService.setMealCustomDinersFlag(mealId, true);
-    }
-
-    // Determinar comensales a usar
-    const dinersToUse = customDiners ||
-      (existingMeal.diners.length > 0
+    } else {
+      // Use existing diners or default
+      dinersForAI = existingMeal.diners.length > 0
         ? existingMeal.diners.map(d => ({ name: d.name, preferences: d.preferences }))
-        : this.createDefaultDiners(user.defaultDiners));
+        : this.createDefaultDiners(user.defaultDiners);
+    }
 
     // Regenerar comida con IA
     const regeneratedDishes = await AIService.regenerateMeal({
       preferences: user.preferences,
-      diners: dinersToUse,
+      diners: dinersForAI,
       numberOfDishes: numberOfDishes || existingMeal.dishes.length || 2,
       dayOfWeek: existingMeal.dayOfWeek,
       mealType: existingMeal.mealType,
@@ -185,11 +207,36 @@ class MenuPlanService {
     await DatabaseService.deleteDishesByMealId(mealId);
 
     // Crear nuevos comensales
-    for (const dinerData of dinersToUse) {
-      await DatabaseService.createDiner(mealId, {
-        name: dinerData.name,
-        preferences: dinerData.preferences,
-      });
+    if (familyMemberIds.length > 0) {
+      // Create diners from family member IDs
+      for (const id of familyMemberIds) {
+        if (id === plan.userId) {
+          // This is the user
+          await DatabaseService.createDiner(mealId, {
+            name: user.name,
+            preferences: user.preferences,
+            familyMemberId: id,
+          });
+        } else {
+          // This is a family member
+          const familyMember = await DatabaseService.getFamilyMemberById(id);
+          if (familyMember) {
+            await DatabaseService.createDiner(mealId, {
+              name: familyMember.name,
+              preferences: familyMember.preferences,
+              familyMemberId: id,
+            });
+          }
+        }
+      }
+    } else {
+      // Create diners from objects (legacy format)
+      for (const dinerData of dinersForAI) {
+        await DatabaseService.createDiner(mealId, {
+          name: dinerData.name,
+          preferences: dinerData.preferences,
+        });
+      }
     }
 
     // Crear nuevos platos
@@ -334,6 +381,7 @@ class MenuPlanService {
           await DatabaseService.createDiner(meal.id, {
             name: familyMember.name,
             preferences: familyMember.preferences,
+            familyMemberId: familyMemberId,
           });
         }
       }
@@ -369,6 +417,7 @@ class MenuPlanService {
         await DatabaseService.createDiner(meal.id, {
           name: user.name,
           preferences: user.preferences,
+          familyMemberId: userId, // User ID as familyMemberId for consistency
         });
       }
     }
@@ -382,6 +431,7 @@ class MenuPlanService {
           await DatabaseService.createDiner(meal.id, {
             name: familyMember.name,
             preferences: familyMember.preferences,
+            familyMemberId: familyMemberId,
           });
         }
       }
@@ -391,6 +441,7 @@ class MenuPlanService {
         await DatabaseService.createDiner(meal.id, {
           name: dinerData.name,
           preferences: dinerData.preferences,
+          // No familyMemberId for default diners
         });
       }
     }

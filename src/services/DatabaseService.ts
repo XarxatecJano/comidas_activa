@@ -303,11 +303,11 @@ class DatabaseService {
 
   async createDiner(mealId: string, dinerData: CreateDinerDTO): Promise<Diner> {
     const query = `
-      INSERT INTO "Diner" (meal_id, name, preferences)
-      VALUES ($1, $2, $3)
-      RETURNING id, name, preferences
+      INSERT INTO "Diner" (meal_id, name, preferences, family_member_id)
+      VALUES ($1, $2, $3, $4)
+      RETURNING id, name, preferences, family_member_id as "familyMemberId"
     `;
-    const values = [mealId, dinerData.name, dinerData.preferences || null];
+    const values = [mealId, dinerData.name, dinerData.preferences || null, dinerData.familyMemberId || null];
 
     const result = await pool.query(query, values);
     return result.rows[0];
@@ -315,7 +315,7 @@ class DatabaseService {
 
   async getDinersByMealId(mealId: string): Promise<Diner[]> {
     const query = `
-      SELECT id, name, preferences
+      SELECT id, name, preferences, family_member_id as "familyMemberId"
       FROM "Diner"
       WHERE meal_id = $1
     `;
@@ -575,29 +575,15 @@ class DatabaseService {
    */
   private async getResolvedDiners(mealId: string, hasCustomDiners: boolean, userId: string, mealType: string): Promise<ResolvedDiner[]> {
     if (hasCustomDiners) {
-      // Get custom diners from Diner table
+      // Get custom diners from Diner table with their family_member_id
       const dinersQuery = `
-        SELECT d.id, fm.id as "familyMemberId", fm.name, fm.preferences, fm.dietary_restrictions as "dietaryRestrictions"
+        SELECT d.id, d.family_member_id as "familyMemberId", d.name, d.preferences
         FROM "Diner" d
-        LEFT JOIN "FamilyMember" fm ON d.name = fm.name AND fm.user_id = $2
         WHERE d.meal_id = $1
       `;
-      const dinersResult = await pool.query(dinersQuery, [mealId, userId]);
+      const dinersResult = await pool.query(dinersQuery, [mealId]);
       
-      // For diners without familyMemberId, check if they match the user
-      const user = await this.getUserById(userId);
-      const resolvedDiners = dinersResult.rows.map(diner => {
-        if (!diner.familyMemberId && user && diner.name === user.name) {
-          // This is the user, add userId as familyMemberId for frontend consistency
-          return {
-            ...diner,
-            familyMemberId: userId
-          };
-        }
-        return diner;
-      });
-      
-      return resolvedDiners;
+      return dinersResult.rows;
     } else {
       // Get bulk selection diners from UserDinerPreferences
       const bulkDinersQuery = `

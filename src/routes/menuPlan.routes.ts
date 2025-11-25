@@ -118,7 +118,7 @@ menuPlanRoutes.put('/:id/meals/:mealId', async (c) => {
     const mealId = c.req.param('mealId');
     const userId = c.get('userId');
     const body = await c.req.json();
-    const { numberOfDishes, customDiners } = body;
+    const { numberOfDishes, familyMemberIds, customDiners } = body;
 
     // Verificar que el plan existe y pertenece al usuario
     const menuPlan = await MenuPlanService.getMenuPlanById(planId);
@@ -137,10 +137,16 @@ menuPlanRoutes.put('/:id/meals/:mealId', async (c) => {
       );
     }
 
+    // Convert familyMemberIds to customDiners format if provided
+    let dinersToUse = customDiners;
+    if (familyMemberIds && familyMemberIds.length > 0) {
+      dinersToUse = familyMemberIds;
+    }
+
     const updatedMeal = await MenuPlanService.updateMeal({
       mealId,
       numberOfDishes,
-      customDiners,
+      customDiners: dinersToUse,
     });
 
     return c.json({ meal: updatedMeal }, 200);
