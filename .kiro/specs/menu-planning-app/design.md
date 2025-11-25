@@ -331,7 +331,8 @@ class FamilyMemberComponent {
 
 ```javascript
 class BulkDinerSelector {
-  constructor(mealType: 'lunch' | 'dinner', familyMembers: FamilyMember[], initialSelection: string[])
+  constructor(mealType: 'lunch' | 'dinner', allDiners: Diner[], initialSelection: string[])
+  // allDiners incluye al usuario logueado y los miembros de familia
   
   render(): HTMLElement
   getSelectedDiners(): string[]

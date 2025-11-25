@@ -226,6 +226,13 @@ git push origin develop
   - Escribir tests unitarios
   - _Requisitos: 3_
 
+- [x] 33. Incluir usuario logueado en selectores de comensales
+  - Modificar menu-planner.js para incluir usuario en lista de comensales
+  - Actualizar BulkDinerSelector para aceptar usuario + miembros de familia
+  - Modificar MealCard para incluir usuario en selector de comensales
+  - Actualizar tests para verificar inclusión del usuario
+  - _Requisitos: 3.3, 4.2_
+
 - [x] 25. Actualizar menu-planner.js
   - Cargar y mostrar preferencias masivas
   - Crear instancias de BulkDinerSelector

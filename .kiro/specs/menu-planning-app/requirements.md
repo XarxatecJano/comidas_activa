@@ -49,9 +49,10 @@ La funcionalidad principal incluye la selección masiva de comensales a nivel de
 
 1. WHEN un usuario accede al planificador de menús THEN el sistema SHALL mostrar controles para establecer comensales por defecto para todas las comidas
 2. WHEN un usuario accede al planificador de menús THEN el sistema SHALL mostrar controles para establecer comensales por defecto para todas las cenas
-3. WHEN un usuario selecciona comensales para todas las comidas THEN el sistema SHALL aplicar esos comensales a cada comida del tipo lunch en el plan actual
-4. WHEN un usuario selecciona comensales para todas las cenas THEN el sistema SHALL aplicar esos comensales a cada comida del tipo dinner en el plan actual
-5. WHEN un usuario cambia la selección masiva de comensales THEN el sistema SHALL actualizar todas las comidas de ese tipo que no hayan sido sobrescritas individualmente
+3. WHEN se muestran los selectores de comensales THEN el sistema SHALL incluir al usuario logueado como opción de comensal junto con los miembros de familia
+4. WHEN un usuario selecciona comensales para todas las comidas THEN el sistema SHALL aplicar esos comensales a cada comida del tipo lunch en el plan actual
+5. WHEN un usuario selecciona comensales para todas las cenas THEN el sistema SHALL aplicar esos comensales a cada comida del tipo dinner en el plan actual
+6. WHEN un usuario cambia la selección masiva de comensales THEN el sistema SHALL actualizar todas las comidas de ese tipo que no hayan sido sobrescritas individualmente
 
 ### Requisito 4: Sobrescritura Individual de Comensales
 
@@ -60,10 +61,11 @@ La funcionalidad principal incluye la selección masiva de comensales a nivel de
 #### Criterios de Aceptación
 
 1. WHEN un usuario abre una tarjeta de comida individual THEN el sistema SHALL mostrar los comensales actuales para esa comida
-2. WHEN un usuario modifica los comensales de una comida individual THEN el sistema SHALL marcar esa comida como teniendo una sobrescritura individual
-3. WHEN una comida tiene una sobrescritura individual THEN el sistema SHALL no actualizar los comensales de esa comida cuando cambien las selecciones masivas
-4. WHEN un usuario elimina una sobrescritura individual THEN el sistema SHALL revertir esa comida para usar la selección masiva de su tipo de comida
-5. WHEN se muestra una comida con sobrescritura individual THEN el sistema SHALL proporcionar indicación visual de que difiere de la selección masiva
+2. WHEN se muestra el selector de comensales en una comida individual THEN el sistema SHALL incluir al usuario logueado como opción junto con los miembros de familia
+3. WHEN un usuario modifica los comensales de una comida individual THEN el sistema SHALL marcar esa comida como teniendo una sobrescritura individual
+4. WHEN una comida tiene una sobrescritura individual THEN el sistema SHALL no actualizar los comensales de esa comida cuando cambien las selecciones masivas
+5. WHEN un usuario elimina una sobrescritura individual THEN el sistema SHALL revertir esa comida para usar la selección masiva de su tipo de comida
+6. WHEN se muestra una comida con sobrescritura individual THEN el sistema SHALL proporcionar indicación visual de que difiere de la selección masiva
 
 ### Requisito 5: Generación de Menús con IA
 

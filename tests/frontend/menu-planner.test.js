@@ -218,8 +218,15 @@ describe('Menu Planner Module', () => {
       await loadFamilyMembersAndPreferences();
 
       expect(global.authenticatedFetch).toHaveBeenCalledTimes(3);
-      expect(global.BulkDinerSelector).toHaveBeenCalledWith('lunch', mockMembers, ['1']);
-      expect(global.BulkDinerSelector).toHaveBeenCalledWith('dinner', mockMembers, ['2']);
+      
+      // Should include user as first diner option
+      const expectedDiners = [
+        { id: 'user-123', name: 'Test User', preferences: '' },
+        ...mockMembers
+      ];
+      
+      expect(global.BulkDinerSelector).toHaveBeenCalledWith('lunch', expectedDiners, ['1']);
+      expect(global.BulkDinerSelector).toHaveBeenCalledWith('dinner', expectedDiners, ['2']);
     });
 
     test('should save preferences when selection changes', async () => {
@@ -263,8 +270,13 @@ describe('Menu Planner Module', () => {
 
       await loadFamilyMembersAndPreferences();
 
-      expect(global.BulkDinerSelector).toHaveBeenCalledWith('lunch', [], []);
-      expect(global.BulkDinerSelector).toHaveBeenCalledWith('dinner', [], []);
+      // Should still include user even with no family members
+      const expectedDiners = [
+        { id: 'user-123', name: 'Test User', preferences: '' }
+      ];
+      
+      expect(global.BulkDinerSelector).toHaveBeenCalledWith('lunch', expectedDiners, []);
+      expect(global.BulkDinerSelector).toHaveBeenCalledWith('dinner', expectedDiners, []);
     });
 
     test('should handle API errors when loading preferences', async () => {
@@ -276,9 +288,13 @@ describe('Menu Planner Module', () => {
 
       await loadFamilyMembersAndPreferences();
 
-      // Should still render selectors with empty data
-      expect(global.BulkDinerSelector).toHaveBeenCalledWith('lunch', [], []);
-      expect(global.BulkDinerSelector).toHaveBeenCalledWith('dinner', [], []);
+      // Should still render selectors with user even on error
+      const expectedDiners = [
+        { id: 'user-123', name: 'Test User', preferences: '' }
+      ];
+      
+      expect(global.BulkDinerSelector).toHaveBeenCalledWith('lunch', expectedDiners, []);
+      expect(global.BulkDinerSelector).toHaveBeenCalledWith('dinner', expectedDiners, []);
     });
 
     test('should show success message after saving preferences', async () => {

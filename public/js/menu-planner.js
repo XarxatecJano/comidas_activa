@@ -61,7 +61,15 @@ async function loadFamilyMembersAndPreferences() {
         const membersData = await membersResponse.json();
         
         if (membersResponse.ok) {
-            familyMembers = membersData.members || [];
+            // Include the logged-in user as the first diner option
+            const userAsDiner = {
+                id: userData.id,
+                name: userData.name || 'Yo',
+                preferences: userData.preferences || ''
+            };
+            
+            // Combine user with family members
+            familyMembers = [userAsDiner, ...(membersData.members || [])];
             
             // Load bulk diner preferences for lunch and dinner
             const [lunchPrefsResponse, dinnerPrefsResponse] = await Promise.all([
@@ -80,7 +88,13 @@ async function loadFamilyMembersAndPreferences() {
         }
     } catch (error) {
         console.error('Error loading family members and preferences:', error);
-        familyMembers = [];
+        const userData = getUserData();
+        // Even on error, include the user
+        familyMembers = [{
+            id: userData.id,
+            name: userData.name || 'Yo',
+            preferences: userData.preferences || ''
+        }];
         renderBulkDinerSelectors([], []);
     }
 }
