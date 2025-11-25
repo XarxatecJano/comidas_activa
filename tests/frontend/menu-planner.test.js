@@ -201,6 +201,10 @@ describe('Menu Planner Module', () => {
       global.authenticatedFetch = jest.fn()
         .mockResolvedValueOnce({
           ok: true,
+          json: async () => ({ user: { id: 'user-123', name: 'Test User', preferences: '' } })
+        })
+        .mockResolvedValueOnce({
+          ok: true,
           json: async () => ({ members: mockMembers })
         })
         .mockResolvedValueOnce({
@@ -217,7 +221,7 @@ describe('Menu Planner Module', () => {
 
       await loadFamilyMembersAndPreferences();
 
-      expect(global.authenticatedFetch).toHaveBeenCalledTimes(3);
+      expect(global.authenticatedFetch).toHaveBeenCalledTimes(4);
       
       // Should include user as first diner option
       const expectedDiners = [
@@ -253,6 +257,10 @@ describe('Menu Planner Module', () => {
 
     test('should handle empty family members gracefully', async () => {
       global.authenticatedFetch = jest.fn()
+        .mockResolvedValueOnce({
+          ok: true,
+          json: async () => ({ user: { id: 'user-123', name: 'Test User', preferences: '' } })
+        })
         .mockResolvedValueOnce({
           ok: true,
           json: async () => ({ members: [] })

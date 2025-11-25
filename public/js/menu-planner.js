@@ -5,6 +5,7 @@ let currentMenuPlan = null;
 let familyMembers = [];
 let lunchSelector = null;
 let dinnerSelector = null;
+let currentUser = null; // Store the authenticated user data
 
 // Set minimum date to today and load user defaults
 document.addEventListener('DOMContentLoaded', () => {
@@ -54,7 +55,11 @@ function setupSelectAllDays() {
 // Load family members and bulk diner preferences
 async function loadFamilyMembersAndPreferences() {
     try {
-        const userData = getUserData();
+        // Load current user data from API to get the correct ID
+        // This ensures we use the same ID that the backend uses for meal.diners
+        const userResponse = await authenticatedFetch(`${API_URL}/users/me`);
+        const userResponseData = await userResponse.json();
+        currentUser = userResponseData.user; // Store in global variable
         
         // Load family members from API
         const membersResponse = await authenticatedFetch(`${API_URL}/family-members`);
@@ -63,9 +68,9 @@ async function loadFamilyMembersAndPreferences() {
         if (membersResponse.ok) {
             // Include the logged-in user as the first diner option
             const userAsDiner = {
-                id: userData.id,
-                name: userData.name || 'Yo',
-                preferences: userData.preferences || ''
+                id: currentUser.id,
+                name: currentUser.name || 'Yo',
+                preferences: currentUser.preferences || ''
             };
             
             // Combine user with family members
@@ -73,8 +78,8 @@ async function loadFamilyMembersAndPreferences() {
             
             // Load bulk diner preferences for lunch and dinner
             const [lunchPrefsResponse, dinnerPrefsResponse] = await Promise.all([
-                authenticatedFetch(`${API_URL}/users/${userData.id}/diner-preferences/lunch`),
-                authenticatedFetch(`${API_URL}/users/${userData.id}/diner-preferences/dinner`)
+                authenticatedFetch(`${API_URL}/users/${currentUser.id}/diner-preferences/lunch`),
+                authenticatedFetch(`${API_URL}/users/${currentUser.id}/diner-preferences/dinner`)
             ]);
             
             const lunchPrefsData = await lunchPrefsResponse.json();
@@ -85,11 +90,11 @@ async function loadFamilyMembersAndPreferences() {
             
             // Always include the user's ID in the preferences
             // The user should always be selected by default
-            if (!lunchPrefs.includes(userData.id)) {
-                lunchPrefs = [userData.id, ...lunchPrefs];
+            if (!lunchPrefs.includes(currentUser.id)) {
+                lunchPrefs = [currentUser.id, ...lunchPrefs];
             }
-            if (!dinnerPrefs.includes(userData.id)) {
-                dinnerPrefs = [userData.id, ...dinnerPrefs];
+            if (!dinnerPrefs.includes(currentUser.id)) {
+                dinnerPrefs = [currentUser.id, ...dinnerPrefs];
             }
             
             // Create and render bulk diner selectors
@@ -97,7 +102,8 @@ async function loadFamilyMembersAndPreferences() {
         }
     } catch (error) {
         console.error('Error loading family members and preferences:', error);
-        const userData = getUserData();
+        // Use currentUser if available, otherwise fall back to localStorage
+        const userData = currentUser || getUserData();
         // Even on error, include the user
         familyMembers = [{
             id: userData.id,
@@ -137,10 +143,11 @@ function renderBulkDinerSelectors(lunchPrefs, dinnerPrefs) {
 // Save bulk diner preferences
 async function saveBulkDinerPreferences(mealType, familyMemberIds) {
     try {
-        const userData = getUserData();
+        // Use currentUser.id if available, otherwise fall back to localStorage
+        const userId = currentUser?.id || getUserData().id;
         
         const response = await authenticatedFetch(
-            `${API_URL}/users/${userData.id}/diner-preferences/${mealType}`,
+            `${API_URL}/users/${userId}/diner-preferences/${mealType}`,
             {
                 method: 'POST',
                 body: JSON.stringify({ familyMemberIds })
