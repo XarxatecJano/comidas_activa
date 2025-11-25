@@ -122,6 +122,69 @@ describe('User Routes', () => {
     });
   });
 
+  describe('GET /api/users/me', () => {
+    it('should get current authenticated user data successfully', async () => {
+      const req = new Request('http://localhost/api/users/me', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${testToken}`,
+        },
+      });
+
+      const res = await app.fetch(req);
+      const data = await parseResponse(res);
+
+      expect(res.status).toBe(200);
+      expect(data.user).toBeDefined();
+      expect(data.user.id).toBe(testUserId);
+      expect(data.user.email).toBe('userroutes@test.com');
+      expect(data.user.passwordHash).toBeUndefined();
+    });
+
+    it('should return 401 without token', async () => {
+      const req = new Request('http://localhost/api/users/me', {
+        method: 'GET',
+      });
+
+      const res = await app.fetch(req);
+      const data = await parseResponse(res);
+
+      expect(res.status).toBe(401);
+      expect(data.error.code).toBe('AUTH_ERROR');
+    });
+
+    it('should return correct user for different tokens', async () => {
+      // Test with first user token
+      const req1 = new Request('http://localhost/api/users/me', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${testToken}`,
+        },
+      });
+
+      const res1 = await app.fetch(req1);
+      const data1 = await parseResponse(res1);
+
+      expect(res1.status).toBe(200);
+      expect(data1.user.id).toBe(testUserId);
+
+      // Test with second user token
+      const req2 = new Request('http://localhost/api/users/me', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${otherToken}`,
+        },
+      });
+
+      const res2 = await app.fetch(req2);
+      const data2 = await parseResponse(res2);
+
+      expect(res2.status).toBe(200);
+      expect(data2.user.id).toBe(otherUserId);
+      expect(data2.user.id).not.toBe(testUserId);
+    });
+  });
+
   describe('PUT /api/users/:id', () => {
     it('should update user data successfully', async () => {
       const updateData = {

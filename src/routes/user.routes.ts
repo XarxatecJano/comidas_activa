@@ -13,6 +13,32 @@ const userRoutes = new Hono<{ Variables: Variables }>();
 // Aplicar middleware de autenticación a todas las rutas
 userRoutes.use('/*', authMiddleware);
 
+// GET /api/users/me - Obtener datos del usuario autenticado
+userRoutes.get('/me', async (c) => {
+  try {
+    const authenticatedUserId = c.get('userId');
+
+    const user = await UserService.getUserById(authenticatedUserId);
+    
+    if (!user) {
+      return c.json(
+        { error: { code: 'NOT_FOUND', message: 'User not found' } },
+        404
+      );
+    }
+
+    // Retornar usuario sin contraseña
+    const { passwordHash, ...userWithoutPassword } = user;
+    return c.json({ user: userWithoutPassword }, 200);
+  } catch (error: unknown) {
+    console.error('Get current user error:', error);
+    return c.json(
+      { error: { code: 'INTERNAL_ERROR', message: 'Internal server error' } },
+      500
+    );
+  }
+});
+
 // GET /api/users/:id - Obtener datos del usuario
 userRoutes.get('/:id', async (c) => {
   try {
