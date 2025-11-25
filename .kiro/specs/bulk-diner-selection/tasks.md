@@ -265,22 +265,22 @@ git push origin develop
     - Mantener diseño responsive
     - _Requisitos: 1.1, 1.2_
 
-- [ ] 13. Testing de integración
-  - [ ] 13.1 Testear flujo completo de selección masiva
+- [x] 13. Testing de integración
+  - [x] 13.1 Testear flujo completo de selección masiva
     - Establecer preferencias masivas → Crear plan → Verificar que las comidas tienen comensales correctos
     - Cambiar preferencias masivas → Verificar que las comidas no sobrescritas se actualizan
     - _Requisitos: 1.3, 1.4, 1.5_
 
-  - [ ] 13.2 Testear flujo de sobrescritura
+  - [x] 13.2 Testear flujo de sobrescritura
     - Crear plan con masivo → Sobrescribir comida individual → Cambiar masivo → Verificar que sobrescritura se preserva
     - Sobrescribir comida → Revertir a masivo → Verificar que masivo se aplica
     - _Requisitos: 2.2, 2.3, 2.4_
 
-  - [ ] 13.3 Testear lista de compra con comidas mixtas
+  - [x] 13.3 Testear lista de compra con comidas mixtas
     - Crear plan con comidas masivas y personalizadas → Generar lista de compra → Verificar cantidades correctas
     - _Requisitos: 5.1, 5.2, 5.3_
 
-  - [ ] 13.4 Testear persistencia entre sesiones
+  - [x] 13.4 Testear persistencia entre sesiones
     - Establecer preferencias masivas → Recargar página → Verificar que las preferencias se cargan
     - _Requisitos: 4.2_
 
