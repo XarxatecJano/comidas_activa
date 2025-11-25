@@ -251,15 +251,15 @@ git push origin develop
     - Testear que la descripción no está presente en el DOM
     - _Requisitos: 3.1, 3.2, 3.3, 3.4_
 
-- [ ] 12. Frontend: Actualizar menu-planner.html
-  - [ ] 12.1 Añadir secciones de selector masivo de comensales al formulario
+- [x] 12. Frontend: Actualizar menu-planner.html
+  - [x] 12.1 Añadir secciones de selector masivo de comensales al formulario
     - Añadir sección para selección de comensales de lunch
     - Añadir sección para selección de comensales de dinner
     - Añadir etiquetas e instrucciones
     - Posicionar antes o después de campos de formulario existentes
     - _Requisitos: 1.1, 1.2_
 
-  - [ ] 12.2 Actualizar diseño y estilo del formulario
+  - [x] 12.2 Actualizar diseño y estilo del formulario
     - Asegurar que los selectores masivos sean visualmente distintos
     - Añadir secciones colapsables si es necesario
     - Mantener diseño responsive

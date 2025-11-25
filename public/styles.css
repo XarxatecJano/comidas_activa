@@ -1487,3 +1487,25 @@ body {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(252, 185, 0, 0.3);
 }
+
+/* ==================== Diners Selector Container Styles ==================== */
+
+.diners-selector {
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.diners-selector .loading-text {
+    color: var(--text-light);
+    font-style: italic;
+    margin: 0;
+}
+
+/* Responsive adjustments for diners selector */
+@media (max-width: 768px) {
+    .diners-selector {
+        min-height: 50px;
+    }
+}
