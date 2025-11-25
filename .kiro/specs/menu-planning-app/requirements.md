@@ -143,6 +143,18 @@ La funcionalidad principal incluye la selección masiva de comensales a nivel de
 5. WHEN el frontend recibe datos de comida del backend THEN el sistema SHALL procesar correctamente el array de objetos de comensales
 6. WHEN se inicializa una tarjeta de comida THEN el sistema SHALL extraer los IDs de comensales del array de objetos de comensales
 
+### Requisito 11: Consistencia de Identificadores de Usuario
+
+**Historia de Usuario:** Como usuario, quiero que el sistema use identificadores consistentes para mi cuenta en todas las operaciones, para que los checkboxes de selección de comensales se marquen correctamente.
+
+#### Criterios de Aceptación
+
+1. WHEN el frontend carga la lista de miembros de familia THEN el sistema SHALL usar el ID de usuario real de la base de datos para representar al usuario
+2. WHEN el backend devuelve comensales de una comida THEN el sistema SHALL usar el mismo ID de usuario que se usa en la lista de miembros de familia
+3. WHEN se comparan IDs de comensales entre diferentes fuentes THEN el sistema SHALL garantizar que los IDs del usuario coincidan exactamente
+4. WHEN el frontend obtiene datos del usuario THEN el sistema SHALL obtener el ID desde el endpoint de usuario autenticado en lugar de localStorage
+5. WHEN se inicializan selectores de comensales THEN el sistema SHALL usar IDs consistentes para permitir la correcta selección de checkboxes
+
 ## Requisitos No Funcionales
 
 ### Rendimiento

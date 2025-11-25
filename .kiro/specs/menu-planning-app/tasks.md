@@ -321,6 +321,29 @@ git push origin develop
   - Arreglar cualquier test fallido
   - _Requisitos: 3.4, 3.7_
 
+## Fase 9: Corrección de Consistencia de IDs
+
+- [ ] 38. Corregir sincronización de IDs de usuario en frontend
+  - Modificar `loadFamilyMembersAndPreferences()` en menu-planner.js para obtener ID de usuario desde endpoint `/api/users/me`
+  - Eliminar dependencia de localStorage para el ID de usuario
+  - Asegurar que el ID de usuario usado en familyMembers coincida con el ID usado en meal.diners
+  - Actualizar tests para verificar consistencia de IDs
+  - _Requisitos: 11_
+
+- [ ] 39. Implementar endpoint GET /api/users/me
+  - Crear endpoint que devuelva datos del usuario autenticado
+  - Implementar en user.routes.ts
+  - Añadir middleware de autenticación
+  - Escribir tests de integración
+  - _Requisitos: 11_
+
+- [ ] 40. Checkpoint - Verificar consistencia de IDs
+  - Ejecutar todos los tests (backend y frontend)
+  - Verificar manualmente que los checkboxes se marcan correctamente
+  - Verificar que el contador de comensales es correcto
+  - Arreglar cualquier test fallido
+  - _Requisitos: 11_
+
 ## Estado Final
 
 ✅ **Proyecto completado exitosamente**
