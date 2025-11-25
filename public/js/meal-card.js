@@ -133,6 +133,13 @@ class MealCard {
 
     // Render family members selector
     renderFamilyMembersSelector() {
+        console.log('MealCard Debug:', {
+            mealId: this.meal.id,
+            selectedMemberIds: Array.from(this.selectedMemberIds),
+            familyMembers: this.familyMembers.map(m => ({ id: m.id, name: m.name })),
+            mealDiners: this.meal.diners
+        });
+        
         return this.familyMembers.map(member => `
             <label class="family-member-checkbox">
                 <input type="checkbox" 
