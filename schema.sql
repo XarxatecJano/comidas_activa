@@ -62,8 +62,11 @@ CREATE TABLE "Diner" (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   meal_id UUID REFERENCES "Meal"(id) ON DELETE CASCADE,
   name VARCHAR(255) NOT NULL,
-  preferences TEXT
+  preferences TEXT,
+  family_member_id UUID
 );
+
+COMMENT ON COLUMN "Diner".family_member_id IS 'References either a FamilyMember.id or User.id to track the source of the diner';
 
 -- Tabla MealDiner (relación muchos a muchos entre Meal y FamilyMember)
 CREATE TABLE "MealDiner" (
