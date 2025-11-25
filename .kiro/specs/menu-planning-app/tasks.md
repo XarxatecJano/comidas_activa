@@ -293,7 +293,7 @@ git push origin develop
 
 ## Fase 8: Corrección de Visualización de Comensales
 
-- [ ] 34. Arreglar visualización de comensales en MealCard
+- [x] 34. Arreglar visualización de comensales en MealCard
   - Modificar constructor de MealCard para extraer IDs de comensales del array `meal.diners`
   - Actualizar `renderDinersInfo()` para usar los objetos de comensales completos
   - Modificar `saveMealSettings()` para manejar correctamente la respuesta del backend
@@ -307,6 +307,19 @@ git push origin develop
   - Verificar que la selección masiva se aplica correctamente
   - Arreglar cualquier test fallido
   - _Requisitos: 10_
+
+- [ ] 36. Incluir usuario por defecto en comensales
+  - Modificar frontend para incluir siempre el ID del usuario en las preferencias cargadas
+  - Modificar backend para crear siempre un comensal para el usuario en cada comida
+  - Actualizar tests para verificar que el usuario está incluido
+  - _Requisitos: 3.4, 3.7_
+
+- [ ] 37. Checkpoint - Verificar inclusión del usuario
+  - Ejecutar todos los tests (backend y frontend)
+  - Verificar manualmente que el usuario aparece en los selectores por defecto
+  - Verificar que el usuario aparece en las comidas generadas
+  - Arreglar cualquier test fallido
+  - _Requisitos: 3.4, 3.7_
 
 ## Estado Final
 

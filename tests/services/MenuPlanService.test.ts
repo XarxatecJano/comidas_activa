@@ -110,17 +110,17 @@ describe('MenuPlanService', () => {
         // Verify meals were created
         expect(menuPlan.meals).toHaveLength(2);
 
-        // Verify lunch meal has correct diners
+        // Verify lunch meal has correct diners (including the user)
         const lunchMeal = menuPlan.meals.find(m => m.mealType === 'lunch');
         expect(lunchMeal).toBeDefined();
-        expect(lunchMeal!.diners).toHaveLength(2);
-        expect(lunchMeal!.diners.map(d => d.name).sort()).toEqual(['Alice', 'Bob']);
+        expect(lunchMeal!.diners).toHaveLength(3); // User + 2 family members
+        expect(lunchMeal!.diners.map(d => d.name).sort()).toEqual(['Alice', 'Bob', 'Test User']);
 
-        // Verify dinner meal has correct diners
+        // Verify dinner meal has correct diners (including the user)
         const dinnerMeal = menuPlan.meals.find(m => m.mealType === 'dinner');
         expect(dinnerMeal).toBeDefined();
-        expect(dinnerMeal!.diners).toHaveLength(3);
-        expect(dinnerMeal!.diners.map(d => d.name).sort()).toEqual(['Alice', 'Bob', 'Charlie']);
+        expect(dinnerMeal!.diners).toHaveLength(4); // User + 3 family members
+        expect(dinnerMeal!.diners.map(d => d.name).sort()).toEqual(['Alice', 'Bob', 'Charlie', 'Test User']);
 
         // Verify has_custom_diners flag is false for all meals
         for (const meal of menuPlan.meals) {
@@ -141,11 +141,12 @@ describe('MenuPlanService', () => {
           mealTypes: ['lunch'],
         });
 
-        // Verify meal was created with default diners
+        // Verify meal was created with default diners (including the user)
         expect(menuPlan.meals).toHaveLength(1);
         const meal = menuPlan.meals[0];
-        expect(meal.diners).toHaveLength(2); // defaultDiners from user
-        expect(meal.diners[0].name).toMatch(/Comensal \d/);
+        expect(meal.diners).toHaveLength(3); // User + defaultDiners from user
+        expect(meal.diners[0].name).toBe('Test User'); // First diner is always the user
+        expect(meal.diners[1].name).toMatch(/Comensal \d/);
       });
     });
 

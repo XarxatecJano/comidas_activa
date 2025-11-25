@@ -541,11 +541,15 @@ interface ShoppingItem {
 
 **Propiedad 1: Aplicación de selección masiva**
 *Para cualquier* plan de menú y tipo de comida (lunch o dinner), cuando se aplican selecciones masivas de comensales, todas las comidas de ese tipo sin comensales personalizados deben tener los mismos comensales que la selección masiva.
-**Valida: Requisitos 3.3, 3.4**
+**Valida: Requisitos 3.5, 3.6**
+
+**Propiedad 1.1: Usuario siempre incluido**
+*Para cualquier* comida generada en un plan de menú, el usuario logueado debe estar siempre incluido como comensal.
+**Valida: Requisitos 3.7**
 
 **Propiedad 2: Aislamiento de sobrescritura**
 *Para cualquier* plan de menú con algunas comidas teniendo comensales personalizados, cuando cambian las selecciones masivas, solo las comidas sin el flag de comensales personalizados deben actualizarse.
-**Valida: Requisitos 3.5, 4.3**
+**Valida: Requisitos 3.8, 4.3**
 
 **Propiedad 3: Persistencia del flag de sobrescritura**
 *Para cualquier* comida, cuando los comensales se modifican individualmente, el flag has_custom_diners debe establecerse en true y permanecer true hasta que se limpie explícitamente.

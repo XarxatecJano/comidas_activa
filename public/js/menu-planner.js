@@ -80,8 +80,17 @@ async function loadFamilyMembersAndPreferences() {
             const lunchPrefsData = await lunchPrefsResponse.json();
             const dinnerPrefsData = await dinnerPrefsResponse.json();
             
-            const lunchPrefs = lunchPrefsResponse.ok ? lunchPrefsData.familyMemberIds : [];
-            const dinnerPrefs = dinnerPrefsResponse.ok ? dinnerPrefsData.familyMemberIds : [];
+            let lunchPrefs = lunchPrefsResponse.ok ? lunchPrefsData.familyMemberIds : [];
+            let dinnerPrefs = dinnerPrefsResponse.ok ? dinnerPrefsData.familyMemberIds : [];
+            
+            // Always include the user's ID in the preferences
+            // The user should always be selected by default
+            if (!lunchPrefs.includes(userData.id)) {
+                lunchPrefs = [userData.id, ...lunchPrefs];
+            }
+            if (!dinnerPrefs.includes(userData.id)) {
+                dinnerPrefs = [userData.id, ...dinnerPrefs];
+            }
             
             // Create and render bulk diner selectors
             renderBulkDinerSelectors(lunchPrefs, dinnerPrefs);

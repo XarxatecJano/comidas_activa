@@ -225,8 +225,9 @@ describe('Menu Planner Module', () => {
         ...mockMembers
       ];
       
-      expect(global.BulkDinerSelector).toHaveBeenCalledWith('lunch', expectedDiners, ['1']);
-      expect(global.BulkDinerSelector).toHaveBeenCalledWith('dinner', expectedDiners, ['2']);
+      // User ID should be included in the preferences
+      expect(global.BulkDinerSelector).toHaveBeenCalledWith('lunch', expectedDiners, ['user-123', '1']);
+      expect(global.BulkDinerSelector).toHaveBeenCalledWith('dinner', expectedDiners, ['user-123', '2']);
     });
 
     test('should save preferences when selection changes', async () => {
@@ -275,8 +276,9 @@ describe('Menu Planner Module', () => {
         { id: 'user-123', name: 'Test User', preferences: '' }
       ];
       
-      expect(global.BulkDinerSelector).toHaveBeenCalledWith('lunch', expectedDiners, []);
-      expect(global.BulkDinerSelector).toHaveBeenCalledWith('dinner', expectedDiners, []);
+      // User should be included by default even with empty preferences
+      expect(global.BulkDinerSelector).toHaveBeenCalledWith('lunch', expectedDiners, ['user-123']);
+      expect(global.BulkDinerSelector).toHaveBeenCalledWith('dinner', expectedDiners, ['user-123']);
     });
 
     test('should handle API errors when loading preferences', async () => {

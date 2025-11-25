@@ -50,9 +50,11 @@ La funcionalidad principal incluye la selección masiva de comensales a nivel de
 1. WHEN un usuario accede al planificador de menús THEN el sistema SHALL mostrar controles para establecer comensales por defecto para todas las comidas
 2. WHEN un usuario accede al planificador de menús THEN el sistema SHALL mostrar controles para establecer comensales por defecto para todas las cenas
 3. WHEN se muestran los selectores de comensales THEN el sistema SHALL incluir al usuario logueado como opción de comensal junto con los miembros de familia
-4. WHEN un usuario selecciona comensales para todas las comidas THEN el sistema SHALL aplicar esos comensales a cada comida del tipo lunch en el plan actual
-5. WHEN un usuario selecciona comensales para todas las cenas THEN el sistema SHALL aplicar esos comensales a cada comida del tipo dinner en el plan actual
-6. WHEN un usuario cambia la selección masiva de comensales THEN el sistema SHALL actualizar todas las comidas de ese tipo que no hayan sido sobrescritas individualmente
+4. WHEN un usuario accede al planificador de menús por primera vez THEN el sistema SHALL mostrar al usuario logueado como seleccionado por defecto en ambos selectores
+5. WHEN un usuario selecciona comensales para todas las comidas THEN el sistema SHALL aplicar esos comensales a cada comida del tipo lunch en el plan actual
+6. WHEN un usuario selecciona comensales para todas las cenas THEN el sistema SHALL aplicar esos comensales a cada comida del tipo dinner en el plan actual
+7. WHEN se genera un plan de menú THEN el sistema SHALL incluir siempre al usuario logueado como comensal en todas las comidas
+8. WHEN un usuario cambia la selección masiva de comensales THEN el sistema SHALL actualizar todas las comidas de ese tipo que no hayan sido sobrescritas individualmente
 
 ### Requisito 4: Sobrescritura Individual de Comensales
 
