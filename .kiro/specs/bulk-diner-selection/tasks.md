@@ -265,7 +265,7 @@ git push origin develop
     - Mantener diseño responsive
     - _Requisitos: 1.1, 1.2_
 
-- [x] 13. Testing de integración
+- [ ] 13. Testing de integración
   - [x] 13.1 Testear flujo completo de selección masiva
     - Establecer preferencias masivas → Crear plan → Verificar que las comidas tienen comensales correctos
     - Cambiar preferencias masivas → Verificar que las comidas no sobrescritas se actualizan
@@ -284,5 +284,5 @@ git push origin develop
     - Establecer preferencias masivas → Recargar página → Verificar que las preferencias se cargan
     - _Requisitos: 4.2_
 
-- [ ] 14. Checkpoint final - Todos los tests pasando
+- [x] 14. Checkpoint final - Todos los tests pasando
   - Asegurar que todos los tests pasen, preguntar al usuario si surgen dudas
