@@ -4,7 +4,12 @@ import { zValidator } from '@hono/zod-validator';
 import { authMiddleware } from '../middleware/auth';
 import * as FamilyMemberService from '../services/FamilyMemberService';
 
-const familyMemberRoutes = new Hono();
+type Variables = {
+  userId: string;
+  userEmail: string;
+};
+
+const familyMemberRoutes = new Hono<{ Variables: Variables }>();
 
 // Validation schemas
 const createFamilyMemberSchema = z.object({
