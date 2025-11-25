@@ -4,11 +4,20 @@
 
 // Define MealCard class for testing
 class MealCard {
-  constructor(meal, menuPlanId, onUpdate) {
+  constructor(meal, menuPlanId, onUpdate, familyMembers = []) {
     this.meal = meal;
     this.menuPlanId = menuPlanId;
     this.onUpdate = onUpdate;
+    this.familyMembers = familyMembers;
     this.isEditing = false;
+    
+    // Extract diner IDs from the diners array (which contains objects with familyMemberId)
+    // The backend returns diners as an array of objects: [{id, familyMemberId, name, preferences, ...}]
+    const dinerIds = (meal.diners || [])
+        .map(diner => diner.familyMemberId || diner.id)
+        .filter(id => id); // Filter out any null/undefined values
+    
+    this.selectedMemberIds = new Set(dinerIds);
   }
 
   render() {
@@ -138,6 +147,36 @@ class MealCard {
         <h5>${dish.name}</h5>
       </div>
     `).join('');
+  }
+
+  renderDinersInfo() {
+    // First try to use the diners from the meal object (resolved diners from backend)
+    if (this.meal.diners && this.meal.diners.length > 0) {
+      const dinerNames = this.meal.diners.map(diner => diner.name).join(', ');
+      return `
+        <div class="diners-info">
+          <strong>Comensales (${this.meal.diners.length}):</strong>
+          ${dinerNames}
+        </div>
+      `;
+    }
+    
+    // Fallback to using selectedMemberIds with familyMembers
+    if (this.selectedMemberIds.size === 0) {
+      return '<p class="diners-info">No hay comensales asignados</p>';
+    }
+
+    const selectedMembers = this.familyMembers.filter(m => this.selectedMemberIds.has(m.id));
+    if (selectedMembers.length === 0) {
+      return '<p class="diners-info">No hay comensales asignados</p>';
+    }
+    
+    return `
+      <div class="diners-info">
+        <strong>Comensales (${selectedMembers.length}):</strong>
+        ${selectedMembers.map(m => m.name).join(', ')}
+      </div>
+    `;
   }
 
   toggleEdit() {
@@ -929,6 +968,105 @@ describe('MealCard Component', () => {
       expect(element.innerHTML).toContain('Plato Sin Descripción');
       expect(element.innerHTML).not.toContain('ingrediente1');
       expect(element.innerHTML).not.toContain('ingrediente2');
+    });
+  });
+
+  describe('Diner Display', () => {
+    test('should extract diner IDs from diners array with familyMemberId', () => {
+      const mealWithFamilyMembers = {
+        ...mockMeal,
+        diners: [
+          { id: 'diner-1', familyMemberId: 'member-1', name: 'Juan', preferences: '' },
+          { id: 'diner-2', familyMemberId: 'member-2', name: 'María', preferences: '' }
+        ]
+      };
+
+      const familyMembers = [
+        { id: 'member-1', name: 'Juan', preferences: '' },
+        { id: 'member-2', name: 'María', preferences: '' }
+      ];
+
+      const card = new MealCard(mealWithFamilyMembers, mockMenuPlanId, mockOnUpdate, familyMembers);
+      
+      // Verify that selectedMemberIds contains the familyMemberIds
+      expect(card.selectedMemberIds.has('member-1')).toBe(true);
+      expect(card.selectedMemberIds.has('member-2')).toBe(true);
+      expect(card.selectedMemberIds.size).toBe(2);
+    });
+
+    test('should handle diners array without familyMemberId', () => {
+      const mealWithoutFamilyMemberId = {
+        ...mockMeal,
+        diners: [
+          { id: 'diner-1', name: 'Juan', preferences: '' },
+          { id: 'diner-2', name: 'María', preferences: '' }
+        ]
+      };
+
+      const card = new MealCard(mealWithoutFamilyMemberId, mockMenuPlanId, mockOnUpdate);
+      
+      // Should fall back to using id
+      expect(card.selectedMemberIds.has('diner-1')).toBe(true);
+      expect(card.selectedMemberIds.has('diner-2')).toBe(true);
+      expect(card.selectedMemberIds.size).toBe(2);
+    });
+
+    test('should handle empty diners array', () => {
+      const mealWithNoDiners = {
+        ...mockMeal,
+        diners: []
+      };
+
+      const card = new MealCard(mealWithNoDiners, mockMenuPlanId, mockOnUpdate);
+      
+      expect(card.selectedMemberIds.size).toBe(0);
+    });
+
+    test('should filter out null and undefined values from diners', () => {
+      const mealWithInvalidDiners = {
+        ...mockMeal,
+        diners: [
+          { id: 'diner-1', familyMemberId: 'member-1', name: 'Juan' },
+          { id: null, familyMemberId: null, name: 'Invalid' },
+          { id: 'diner-3', familyMemberId: undefined, name: 'Another' }
+        ]
+      };
+
+      const card = new MealCard(mealWithInvalidDiners, mockMenuPlanId, mockOnUpdate);
+      
+      // Should only include valid IDs
+      expect(card.selectedMemberIds.has('member-1')).toBe(true);
+      expect(card.selectedMemberIds.has('diner-3')).toBe(true);
+      expect(card.selectedMemberIds.size).toBe(2);
+    });
+
+    test('should display diner names from meal.diners', () => {
+      const mealWithDiners = {
+        ...mockMeal,
+        diners: [
+          { id: 'diner-1', familyMemberId: 'member-1', name: 'Juan', preferences: '' },
+          { id: 'diner-2', familyMemberId: 'member-2', name: 'María', preferences: '' }
+        ]
+      };
+
+      const card = new MealCard(mealWithDiners, mockMenuPlanId, mockOnUpdate);
+      const dinersInfo = card.renderDinersInfo();
+      
+      expect(dinersInfo).toContain('Juan');
+      expect(dinersInfo).toContain('María');
+      expect(dinersInfo).toContain('Comensales (2)');
+    });
+
+    test('should show "No hay comensales asignados" when no diners', () => {
+      const mealWithNoDiners = {
+        ...mockMeal,
+        diners: []
+      };
+
+      const card = new MealCard(mealWithNoDiners, mockMenuPlanId, mockOnUpdate);
+      const dinersInfo = card.renderDinersInfo();
+      
+      expect(dinersInfo).toContain('No hay comensales asignados');
     });
   });
 });

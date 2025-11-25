@@ -128,6 +128,19 @@ La funcionalidad principal incluye la selección masiva de comensales a nivel de
 5. WHEN el sistema actualiza comensales de comidas THEN el sistema SHALL mantener integridad referencial con las tablas FamilyMember y User
 6. WHEN se genera una lista de compra THEN el sistema SHALL agregar ingredientes comunes y calcular cantidades totales
 
+### Requisito 10: Visualización de Comensales en Tarjetas de Comida
+
+**Historia de Usuario:** Como usuario, quiero ver claramente qué comensales están asignados a cada comida en el plan generado, para verificar que la selección masiva se aplicó correctamente.
+
+#### Criterios de Aceptación
+
+1. WHEN el sistema muestra una tarjeta de comida THEN el sistema SHALL mostrar los nombres de todos los comensales asignados a esa comida
+2. WHEN una comida tiene comensales de selección masiva THEN el sistema SHALL mostrar esos comensales resueltos desde las preferencias del usuario
+3. WHEN una comida tiene comensales personalizados THEN el sistema SHALL mostrar esos comensales específicos
+4. WHEN una comida no tiene comensales asignados THEN el sistema SHALL mostrar un mensaje indicando que no hay comensales
+5. WHEN el frontend recibe datos de comida del backend THEN el sistema SHALL procesar correctamente el array de objetos de comensales
+6. WHEN se inicializa una tarjeta de comida THEN el sistema SHALL extraer los IDs de comensales del array de objetos de comensales
+
 ## Requisitos No Funcionales
 
 ### Rendimiento

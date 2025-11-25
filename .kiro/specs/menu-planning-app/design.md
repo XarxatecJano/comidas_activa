@@ -579,6 +579,10 @@ interface ShoppingItem {
 *Para cualquier* asignación de comensal de comida (masiva o personalizada), todos los IDs de miembros de familia referenciados deben existir en la tabla FamilyMember.
 **Valida: Requisitos 9.5**
 
+**Propiedad 11: Visualización correcta de comensales**
+*Para cualquier* comida con comensales asignados (ya sean de selección masiva o personalizados), el frontend debe mostrar los nombres de todos los comensales extraídos del array de objetos de comensales devuelto por el backend.
+**Valida: Requisitos 10.1, 10.2, 10.3, 10.5, 10.6**
+
 ## Manejo de Errores
 
 ### Códigos de Estado HTTP

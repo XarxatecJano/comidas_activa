@@ -8,7 +8,14 @@ class MealCard {
         this.onUpdate = onUpdate;
         this.familyMembers = familyMembers;
         this.isEditing = false;
-        this.selectedMemberIds = new Set(meal.dinerIds || []);
+        
+        // Extract diner IDs from the diners array (which contains objects with familyMemberId)
+        // The backend returns diners as an array of objects: [{id, familyMemberId, name, preferences, ...}]
+        const dinerIds = (meal.diners || [])
+            .map(diner => diner.familyMemberId || diner.id)
+            .filter(id => id); // Filter out any null/undefined values
+        
+        this.selectedMemberIds = new Set(dinerIds);
     }
 
     // Render the meal card
@@ -151,11 +158,27 @@ class MealCard {
 
     // Render diners info (read-only display)
     renderDinersInfo() {
+        // First try to use the diners from the meal object (resolved diners from backend)
+        if (this.meal.diners && this.meal.diners.length > 0) {
+            const dinerNames = this.meal.diners.map(diner => diner.name).join(', ');
+            return `
+                <div class="diners-info">
+                    <strong>Comensales (${this.meal.diners.length}):</strong>
+                    ${dinerNames}
+                </div>
+            `;
+        }
+        
+        // Fallback to using selectedMemberIds with familyMembers
         if (this.selectedMemberIds.size === 0) {
             return '<p class="diners-info">No hay comensales asignados</p>';
         }
 
         const selectedMembers = this.familyMembers.filter(m => this.selectedMemberIds.has(m.id));
+        if (selectedMembers.length === 0) {
+            return '<p class="diners-info">No hay comensales asignados</p>';
+        }
+        
         return `
             <div class="diners-info">
                 <strong>Comensales (${selectedMembers.length}):</strong>
@@ -221,9 +244,15 @@ class MealCard {
             const data = await response.json();
 
             if (response.ok) {
+                // Update the meal with the response from backend
                 this.meal = data.meal;
-                this.meal.dinerIds = familyMemberIds;
-                this.meal.hasCustomDiners = true;
+                
+                // Extract diner IDs from the updated meal's diners array
+                const updatedDinerIds = (data.meal.diners || [])
+                    .map(diner => diner.familyMemberId || diner.id)
+                    .filter(id => id);
+                
+                this.selectedMemberIds = new Set(updatedDinerIds);
                 this.isEditing = false;
                 this.refresh();
                 
@@ -266,8 +295,15 @@ class MealCard {
             const data = await response.json();
 
             if (response.ok) {
+                // Update the meal with the response from backend
                 this.meal = data.meal;
-                this.meal.dinerIds = familyMemberIds;
+                
+                // Extract diner IDs from the updated meal's diners array
+                const updatedDinerIds = (data.meal.diners || [])
+                    .map(diner => diner.familyMemberId || diner.id)
+                    .filter(id => id);
+                
+                this.selectedMemberIds = new Set(updatedDinerIds);
                 this.refresh();
                 
                 if (this.onUpdate) {
@@ -301,9 +337,15 @@ class MealCard {
             const data = await response.json();
 
             if (response.ok) {
+                // Update the meal with the response from backend
                 this.meal = data.meal;
-                this.meal.hasCustomDiners = false;
-                this.selectedMemberIds = new Set(this.meal.dinerIds || []);
+                
+                // Extract diner IDs from the updated meal's diners array
+                const updatedDinerIds = (data.meal.diners || [])
+                    .map(diner => diner.familyMemberId || diner.id)
+                    .filter(id => id);
+                
+                this.selectedMemberIds = new Set(updatedDinerIds);
                 this.refresh();
                 
                 if (this.onUpdate) {

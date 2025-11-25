@@ -291,6 +291,23 @@ git push origin develop
   - Documentar estado final
   - _Requisitos: Todos_
 
+## Fase 8: Corrección de Visualización de Comensales
+
+- [ ] 34. Arreglar visualización de comensales en MealCard
+  - Modificar constructor de MealCard para extraer IDs de comensales del array `meal.diners`
+  - Actualizar `renderDinersInfo()` para usar los objetos de comensales completos
+  - Modificar `saveMealSettings()` para manejar correctamente la respuesta del backend
+  - Actualizar tests de MealCard para verificar extracción correcta de IDs
+  - Escribir test de propiedad para verificar visualización correcta
+  - _Requisitos: 10_
+
+- [ ] 35. Checkpoint - Verificar visualización de comensales
+  - Ejecutar todos los tests (backend y frontend)
+  - Verificar manualmente que los comensales se muestran correctamente
+  - Verificar que la selección masiva se aplica correctamente
+  - Arreglar cualquier test fallido
+  - _Requisitos: 10_
+
 ## Estado Final
 
 ✅ **Proyecto completado exitosamente**
