@@ -14,7 +14,8 @@
     "test:frontend:watch": "jest --config jest.config.frontend.js --watch",
     "test:frontend:coverage": "jest --config jest.config.frontend.js --coverage",
     "test:all": "npm run test && npm run test:frontend",
-    "test:integration": "./scripts/test-integration.sh"
+    "test:integration": "./scripts/test-integration.sh",
+    "test:db": "tsx scripts/test-db-connection.ts"
   },
   "keywords": [],
   "author": "",

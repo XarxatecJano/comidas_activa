@@ -9,13 +9,35 @@ Esta guía te ayudará a desplegar la aplicación de Planificación de Menús en
 - ✅ API Key de OpenAI
 - ✅ Repositorio Git con el código
 
+## Configuración de Base de Datos: Desarrollo vs Producción
+
+La aplicación está configurada para funcionar en ambos entornos automáticamente:
+
+### 🏠 Desarrollo Local
+- **Base de datos:** PostgreSQL local (localhost:5432)
+- **SSL:** Deshabilitado (no necesario)
+- **Configuración:** `.env.development` o `.env`
+- **Ejemplo:** `postgresql://user:password@localhost:5432/comidas_activa`
+
+### 🚀 Producción (Render)
+- **Base de datos:** Supabase con Connection Pooling (puerto 6543)
+- **SSL:** Habilitado automáticamente
+- **Configuración:** Variables de entorno en Render
+- **Ejemplo:** `postgresql://postgres.xxxxx:[PASSWORD]@aws-0-eu-central-1.pooler.supabase.com:6543/postgres`
+
+**La aplicación detecta automáticamente el entorno usando `NODE_ENV`:**
+- `NODE_ENV=development` → Sin SSL, para desarrollo local
+- `NODE_ENV=production` → Con SSL, para Render/Supabase
+
 ## Paso 1: Preparar Supabase
 
-1. **Obtener Connection String:**
+1. **Obtener Connection String (IMPORTANTE - Usar Connection Pooling):**
    - Ve a tu proyecto en Supabase
    - Settings → Database → Connection string
-   - Copia el connection string en modo "URI"
-   - Formato: `postgresql://postgres:[PASSWORD]@[HOST]:[PORT]/postgres`
+   - **IMPORTANTE:** Selecciona el modo "Transaction" en Connection Pooling
+   - Copia el connection string que termina en puerto 6543 (NO uses el puerto 5432)
+   - Formato: `postgresql://postgres.xxxxx:[PASSWORD]@aws-0-eu-central-1.pooler.supabase.com:6543/postgres`
+   - **Nota:** El puerto 6543 es para connection pooling y evita problemas de IPv6 en Render
 
 2. **Verificar que las tablas están creadas:**
    - Ve a Table Editor en Supabase
@@ -80,10 +102,26 @@ Esta guía te ayudará a desplegar la aplicación de Planificación de Menús en
    - Visita: `https://tu-app.onrender.com/api`
    - Deberías ver: `{"message": "Menu Planner API - Server is running"}`
 
-3. **Probar la aplicación:**
+3. **Verificar la conexión a la base de datos:**
+   - Revisa los logs en Render Dashboard
+   - Busca el mensaje: "✓ PostgreSQL connection test successful"
+   - Si ves errores de conexión, ve a la sección de Troubleshooting
+
+4. **Probar la aplicación:**
    - Visita: `https://tu-app.onrender.com`
    - Deberías ver la página de inicio de la aplicación
    - Intenta registrarte y crear un plan de menú
+
+### Probar conexión localmente (opcional)
+
+Antes de desplegar, puedes probar la conexión a Supabase localmente:
+
+```bash
+# Configura DATABASE_URL en tu .env con el connection string de Supabase
+npm run test:db
+```
+
+Este script te dirá si estás usando el puerto correcto y si la conexión funciona.
 
 ## Paso 4: Configuración Post-Despliegue
 
@@ -107,11 +145,43 @@ app.use('/*', cors({
 
 ## Troubleshooting
 
-### Error: "Cannot connect to database"
+### ❌ Error: "ENETUNREACH" o "Cannot connect to database"
+
+Este es el error más común al desplegar en Render. Ocurre cuando intentas usar la conexión directa (puerto 5432) que usa IPv6.
+
+**✅ SOLUCIÓN (IMPORTANTE):**
+
+1. **Ve a tu proyecto en Supabase:**
+   - Dashboard → Settings → Database → Connection string
+
+2. **Cambia el modo de conexión:**
+   - En el dropdown, selecciona **"Transaction"** (NO uses "Session")
+   - Esto te dará un connection string con puerto **6543** (connection pooling)
+
+3. **Copia el nuevo connection string:**
+   - Debe verse así: `postgresql://postgres.xxxxx:[TU_PASSWORD]@aws-0-eu-central-1.pooler.supabase.com:6543/postgres`
+   - **Nota importante:** Reemplaza `[TU_PASSWORD]` con tu contraseña real
+
+4. **Actualiza en Render:**
+   - Ve a Render Dashboard → tu servicio → Environment
+   - Edita la variable `DATABASE_URL`
+   - Pega el nuevo connection string (con puerto 6543)
+   - Guarda los cambios
+
+5. **Redeploy:**
+   - Render hará un redeploy automático
+   - Espera 2-3 minutos
+   - Verifica los logs para confirmar: "✓ PostgreSQL connection test successful"
+
+**Diferencias clave:**
+- ❌ Puerto 5432 = Conexión directa (IPv6) → No funciona en Render
+- ✅ Puerto 6543 = Connection Pooling (IPv4) → Funciona en Render
+
+### Error: "Cannot connect to database" (otros casos)
 
 - Verifica que el `DATABASE_URL` esté correctamente configurado
-- Asegúrate de que Supabase permite conexiones desde cualquier IP
-- En Supabase: Settings → Database → Connection pooling → Enable
+- Asegúrate de que Supabase permite conexiones desde cualquier IP (por defecto está habilitado)
+- Verifica que la contraseña en el connection string sea correcta
 
 ### Error: "OpenAI API error"
 

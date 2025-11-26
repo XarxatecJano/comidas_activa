@@ -8,6 +8,7 @@ const poolConfig: PoolConfig = {
   max: 20, // Máximo de conexiones en el pool
   idleTimeoutMillis: 0, // 0 = nunca cerrar conexiones inactivas
   connectionTimeoutMillis: 10000, // 10 segundos para obtener conexión
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
 };
 
 const pool = new Pool(poolConfig);
